@@ -1,10 +1,12 @@
-import React from "react";
+import React, { Fragment } from "react";
+import { Header } from "./index";
 
 export function Home() {
   return (
-    <div>
+    <Fragment>
+      <Header></Header>
       <h1>Home</h1>
       <p>Hola Mundo</p>
-    </div>
+    </Fragment>
   );
 }
