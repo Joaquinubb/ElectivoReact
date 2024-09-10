@@ -1,3 +1,6 @@
+*.rar
+*.zip
+
 # Logs
 logs
 *.log
