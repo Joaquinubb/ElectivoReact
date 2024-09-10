@@ -1,0 +1,30 @@
+.text-blanco {
+  color: #eae8e0;
+}
+
+.text-24 {
+  font-size: 24px;
+}
+.text-20 {
+  font-size: 20px;
+}
+
+.blue {
+  background-color: #255380;
+}
+
+.blue-size {
+  height: 100vh;
+  width: 15vw;
+}
+.decoration-none {
+  text-decoration: none;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.semibold {
+  font-weight: 600;
+}

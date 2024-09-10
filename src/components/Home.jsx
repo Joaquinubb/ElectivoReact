@@ -1,12 +1,13 @@
 import React, { Fragment } from "react";
-import { Header } from "./index";
+import { Header, Sidebar } from "./index";
+import "./Home.css";
 
 export function Home() {
   return (
     <Fragment>
       <Header></Header>
-      <h1>Home</h1>
-      <p>Hola Mundo</p>
+      <Sidebar></Sidebar>
+      <div className="bg-white"></div>
     </Fragment>
   );
 }
