@@ -1,0 +1,52 @@
+.bg-red{
+    background-color: #DB1A33;
+
+}
+.bg{
+    height: 100vh;
+}
+
+.text-blanco{
+    color: #EAE8E0;
+}
+
+.text-24{
+ font-size: 24px;
+}
+.text-20{
+    font-size: 20px;
+
+}
+
+.bg-blue{
+    background-color: #255380;
+    transition: 0.3s;
+}
+
+
+.bg-blue:hover{
+    background-color: #4372a1;
+}
+.fixed-bottom{
+    position: fixed;
+    bottom: 0;
+}
+
+.bg-size{
+    height: 20vh;
+}
+.decoration-none{
+    text-decoration: none;
+}
+
+.bold{
+    font-weight: 700;
+}
+
+.semibold{
+    font-weight: 600;
+}
+
+.p-10{
+    padding: 5rem;
+}
