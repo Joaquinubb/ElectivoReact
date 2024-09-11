@@ -5,9 +5,17 @@ import "./Home.css";
 export function Home() {
   return (
     <Fragment>
-      <Header></Header>
-      <Sidebar></Sidebar>
-      <div className="bg-white"></div>
+      <div className="row">
+        <Header></Header>
+      </div>
+      <div className="row">
+        <div className="col-2">
+          <Sidebar></Sidebar>
+        </div>
+        <div className="col">
+          <div className="bg-white"></div>
+        </div>
+      </div>
     </Fragment>
   );
 }

@@ -1,6 +1,5 @@
 .bg-white {
   background-color: #eae8e0;
-  height: 100vh;
 }
 
 .text-blanco {
@@ -10,6 +9,7 @@
 .text-24 {
   font-size: 24px;
 }
+
 .text-20 {
   font-size: 20px;
 }
@@ -22,6 +22,7 @@
 .bg-blue:hover {
   background-color: #4372a1;
 }
+
 .fixed-bottom {
   position: fixed;
   bottom: 0;
@@ -30,6 +31,7 @@
 .bg-size {
   height: 20vh;
 }
+
 .decoration-none {
   text-decoration: none;
 }
