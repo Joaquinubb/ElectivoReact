@@ -19,7 +19,7 @@ export function Sidebar() {
   }, []);
 
   return (
-    <div className="blue blue-size p-3">
+    <div className="p-3 blue-size">
       {data &&
         data.map((club) => (
           <div className="mb-2">

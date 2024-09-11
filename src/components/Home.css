@@ -14,13 +14,8 @@
   font-size: 20px;
 }
 
-.bg-blue {
+.blue {
   background-color: #255380;
-  transition: 0.3s;
-}
-
-.bg-blue:hover {
-  background-color: #4372a1;
 }
 
 .fixed-bottom {
