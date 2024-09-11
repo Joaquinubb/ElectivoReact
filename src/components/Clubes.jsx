@@ -33,14 +33,15 @@ export function Clubes() {
         <div className="col">
           <div className="bg-white p-3">
             <h2 className="red-text bold text-24">Clubes dentro de la Chilean Premier League</h2>
-            <div className="club-list d-inline-flex flex-wrap">
+            <div className="club-list">
               {data &&
                 data.map((club) => (
                   <Link
-                      className="red-text text-12 bold decoration-none medium text-center pt-2"
-                      to={`/clubes/${club.id_club}`}
-                    >
-                  <div className="mb-2 mx-2 d-flex flex-column align-items-center custom-border-type p-5">
+                    className="red-text text-12 bold decoration-none medium text-center pt-2"
+                    to={`/clubes/${club.id_club}`}
+                    key={club.id_club}
+                  >
+                    <div className="custom-border-type">
                       <div className="d-flex flex-column align-items-center">
                         <div>
                           <img
@@ -54,8 +55,8 @@ export function Clubes() {
                           {club.nombre_club}
                         </div>
                       </div>
-                  </div>
-                    </Link>
+                    </div>
+                  </Link>
                 ))}
             </div>
           </div>
