@@ -28,7 +28,7 @@ export function Clubes() {
           <div className="col-2 blue d-flex flex-column sidebar-container">
             <Sidebar></Sidebar>
           </div>
-          <div className="col mt-5 py-2 content-container">
+          <div className="col mt-5 pt-4 content-container">
             <div className="bg-white p-3">
               <h2 className="red-text bold text-24">
                 Clubes dentro de la Chilean Premier League

@@ -22,18 +22,18 @@ export function Entrenadores() {
   //Retorno del componente
   return (
     <Fragment>
-      <div className="container-fluid">
-        <div className="row">
-          <Header></Header>
-        </div>
-        <div className="row">
-          <div className="col-2 blue">
+      <div className="container-fluid d-flex flex-column vh-100">
+        <Header></Header>
+        <div className="row flex-grow-1">
+          <div className="col-2 blue d-flex flex-column sidebar-container">
             <Sidebar></Sidebar>
           </div>
-          <div className="col">
+          <div className="col mt-5 pt-4 content-container">
             <div className="bg-white p-3">
-            <h2 className="red-text bold text-24">Entrenadores de la Chilean Premier League</h2>
-            <div className="entrenadores-list">
+              <h2 className="red-text bold text-24">
+                Entrenadores de la Chilean Premier League
+              </h2>
+              <div className="entrenadores-list">
                 {data &&
                   data.map((entrenador) => (
                     <Link
@@ -44,11 +44,15 @@ export function Entrenadores() {
                       <div className="custom-border-type-entrenador">
                         <div className="entrenador">
                           <div className="foto-entrenador">
-                            <img src="images/Group.png" alt="Foto del entrenador" />
+                            <img
+                              src="images/Group.png"
+                              alt="Foto del entrenador"
+                            />
                           </div>
                           <div className="info-entrenador">
                             <div>
-                              {entrenador.nombre_entrenador} {entrenador.apellido_entrenador}
+                              {entrenador.nombre_entrenador}{" "}
+                              {entrenador.apellido_entrenador}
                             </div>
                             <div className="bold">
                               {entrenador.club_entrenador}
