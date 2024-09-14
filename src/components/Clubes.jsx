@@ -22,47 +22,45 @@ export function Clubes() {
   //Retorno del componente
   return (
     <Fragment>
-    <div className="container-fluid">
-      <div className="row">
+      <div className="container-fluid d-flex flex-column vh-100">
         <Header></Header>
-      </div>
-      <div className="row">
-        <div className="col-2 blue">
-          <Sidebar></Sidebar>
-        </div>
-        <div className="col">
-          <div className="bg-white p-3">
-            <h2 className="red-text bold text-24">Clubes dentro de la Chilean Premier League</h2>
-            <div className="club-list">
-              {data &&
-                data.map((club) => (
-                  <Link
-                    className="red-text text-12 bold decoration-none medium text-center pt-2"
-                    to={`/clubes/${club.id_club}`}
-                    key={club.id_club}
-                  >
-                    <div className="custom-border-type">
-                      <div className="d-flex flex-column align-items-center">
-                        <div>
-                          <img
-                            src={`${club.escudo_club}`}
-                            alt="Escudo"
-                            height={30}
-                            className="mb-1"
-                          />
-                        </div>
-                        <div>
-                          {club.nombre_club}
+        <div className="row flex-grow-1">
+          <div className="col-2 blue d-flex flex-column sidebar-container">
+            <Sidebar></Sidebar>
+          </div>
+          <div className="col mt-5 py-2 content-container">
+            <div className="bg-white p-3">
+              <h2 className="red-text bold text-24">
+                Clubes dentro de la Chilean Premier League
+              </h2>
+              <div className="club-list">
+                {data &&
+                  data.map((club) => (
+                    <Link
+                      className="red-text text-12 bold decoration-none medium text-center pt-2"
+                      to={`/clubes/${club.id_club}`}
+                      key={club.id_club}
+                    >
+                      <div className="custom-border-type">
+                        <div className="d-flex flex-column align-items-center">
+                          <div>
+                            <img
+                              src={`${club.escudo_club}`}
+                              alt="Escudo"
+                              height={30}
+                              className="mb-1"
+                            />
+                          </div>
+                          <div>{club.nombre_club}</div>
                         </div>
                       </div>
-                    </div>
-                  </Link>
-                ))}
+                    </Link>
+                  ))}
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </Fragment>
+    </Fragment>
   );
 }

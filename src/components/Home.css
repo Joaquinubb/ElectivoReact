@@ -18,15 +18,6 @@
   background-color: #255380;
 }
 
-.fixed-bottom {
-  position: fixed;
-  bottom: 0;
-}
-
-.bg-size {
-  height: 20vh;
-}
-
 .decoration-none {
   text-decoration: none;
 }
@@ -39,6 +30,22 @@
   font-weight: 600;
 }
 
-.p-10 {
-  padding: 5rem;
+.vh-100 {
+  height: 100vh;
+}
+
+/* Media queries for larger screens */
+@media (min-width: 992px) {
+  .sidebar-content {
+    justify-content: flex-start;
+    margin-top: 0;
+    padding-top: 0;
+  }
+}
+
+/* Hide sidebar on mobile */
+@media (max-width: 767px) {
+  .sidebar-container {
+    display: none !important;
+  }
 }

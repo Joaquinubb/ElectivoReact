@@ -1,20 +1,19 @@
 import React, { Fragment } from "react";
-import { Header, Sidebar } from "./index";
+import { Header } from "./Header";
+import { Sidebar } from "./Sidebar";
 import "./Home.css";
 
 export function Home() {
   return (
     <Fragment>
-      <div className="container-fluid">
-        <div className="row">
-          <Header></Header>
-        </div>
-        <div className="row">
-          <div className="col-2 blue">
-            <Sidebar></Sidebar>
+      <div className="container-fluid d-flex flex-column vh-100">
+        <Header />
+        <div className="row flex-grow-1">
+          <div className="col-2 blue d-flex flex-column sidebar-container">
+            <Sidebar />
           </div>
-          <div className="col">
-            <div className="bg-white"></div>
+          <div className="col bg-white">
+            <div className="content"></div>
           </div>
         </div>
       </div>
