@@ -5,3 +5,4 @@ export * from "./Entrenadores";
 export * from "./Jugadores";
 export * from "./Start";
 export * from "./Header";
+export * from "./Sidebar";

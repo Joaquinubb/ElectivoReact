@@ -5,7 +5,7 @@ import "./Header.css";
 export function Header() {
   return (
     <Fragment>
-      <header className="bg-red d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <header className="bg-red d-flex flex-wrap justify-content-center py-1 fixed-top">
         <Link
           to={"/"}
           className="ms-3 d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
@@ -17,8 +17,8 @@ export function Header() {
           />
         </Link>
 
-        <ul class="nav nav-pills me-4">
-          <li class="nav-item">
+        <ul className="nav nav-pills me-4">
+          <li className="nav-item">
             <Link
               className="nav-link text-blanco decoration-none text-20 semibold"
               to={"/entrenadores"}
@@ -26,7 +26,7 @@ export function Header() {
               Entrenadores
             </Link>
           </li>
-          <li class="nav-item">
+          <li className="nav-item">
             <Link
               className="nav-link text-blanco decoration-none text-20 semibold"
               to={"/arbitros"}
@@ -34,7 +34,7 @@ export function Header() {
               Arbitros
             </Link>
           </li>
-          <li class="nav-item">
+          <li className="nav-item">
             <Link
               className="nav-link text-blanco decoration-none text-20 semibold"
               to={"/clubes"}
@@ -42,7 +42,7 @@ export function Header() {
               Clubes
             </Link>
           </li>
-          <li class="nav-item">
+          <li className="nav-item">
             <Link
               className="nav-link text-blanco decoration-none text-20 semibold"
               to={"/jugadores"}

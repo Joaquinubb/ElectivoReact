@@ -1,0 +1,46 @@
+.text-blanco {
+  color: #eae8e0;
+}
+
+.text-24 {
+  font-size: 24px;
+}
+
+.text-20 {
+  font-size: 20px;
+}
+
+.text-12 {
+  font-size: 12px;
+}
+
+.blue {
+  background-color: #255380;
+}
+
+.decoration-none {
+  text-decoration: none;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.semibold {
+  font-weight: 600;
+}
+
+.medium {
+  font-weight: 500;
+}
+
+.overflow-auto {
+  overflow: auto;
+}
+
+/* Hide sidebar on mobile */
+@media (max-width: 767px) {
+  .sidebar-content {
+    display: none;
+  }
+}

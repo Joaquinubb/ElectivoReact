@@ -25,8 +25,8 @@ export function Start() {
           <Route path="/home" element={<Home />} />
         </Routes>
       </div>
-      <div className="bg-blue fixed-bottom bg-size d-flex justify-content-center align-items-center">
-        <Link className="text-blanco decoration-none text-24 bold" to={"/home"}>
+      <Link className="text-blanco decoration-none text-24 bold" to={"/home"}>
+        <div className="bg-blue fixed-bottom bg-size d-flex justify-content-center align-items-center">
           <svg
             className="me-3"
             width="33"
@@ -41,8 +41,8 @@ export function Start() {
             />
           </svg>
           Comenzar
-        </Link>
-      </div>
+        </div>
+      </Link>
     </>
   );
 }
