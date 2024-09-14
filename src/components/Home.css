@@ -14,6 +14,10 @@
   font-size: 20px;
 }
 
+.text-12 {
+  font-size: 12px;
+}
+
 .blue {
   background-color: #255380;
 }
@@ -32,6 +36,28 @@
 
 .vh-100 {
   height: 100vh;
+}
+
+.custom-border-btn {
+  border-color: #DB1A33;
+  border-width: 3px;
+  border-style: solid;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+.custom-border-btn:hover {
+  background-color: #DB1A33;
+}
+
+.imagenes {
+  max-width: 780px;
+  margin-top: 40px;
+}
+
+.imagen {
+  border-radius: 20px;
+  height: 390px;
 }
 
 /* Media queries for larger screens */
