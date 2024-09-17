@@ -1,8 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Header, Sidebar } from "./index";
+import { Header, Sidebar } from "../components/index";
 import { Link } from "react-router-dom";
-import "./Entrenadores.css";
-export function Entrenadores() {
+export function Arbitros() {
   //Obtenemos los datos
   const [data, setData] = useState(null);
 
@@ -10,7 +9,7 @@ export function Entrenadores() {
     async function fetchData() {
       const apiUrl = process.env.REACT_APP_API;
 
-      let data = await fetch(`${apiUrl}/entrenadores`, {
+      let data = await fetch(`${apiUrl}/arbitros`, {
         method: "GET",
       }).then((response) => response.json());
 
@@ -30,33 +29,31 @@ export function Entrenadores() {
           </div>
           <div className="col mt-5 pt-4 content-container">
             <div className="bg-white p-3">
-              <h2 className="red-text bold text-24">
-                Entrenadores de la Chilean Premier League
+              <h2 className="red-text bold text-20">
+                Arbitros de la Chilean Premier League
               </h2>
-              <div className="entrenadores-list">
+              <div className="arbitros-list">
                 {data &&
-                  data.map((entrenador) => (
+                  data.map((arbitros) => (
                     <Link
                       className="red-text text-12 bold decoration-none medium text-center pt-2"
-                      to={`/entrenadores/${entrenador.nombre_entrenador}`}
-                      key={entrenador.id_entrenador}
+                      to={`/arbitros/${arbitros.nombre_arbitro}`}
+                      key={arbitros.id_arbitro}
                     >
-                      <div className="custom-border-type-entrenador">
-                        <div className="entrenador">
-                          <div className="foto-entrenador">
+                      <div className="custom-border-type-arbitro">
+                        <div className="arbitro">
+                          <div className="foto-arbitro">
                             <img
                               src="images/Group.png"
-                              alt="Foto del entrenador"
+                              alt="Foto del arbitro"
                             />
                           </div>
-                          <div className="info-entrenador">
-                            <div>
-                              {entrenador.nombre_entrenador}{" "}
-                              {entrenador.apellido_entrenador}
-                            </div>
+                          <div className="info-arbitro">
                             <div className="bold">
-                              {entrenador.club_entrenador}
+                              {arbitros.nombre_arbitro}{" "}
+                              {arbitros.apellido_arbitro}
                             </div>
+                            <div className="semibold">{arbitros.edad} años</div>
                           </div>
                         </div>
                       </div>
