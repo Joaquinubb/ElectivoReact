@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
-import { Header } from "./Header";
-import { Sidebar } from "./Sidebar";
-import "./Home.css";
+import { Header } from "../components/index";
+import { Sidebar } from "../components/Sidebar";
 import { Link } from "react-router-dom";
 
 export function Home() {

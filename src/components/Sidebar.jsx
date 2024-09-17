@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./Sidebar.css";
 
 export function Sidebar() {
   const [data, setData] = useState(null);
@@ -10,6 +9,7 @@ export function Sidebar() {
     async function fetchData() {
       try {
         const apiUrl = process.env.REACT_APP_API;
+
         const response = await fetch(`${apiUrl}/clubes`, {
           method: "GET",
         });
@@ -44,7 +44,7 @@ export function Sidebar() {
         data.map((club) => (
           <div key={club.id_club} className="mb-2">
             <a
-              href={`/clubes/${club.id_club}`}
+              href={`/clubes/${club.nombre_club}`}
               className="text-blanco text-12 decoration-none medium"
             >
               <img

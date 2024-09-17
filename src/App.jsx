@@ -9,6 +9,9 @@ import {
   Start,
 } from "./components";
 
+import "./Globals.css";
+import { Club } from "./pages/Club";
+
 export function App() {
   return (
     <Fragment>
@@ -19,6 +22,7 @@ export function App() {
         <Route path="/clubes" element={<Clubes />} />
         <Route path="/entrenadores" element={<Entrenadores />} />
         <Route path="/jugadores" element={<Jugadores />} />
+        <Route path="/clubes/*" element={<Club />} />
       </Routes>
     </Fragment>
   );

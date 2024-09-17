@@ -1,8 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Header, Sidebar } from "./index";
+import { Header, Sidebar } from "../components/index";
 import { Link } from "react-router-dom";
-import "./Arbitros.css";
-export function Arbitros() {
+export function Clubes() {
   //Obtenemos los datos
   const [data, setData] = useState(null);
 
@@ -10,7 +9,7 @@ export function Arbitros() {
     async function fetchData() {
       const apiUrl = process.env.REACT_APP_API;
 
-      let data = await fetch(`${apiUrl}/arbitros`, {
+      let data = await fetch(`${apiUrl}/clubes`, {
         method: "GET",
       }).then((response) => response.json());
 
@@ -31,31 +30,27 @@ export function Arbitros() {
           <div className="col mt-5 pt-4 content-container">
             <div className="bg-white p-3">
               <h2 className="red-text bold text-24">
-                Arbitros de la Chilean Premier League
+                Clubes dentro de la Chilean Premier League
               </h2>
-              <div className="arbitros-list">
+              <div className="club-list">
                 {data &&
-                  data.map((arbitros) => (
+                  data.map((club) => (
                     <Link
                       className="red-text text-12 bold decoration-none medium text-center pt-2"
-                      to={`/arbitros/${arbitros.nombre_arbitro}`}
-                      key={arbitros.id_arbitro}
+                      to={`/clubes/${club.nombre_club}`}
+                      key={club.id_club}
                     >
-                      <div className="custom-border-type-arbitro">
-                        <div className="arbitro">
-                          <div className="foto-arbitro">
+                      <div className="custom-border-type">
+                        <div className="d-flex flex-column align-items-center">
+                          <div>
                             <img
-                              src="images/Group.png"
-                              alt="Foto del arbitro"
+                              src={`${club.escudo_club}`}
+                              alt="Escudo"
+                              height={30}
+                              className="mb-1"
                             />
                           </div>
-                          <div className="info-arbitro">
-                            <div className="bold">
-                              {arbitros.nombre_arbitro}{" "}
-                              {arbitros.apellido_arbitro}
-                            </div>
-                            <div className="semibold">{arbitros.edad} años</div>
-                          </div>
+                          <div>{club.nombre_club}</div>
                         </div>
                       </div>
                     </Link>

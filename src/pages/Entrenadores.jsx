@@ -1,8 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Header, Sidebar } from "./index";
-import "./Clubes.css";
+import { Header, Sidebar } from "../components/index";
 import { Link } from "react-router-dom";
-export function Clubes() {
+export function Entrenadores() {
   //Obtenemos los datos
   const [data, setData] = useState(null);
 
@@ -10,7 +9,7 @@ export function Clubes() {
     async function fetchData() {
       const apiUrl = process.env.REACT_APP_API;
 
-      let data = await fetch(`${apiUrl}/clubes`, {
+      let data = await fetch(`${apiUrl}/entrenadores`, {
         method: "GET",
       }).then((response) => response.json());
 
@@ -30,28 +29,34 @@ export function Clubes() {
           </div>
           <div className="col mt-5 pt-4 content-container">
             <div className="bg-white p-3">
-              <h2 className="red-text bold text-24">
-                Clubes dentro de la Chilean Premier League
+              <h2 className="red-text bold text-20">
+                Entrenadores de la Chilean Premier League
               </h2>
-              <div className="club-list">
+              <div className="entrenadores-list">
                 {data &&
-                  data.map((club) => (
+                  data.map((entrenador) => (
                     <Link
                       className="red-text text-12 bold decoration-none medium text-center pt-2"
-                      to={`/clubes/${club.id_club}`}
-                      key={club.id_club}
+                      to={`/entrenadores/${entrenador.nombre_entrenador}`}
+                      key={entrenador.id_entrenador}
                     >
-                      <div className="custom-border-type">
-                        <div className="d-flex flex-column align-items-center">
-                          <div>
+                      <div className="custom-border-type-entrenador">
+                        <div className="entrenador">
+                          <div className="foto-entrenador">
                             <img
-                              src={`${club.escudo_club}`}
-                              alt="Escudo"
-                              height={30}
-                              className="mb-1"
+                              src="images/Group.png"
+                              alt="Foto del entrenador"
                             />
                           </div>
-                          <div>{club.nombre_club}</div>
+                          <div className="info-entrenador">
+                            <div>
+                              {entrenador.nombre_entrenador}{" "}
+                              {entrenador.apellido_entrenador}
+                            </div>
+                            <div className="bold">
+                              {entrenador.club_entrenador}
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </Link>
