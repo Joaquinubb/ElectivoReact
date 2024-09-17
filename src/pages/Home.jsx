@@ -31,7 +31,10 @@ export function Home() {
               </p>
               <div className="row ">
                 <div className="col">
-                  <Link className="btn custom-border-btn bg-red text-blanco">
+                  <Link
+                    className="btn custom-border-btn bg-red text-blanco"
+                    to={"/clubes"}
+                  >
                     <svg
                       className="me-3"
                       width="38"
@@ -57,7 +60,10 @@ export function Home() {
                   </Link>
                 </div>
                 <div className="col">
-                  <Link className="btn custom-border-btn bg-red text-blanco">
+                  <Link
+                    className="btn custom-border-btn bg-red text-blanco"
+                    to={"/entrenadores"}
+                  >
                     <svg
                       className="me-3"
                       width="34"
@@ -75,7 +81,10 @@ export function Home() {
                   </Link>
                 </div>
                 <div className="col">
-                  <Link className="btn custom-border-btn bg-red text-blanco">
+                  <Link
+                    className="btn custom-border-btn bg-red text-blanco"
+                    to={"/jugadores"}
+                  >
                     <svg
                       className="me-3"
                       width="20"
@@ -93,7 +102,10 @@ export function Home() {
                   </Link>
                 </div>
                 <div className="col">
-                  <Link className="btn custom-border-btn bg-red text-blanco">
+                  <Link
+                    className="btn custom-border-btn bg-red text-blanco"
+                    to={"/arbitros"}
+                  >
                     <svg
                       className="me-3"
                       width="38"

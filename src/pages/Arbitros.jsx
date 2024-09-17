@@ -35,9 +35,8 @@ export function Arbitros() {
               <div className="arbitros-list">
                 {data &&
                   data.map((arbitros) => (
-                    <Link
+                    <div
                       className="red-text text-12 bold decoration-none medium text-center pt-2"
-                      to={`/arbitros/${arbitros.nombre_arbitro}`}
                       key={arbitros.id_arbitro}
                     >
                       <div className="custom-border-type-arbitro">
@@ -57,7 +56,7 @@ export function Arbitros() {
                           </div>
                         </div>
                       </div>
-                    </Link>
+                    </div>
                   ))}
               </div>
             </div>
