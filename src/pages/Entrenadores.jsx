@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Header, Sidebar } from "../components/index";
-import { Link } from "react-router-dom";
+import { CardEntrenador, Header, Sidebar } from "../components/index";
+
 export function Entrenadores() {
   //Obtenemos los datos
   const [data, setData] = useState(null);
@@ -33,34 +33,27 @@ export function Entrenadores() {
                 Entrenadores de la Chilean Premier League
               </h2>
               <div className="entrenadores-list">
-                {data &&
-                  data.map((entrenador) => (
-                    <Link
-                      className="red-text text-12 bold decoration-none medium text-center pt-2"
-                      to={`/entrenadores/${entrenador.nombre_entrenador}`}
-                      key={entrenador.id_entrenador}
-                    >
-                      <div className="custom-border-type-entrenador">
-                        <div className="entrenador">
-                          <div className="foto-entrenador">
-                            <img
-                              src="images/Group.png"
-                              alt="Foto del entrenador"
-                            />
-                          </div>
-                          <div className="info-entrenador">
-                            <div>
-                              {entrenador.nombre_entrenador}{" "}
-                              {entrenador.apellido_entrenador}
-                            </div>
-                            <div className="bold">
-                              {entrenador.club_entrenador}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
+                <div className="row mt-4">
+                  {/* card entrenador*/}
+                  {data &&
+                    data.map(
+                      (entrenador) =>
+                        entrenador.nombre_entrenador && (
+                          <CardEntrenador
+                            key={entrenador.id_entrenador}
+                            nombre_entrenador={entrenador.nombre_entrenador}
+                            apellido_entrenador={entrenador.apellido_entrenador}
+                            club_entrenador={entrenador.club_entrenador}
+                            edad={entrenador.edad}
+                            fechaNac_entrenador={entrenador.fechaNac_entrenador}
+                            id_entrenador={entrenador.id_entrenador}
+                            nacionalidad_entrenador={
+                              entrenador.nacionalidad_entrenador
+                            }
+                          />
+                        )
+                    )}
+                </div>
               </div>
             </div>
           </div>

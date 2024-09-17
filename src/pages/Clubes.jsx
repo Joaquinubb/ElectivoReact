@@ -29,7 +29,7 @@ export function Clubes() {
           </div>
           <div className="col mt-5 pt-4 content-container">
             <div className="bg-white p-3">
-              <h2 className="red-text bold text-24">
+              <h2 className="red-text bold text-20">
                 Clubes dentro de la Chilean Premier League
               </h2>
               <div className="club-list">

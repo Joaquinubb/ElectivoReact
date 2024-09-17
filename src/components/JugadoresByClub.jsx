@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { CardJugador } from "./CardJugador";
 
 export const JugadoresByClub = ({ club }) => {
   const [data, setData] = useState({
@@ -11,6 +10,7 @@ export const JugadoresByClub = ({ club }) => {
         apellido: null,
         edad: 0,
         posicion: null,
+        nacionalidad: null,
       },
     ],
   });
@@ -56,6 +56,12 @@ export const JugadoresByClub = ({ club }) => {
                 {jugador.nombre} {jugador.apellido}
               </p>
               <p className="m-0 bold">{jugador.edad} Años</p>
+              <img
+                width={20}
+                height={20}
+                src={`/images/${jugador.nacionalidad}.png`}
+                alt={jugador.nacionalidad}
+              />
             </div>
           </div>
         ))}
@@ -72,6 +78,12 @@ export const JugadoresByClub = ({ club }) => {
                 {jugador.nombre} {jugador.apellido}
               </p>
               <p className="m-0 bold">{jugador.edad} Años</p>
+              <img
+                width={20}
+                height={20}
+                src={`/images/${jugador.nacionalidad}.png`}
+                alt={jugador.nacionalidad}
+              />
             </div>
           </div>
         ))}
@@ -88,6 +100,12 @@ export const JugadoresByClub = ({ club }) => {
                 {jugador.nombre} {jugador.apellido}
               </p>
               <p className="m-0 bold">{jugador.edad} Años</p>
+              <img
+                width={20}
+                height={20}
+                src={`/images/${jugador.nacionalidad}.png`}
+                alt={jugador.nacionalidad}
+              />
             </div>
           </div>
         ))}
@@ -104,6 +122,12 @@ export const JugadoresByClub = ({ club }) => {
                 {jugador.nombre} {jugador.apellido}
               </p>
               <p className="m-0 bold">{jugador.edad} Años</p>
+              <img
+                width={20}
+                height={20}
+                src={`/images/${jugador.nacionalidad}.png`}
+                alt={jugador.nacionalidad}
+              />
             </div>
           </div>
         ))}
