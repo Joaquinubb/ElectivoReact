@@ -142,11 +142,6 @@ export function Club() {
                     <p className="red-text medium m-0">
                       {data.entrenador_club}
                     </p>
-                    <p className="red-text bold m-0">Ojo leer</p>
-                    <p className="red-text bold m-0">
-                      el comentario en el codigo
-                    </p>
-                    {/* PUEDE QUE HAYA UN PROBLEMA EN EL BACK PORQUE LO UNICO QUE TENEMOS PA TENER EL GET ENTRENDOR ES EL APELLIDO XD */}
                   </div>
                 </div>
                 <div className="separation-bar"></div>

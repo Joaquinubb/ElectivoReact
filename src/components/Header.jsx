@@ -6,7 +6,7 @@ export function Header() {
     <Fragment>
       <header className="bg-red d-flex flex-wrap justify-content-center py-1 fixed-top">
         <Link
-          to={"/"}
+          to={"/home"}
           className="ms-3 d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
         >
           <img
@@ -30,7 +30,7 @@ export function Header() {
               className="nav-link text-blanco decoration-none text-20 semibold"
               to={"/arbitros"}
             >
-              Arbitros
+              Árbitros
             </Link>
           </li>
           <li className="nav-item">

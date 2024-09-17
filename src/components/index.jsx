@@ -7,3 +7,4 @@ export * from "../pages/Start";
 export * from "./Header";
 export * from "./Sidebar";
 export * from "./CardJugador";
+export * from "./CardEntrenador";
