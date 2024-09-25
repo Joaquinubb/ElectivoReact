@@ -1,6 +1,7 @@
 import React from "react";
 import { Header, Sidebar } from "../components";
 import { ClubesCrud } from "../components/ClubesCrud";
+import { PartidosCrud } from "../components/PartidosCrud";
 
 export const Editor = () => {
   const [dataType, setDataType] = React.useState("clubes");
@@ -44,9 +45,18 @@ export const Editor = () => {
                 >
                   Arbitros
                 </p>
+                <p
+                  onClick={() => setDataType("partidos")}
+                  className={`m-0 text-16 red-text semibold   
+                    ${dataType === "partidos" ? "switch-item-clicked" : ""}
+                    `}
+                >
+                  Partidos
+                </p>
               </div>
 
               {dataType === "clubes" && <ClubesCrud />}
+              {dataType === "partidos" && <PartidosCrud />}
             </div>
           </div>
         </div>
