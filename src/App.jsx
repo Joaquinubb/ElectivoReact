@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import {
   Home,
   Arbitros,
@@ -23,6 +23,7 @@ export function App() {
         <Route path="/entrenadores" element={<Entrenadores />} />
         <Route path="/jugadores" element={<Jugadores />} />
         <Route path="/clubes/*" element={<Club />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Fragment>
   );
