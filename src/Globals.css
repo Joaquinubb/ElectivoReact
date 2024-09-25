@@ -395,11 +395,3 @@
   background-color: #dddddd;
   cursor: pointer;
 }
-
-.cursor-pointer {
-  cursor: pointer;
-}
-
-.rounded-full {
-  border-radius: 50px;
-}
