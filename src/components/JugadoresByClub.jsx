@@ -50,18 +50,17 @@ export const JugadoresByClub = ({ club }) => {
         {/* card jugador*/}
         {ARQUEROS.map((jugador) => (
           <div className="col-md-4 w-fit border-red-2 red-text text-16 d-flex align-items-center text-start rounded-3 mx-2 mb-2 shadow-card ">
-            <img width={40} height={40} src="/images/Group.png" alt="" />{" "}
+            <img
+              width={40}
+              height={40}
+              src={`/images/${jugador.nacionalidad}.png`}
+              alt=""
+            />{" "}
             <div className="ms-2">
               <p className="m-0">
                 {jugador.nombre} {jugador.apellido}
               </p>
               <p className="m-0 bold">{jugador.edad} Años</p>
-              <img
-                width={20}
-                height={20}
-                src={`/images/${jugador.nacionalidad}.png`}
-                alt={jugador.nacionalidad}
-              />
             </div>
           </div>
         ))}
@@ -72,18 +71,17 @@ export const JugadoresByClub = ({ club }) => {
         {/* card jugador*/}
         {DEFENSAS.map((jugador) => (
           <div className="col-md-4 w-fit border-red-2 red-text text-16 d-flex align-items-center text-start rounded-3 mx-2 mb-2 shadow-card ">
-            <img width={40} height={40} src="/images/Group.png" alt="" />{" "}
+            <img
+              width={40}
+              height={40}
+              src={`/images/${jugador.nacionalidad}.png`}
+              alt=""
+            />{" "}
             <div className="ms-2">
               <p className="m-0">
                 {jugador.nombre} {jugador.apellido}
               </p>
               <p className="m-0 bold">{jugador.edad} Años</p>
-              <img
-                width={20}
-                height={20}
-                src={`/images/${jugador.nacionalidad}.png`}
-                alt={jugador.nacionalidad}
-              />
             </div>
           </div>
         ))}
@@ -94,18 +92,17 @@ export const JugadoresByClub = ({ club }) => {
         {/* card jugador*/}
         {MEDIOCAMPISTAS.map((jugador) => (
           <div className="col-md-4 w-fit border-red-2 red-text text-16 d-flex align-items-center text-start rounded-3 mx-2 mb-2 shadow-card ">
-            <img width={40} height={40} src="/images/Group.png" alt="" />{" "}
+            <img
+              width={40}
+              height={40}
+              src={`/images/${jugador.nacionalidad}.png`}
+              alt=""
+            />{" "}
             <div className="ms-2">
               <p className="m-0">
                 {jugador.nombre} {jugador.apellido}
               </p>
               <p className="m-0 bold">{jugador.edad} Años</p>
-              <img
-                width={20}
-                height={20}
-                src={`/images/${jugador.nacionalidad}.png`}
-                alt={jugador.nacionalidad}
-              />
             </div>
           </div>
         ))}
@@ -116,18 +113,17 @@ export const JugadoresByClub = ({ club }) => {
         {/* card jugador*/}
         {DELANTEROS.map((jugador) => (
           <div className="col-md-4 w-fit border-red-2 red-text text-16 d-flex align-items-center text-start rounded-3 mx-2 mb-2 shadow-card ">
-            <img width={40} height={40} src="/images/Group.png" alt="" />{" "}
+            <img
+              width={40}
+              height={40}
+              src={`/images/${jugador.nacionalidad}.png`}
+              alt=""
+            />{" "}
             <div className="ms-2">
               <p className="m-0">
                 {jugador.nombre} {jugador.apellido}
               </p>
               <p className="m-0 bold">{jugador.edad} Años</p>
-              <img
-                width={20}
-                height={20}
-                src={`/images/${jugador.nacionalidad}.png`}
-                alt={jugador.nacionalidad}
-              />
             </div>
           </div>
         ))}
