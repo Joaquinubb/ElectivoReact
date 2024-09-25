@@ -54,17 +54,26 @@ export function CardJugador({
   return (
     <>
       <button
-        className="col-md-4 w-fit border-red-2 red-text text-16 d-flex align-items-center text-start rounded-3 mx-2 my-2 shadow-card "
+        className="custom-border-type-jugador m-1 red-text text-12 decoration-none medium text-center shadow-card"
         type="button"
         data-bs-toggle="modal"
         data-bs-target={`#jugador${id_jugador}`}
       >
-        <img width={40} height={40} src="images/Group.png" alt="" />{" "}
-        <div className="ms-2">
-          <p className="m-0">
-            {nombre_jugador} {apellido_jugador}
-          </p>
-          <p className="m-0 bold">{club_jugador}</p>
+        <div className="jugador">
+          <div className="foto-jugador">
+            <img
+              src="images/Group.png"
+              alt={`Foto de ${nombre_jugador} ${apellido_jugador}`}
+              width={40}
+              height={40}
+            />
+          </div>
+          <div className="info-jugador">
+            <div className="">
+              {nombre_jugador} {apellido_jugador}
+            </div>
+            <div className="semibold">{club_jugador}</div>
+          </div>
         </div>
       </button>
 

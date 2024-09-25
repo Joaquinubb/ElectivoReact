@@ -50,9 +50,8 @@ export function Club() {
                   />
                   {data.nombre_club}
                 </h1>
-
-                <div className="row justify-content-between m-0 ">
-                  <div className="mb-4  bg-red text-blanco w-fit rounded-3 shadow-card px-4 py-3 d-flex">
+                <div className="row justify-content-between m-0">
+                  <div className="col-5  mb-4 bg-red text-blanco rounded-3 shadow-card px-4 py-3 d-flex">
                     <svg
                       width="40"
                       height="40"
@@ -70,7 +69,7 @@ export function Club() {
                       <p className="m-0 bold">{data.fechaFund_club}</p>
                     </div>
                   </div>
-                  <div className="mb-4  bg-red text-blanco w-fit rounded-3 shadow-card px-4 py-3 d-flex">
+                  <div className="col-3 mb-4 bg-red text-blanco rounded-3 shadow-card px-4 py-3 d-flex">
                     <svg
                       width="40"
                       height="40"
@@ -91,7 +90,7 @@ export function Club() {
                       <p className="m-0 bold">{data.ciudad_club}</p>
                     </div>
                   </div>
-                  <div className="mb-4   bg-red text-blanco w-fit rounded-3 shadow-card px-4 py-3 d-flex">
+                  <div className="col mb-4 bg-red text-blanco rounded-3 shadow-card px-4 py-3 d-flex">
                     <svg
                       width="40"
                       height="40"
@@ -110,7 +109,7 @@ export function Club() {
                     </div>
                   </div>
                 </div>
-                <div className="row  justify-content-center m-0 px-2">
+                <div className="row justify-content-center m-0 px-2">
                   <div className=" bg-red text-blanco w-fit rounded-3 shadow-card px-4 py-3 d-flex">
                     <div className=" d-flex flex-column align-items-center">
                       <p className="m-0 text-center">
@@ -138,14 +137,11 @@ export function Club() {
                     alt=""
                     className="me-3"
                   />
-                  <div>
                     <p className="red-text medium m-0">
                       {data.entrenador_club}
                     </p>
-                  </div>
                 </div>
                 <div className="separation-bar"></div>
-
                 <JugadoresByClub club={clubName} />
               </div>
             </div>

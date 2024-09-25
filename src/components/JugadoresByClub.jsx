@@ -49,7 +49,7 @@ export const JugadoresByClub = ({ club }) => {
       <div className="row">
         {/* card jugador*/}
         {ARQUEROS.map((jugador) => (
-          <div className="col-md-4 w-fit border-red-2 red-text text-16 d-flex align-items-center text-start rounded-3 mx-2 mb-2 shadow-card ">
+          <div className="custom-width border-red-2 red-text text-16 d-flex align-items-center text-start rounded-3 mx-2 mb-2 shadow-card">
             <img
               width={40}
               height={40}
@@ -70,7 +70,7 @@ export const JugadoresByClub = ({ club }) => {
       <div className="row">
         {/* card jugador*/}
         {DEFENSAS.map((jugador) => (
-          <div className="col-md-4 w-fit border-red-2 red-text text-16 d-flex align-items-center text-start rounded-3 mx-2 mb-2 shadow-card ">
+          <div className="custom-width border-red-2 red-text text-16 d-flex align-items-center text-start rounded-3 mx-2 mb-2 shadow-card">
             <img
               width={40}
               height={40}
@@ -91,7 +91,7 @@ export const JugadoresByClub = ({ club }) => {
       <div className="row">
         {/* card jugador*/}
         {MEDIOCAMPISTAS.map((jugador) => (
-          <div className="col-md-4 w-fit border-red-2 red-text text-16 d-flex align-items-center text-start rounded-3 mx-2 mb-2 shadow-card ">
+          <div className="custom-width border-red-2 red-text text-16 d-flex align-items-center text-start rounded-3 mx-2 mb-2 shadow-card">
             <img
               width={40}
               height={40}
@@ -112,7 +112,7 @@ export const JugadoresByClub = ({ club }) => {
       <div className="row">
         {/* card jugador*/}
         {DELANTEROS.map((jugador) => (
-          <div className="col-md-4 w-fit border-red-2 red-text text-16 d-flex align-items-center text-start rounded-3 mx-2 mb-2 shadow-card ">
+          <div className="custom-width border-red-2 red-text text-16 d-flex align-items-center text-start rounded-3 mx-2 mb-2 shadow-card">
             <img
               width={40}
               height={40}

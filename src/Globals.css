@@ -31,6 +31,10 @@
   padding-top: 2rem;
 }
 
+.pr-3 {
+  padding-right: 3rem;
+}
+
 .red-text {
   color: #db1a33;
 }
@@ -99,6 +103,11 @@
   bottom: 0;
 }
 
+.custom-width {
+  width: 15rem;
+  height: 6rem;
+}
+
 .bg-size {
   height: 20vh;
 }
@@ -108,8 +117,8 @@
   border-width: 3px;
   border-style: solid;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
-  width: 13rem;
+  box-shadow: 0 4px 8px rgba(110, 110, 110, 0.6);
+  width: 15rem;
   height: 4rem;
   display: flex;
   flex-direction: column;
@@ -120,6 +129,10 @@
   display: flex;
   align-items: center;
   padding-top: 0.2rem;
+}
+
+.info-arbitro {
+  text-align: left;
 }
 
 .arbitros-list {
@@ -135,6 +148,7 @@
   object-fit: cover;
   border-radius: 50%;
 }
+
 .bg-size {
   height: 20vh;
 }
@@ -199,7 +213,7 @@
   border-style: solid;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
-  width: 13rem;
+  width: 15rem;
   height: 4rem;
   display: flex;
   flex-direction: column;
@@ -209,7 +223,12 @@
   padding-left: 1rem;
   display: flex;
   align-items: center;
+  justify-content: center;
   padding-top: 0.2rem;
+}
+
+.info-entrenador {
+  text-align: left;
 }
 
 .entrenadores-list {
@@ -225,6 +244,45 @@
   object-fit: cover;
   border-radius: 50%;
 }
+
+.custom-border-type-jugador {
+  border-color: #db1a33;
+  border-width: 3px;
+  border-style: solid;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+  width: 15rem;
+  height: 4rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.jugador {
+  padding-left: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0.2rem;
+}
+
+.jugadores-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.info-jugador {
+  text-align: left;
+}
+
+.foto-jugador img {
+  margin-right: 1rem;
+  height: 3rem;
+  width: 3rem;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
 .custom-border-btn {
   border-color: #db1a33;
   border-width: 3px;

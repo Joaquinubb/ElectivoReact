@@ -32,11 +32,12 @@ export function Arbitros() {
               <h2 className="red-text bold text-20">
                 Arbitros de la Chilean Premier League
               </h2>
-              <div className="arbitros-list">
+              <div className="arbitros-list mt-4">
                 {data &&
                   data.map((arbitros) => (
+                    
                     <div
-                      className="red-text text-12 bold decoration-none medium text-center pt-2"
+                      className="red-text text-12 decoration-none medium text-center"
                       key={arbitros.id_arbitro}
                     >
                       <div className="custom-border-type-arbitro">
@@ -48,7 +49,7 @@ export function Arbitros() {
                             />
                           </div>
                           <div className="info-arbitro">
-                            <div className="bold">
+                            <div className="">
                               {arbitros.nombre_arbitro}{" "}
                               {arbitros.apellido_arbitro}
                             </div>
