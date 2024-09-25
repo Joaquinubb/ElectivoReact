@@ -25,22 +25,30 @@ export const CardEntrenador = ({
       modal.removeEventListener("show.bs.modal", handleShow);
     };
   }, [id_entrenador, apellido_entrenador]);
-  console.log(infoAdicional);
 
   return (
     <>
       <button
-        className="col-md-4 w-fit border-red-2 red-text text-16 d-flex align-items-center text-start rounded-3 mx-2 my-2 shadow-card "
+        className="custom-border-type-entrenador m-1 red-text text-12 decoration-none medium text-center shadow-card"
         type="button"
         data-bs-toggle="modal"
         data-bs-target={`#entrenador${id_entrenador}`}
       >
-        <img width={40} height={40} src="images/Group.png" alt="" />{" "}
-        <div className="ms-2">
-          <p className="m-0">
-            {nombre_entrenador} {apellido_entrenador}
-          </p>
-          <p className="m-0 bold">{club_entrenador}</p>
+        <div className="entrenador">
+          <div className="foto-entrenador">
+            <img
+              src="images/Group.png"
+              alt={`Foto de ${nombre_entrenador} ${apellido_entrenador}`}
+              width={40}
+              height={40}
+            />
+          </div>
+          <div className="info-entrenador">
+            <div className="">
+              {nombre_entrenador} {apellido_entrenador}
+            </div>
+            <div className="semibold">{club_entrenador}</div>
+          </div>
         </div>
       </button>
 
