@@ -30,6 +30,10 @@ export const JugadoresByClub = ({ club }) => {
   }, []);
   console.log(data.jugadores);
 
+  if (typeof data.jugadores === "string") {
+    return <p className="text-16 m-0 bold red-text">{data.jugadores}</p>;
+  }
+
   const ARQUEROS = data.jugadores.filter(
     (jugador) => jugador.posicion === "PORTERO"
   );
