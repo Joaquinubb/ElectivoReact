@@ -2,6 +2,7 @@ import React from "react";
 import { Header, Sidebar } from "../components";
 import { ClubesCrud } from "../components/ClubesCrud";
 import { PartidosCrud } from "../components/PartidosCrud";
+import { ArbitrosCrud } from "../components/ArbitrosCrud";
 
 export const Editor = () => {
   const [dataType, setDataType] = React.useState("clubes");
@@ -56,6 +57,7 @@ export const Editor = () => {
               </div>
 
               {dataType === "clubes" && <ClubesCrud />}
+              {dataType === "arbitros" && <ArbitrosCrud />}
               {dataType === "partidos" && <PartidosCrud />}
             </div>
           </div>

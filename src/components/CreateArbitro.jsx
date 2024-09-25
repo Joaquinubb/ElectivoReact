@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 
-export const CreatePartido = () => {
+export const CreateArbitro = () => {
   //MANIPULACION DE LOS DATOS DEL FORMULARIO
   const [formData, setFormData] = useState({
-    fecha_partido: "",
-    idLocal_partido: "",
-    idVisita_partido: "",
-    idArbitro_partido: "",
+    nombre_arbitro: "",
+    apellido_arbitro: "",
+    fechaNac_arbitro: "",
   });
 
   const handleChange = (event) => {
@@ -17,26 +16,23 @@ export const CreatePartido = () => {
 
   //VALIDACIONES
   const [errors, setErrors] = useState({
-    fecha_partido: "",
-    idLocal_partido: "",
-    idVisita_partido: "",
-    idArbitro_partido: "",
+    nombre_arbitro: "",
+    apellido_arbitro: "",
+    fechaNac_arbitro: "",
   });
 
   const validateForm = () => {
     const newErrors = {
-      fecha_partido: "",
-      idLocal_partido: "",
-      idVisita_partido: "",
-      idArbitro_partido: "",
+      nombre_arbitro: "",
+      apellido_arbitro: "",
+      fechaNac_arbitro: "",
     };
-    if (!formData.fecha_partido) newErrors.fecha_partido = "Campo obligatorio";
-    if (!formData.idLocal_partido)
-      newErrors.idLocal_partido = "Campo obligatorio";
-    if (!formData.idVisita_partido)
-      newErrors.idVisita_partido = "Campo obligatorio";
-    if (!formData.idArbitro_partido)
-      newErrors.idArbitro_partido = "Campo obligatorio";
+    if (!formData.nombre_arbitro)
+      newErrors.nombre_arbitro = "Campo obligatorio";
+    if (!formData.apellido_arbitro)
+      newErrors.apellido_arbitro = "Campo obligatorio";
+    if (!formData.fechaNac_arbitro)
+      newErrors.fechaNac_arbitro = "Campo obligatorio";
     setErrors(newErrors);
     return !Object.values(newErrors).some((error) => error !== "");
   };
@@ -64,7 +60,7 @@ export const CreatePartido = () => {
 
     const response = await fetch(
       process.env.REACT_APP_API +
-        `/partidos?fecha_partido=${formData.fecha_partido}:00Z&idLocal_partido=${formData.idLocal_partido}&idVisita_partido=${formData.idVisita_partido}&idArbitro_partido=${formData.idArbitro_partido}`,
+        `/arbitros?nombre_arbitro=${formData.nombre_arbitro}&apellido_arbitro=${formData.apellido_arbitro}&fechaNac_arbitro=${formData.fechaNac_arbitro}T00:00:00Z`,
       {
         method: "POST",
         body: JSON.stringify(formData),
@@ -85,35 +81,12 @@ export const CreatePartido = () => {
     }
     setButtonIsClicked(false);
   };
-  // Obtener la lista de clubes
-  const [clubes, setClubes] = useState([]);
-  useEffect(() => {
-    const fetchClubes = async () => {
-      const apiUrl = process.env.REACT_APP_API;
-      const response = await fetch(`${apiUrl}/clubes`);
-      const data = await response.json();
-      setClubes(data);
-    };
-
-    fetchClubes();
-  }, []);
-  const [arbitros, setArbitros] = useState([]);
-  useEffect(() => {
-    const fetchArbitros = async () => {
-      const apiUrl = process.env.REACT_APP_API;
-      const response = await fetch(`${apiUrl}/arbitros`);
-      const data = await response.json();
-      setArbitros(data);
-    };
-
-    fetchArbitros();
-  }, []);
 
   return (
     <>
       <button
         data-bs-toggle="modal"
-        data-bs-target="#crearPartido"
+        data-bs-target="#crearArbitro"
         className="btn custom-border-btn bg-red text-blanco fixed-right-bottom d-flex align-items-center gap-2"
       >
         <svg
@@ -128,12 +101,12 @@ export const CreatePartido = () => {
             fill="#EAE8E0"
           />
         </svg>
-        Añadir Partido
+        Añadir Árbitro
       </button>
 
       <div
         className="modal fade"
-        id="crearPartido"
+        id="crearArbitro"
         tabindex="-1"
         aria-hidden="true"
       >
@@ -156,80 +129,51 @@ export const CreatePartido = () => {
               </button>
             </div>
             <div className="d-flex flex-column w-100 px-3">
-              <h4 className="text-center bold">Crear Partido</h4>
-              <label className="semibold " htmlFor="idLocal_partido">
-                Club Local*
-                {isSubmitted && errors.idLocal_partido && (
-                  <span className="ms-2 regular">{errors.idLocal_partido}</span>
+              <h4 className="text-center bold">Crear Árbitro</h4>
+              <label className="semibold " htmlFor="nombre_arbitro">
+                Nombre*
+                {isSubmitted && errors.nombre_arbitro && (
+                  <span className="ms-2 regular">{errors.nombre_arbitro}</span>
                 )}
               </label>
-              <select
-                name="idLocal_partido"
-                value={formData.idLocal_partido}
+              <input
+                name="nombre_arbitro"
+                id="nombre_arbitro"
+                value={formData.nombre_arbitro}
+                type="text"
                 onChange={handleChange}
-                className="form-select border-red-2 rounded-2 red-text shadow-card mb-2"
-              >
-                <option value="">Seleccione un club</option>
-                {clubes.map((club) => (
-                  <option key={club.id_club} value={club.id_club}>
-                    {club.nombre_club}
-                  </option>
-                ))}
-              </select>
-              <label className="semibold " htmlFor="idVisita_partido">
-                Club Visitante*
-                {isSubmitted && errors.idVisita_partido && (
+                className="form-control border-red-2 rounded-2 red-text shadow-card mb-2"
+              ></input>
+              <label className="semibold " htmlFor="apellido_arbitro">
+                Apellido*
+                {isSubmitted && errors.apellido_arbitro && (
                   <span className="ms-2 regular">
-                    {errors.idVisita_partido}
+                    {errors.apellido_arbitro}
                   </span>
                 )}
               </label>
-              <select
-                name="idVisita_partido"
-                value={formData.idVisita_partido}
+              <input
+                name="apellido_arbitro"
+                id="apellido_arbitro"
+                value={formData.apellido_arbitro}
+                type="text"
                 onChange={handleChange}
-                className="form-select border-red-2 rounded-2 red-text shadow-card mb-2"
-              >
-                <option value="">Seleccione un club</option>
-                {clubes.map((club) => (
-                  <option key={club.id_club} value={club.id_club}>
-                    {club.nombre_club}
-                  </option>
-                ))}
-              </select>
-              <label className="semibold" htmlFor="idArbitro_partido">
-                Árbitro*
-                {isSubmitted && errors.idArbitro_partido && (
+                className="form-control border-red-2 rounded-2 red-text shadow-card mb-2"
+              ></input>
+              <label className="semibold" htmlFor="fechaNac_arbitro">
+                Fecha de Nacimiento*
+                {isSubmitted && errors.fechaNac_arbitro && (
                   <span className="ms-2 regular">
-                    {errors.idArbitro_partido}
+                    {errors.fechaNac_arbitro}
                   </span>
-                )}
-              </label>
-              <select
-                name="idArbitro_partido"
-                value={formData.idArbitro_partido}
-                onChange={handleChange}
-                className="form-select border-red-2 rounded-2 red-text shadow-card mb-2"
-              >
-                <option value="">Seleccione un árbitro</option>
-                {arbitros.map((arbitro) => (
-                  <option key={arbitro.id_arbitro} value={arbitro.id_arbitro}>
-                    {arbitro.nombre_arbitro} {arbitro.apellido_arbitro}
-                  </option>
-                ))}
-              </select>
-              <label className="semibold" htmlFor="fecha_partido">
-                Fecha y Hora*
-                {isSubmitted && errors.fecha_partido && (
-                  <span className="ms-2 regular">{errors.fecha_partido}</span>
                 )}
               </label>
               <input
                 onChange={handleChange}
-                value={formData.fecha_partido}
-                id="fecha_partido"
-                name="fecha_partido"
-                type="datetime-local"
+                value={formData.fechaNac_arbitro}
+                id="fechaNac_arbitro"
+                name="fechaNac_arbitro"
+                type="date"
                 className="form-control border-red-2 rounded-2 red-text shadow-card mb-2"
               />
               <div className="w-100 d-flex justify-content-center align-items-center">
