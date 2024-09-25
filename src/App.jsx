@@ -7,6 +7,7 @@ import {
   Entrenadores,
   Jugadores,
   Start,
+  Editor,
 } from "./components";
 
 import "./Globals.css";
@@ -24,6 +25,7 @@ export function App() {
         <Route path="/entrenadores" element={<Entrenadores />} />
         <Route path="/jugadores" element={<Jugadores />} />
         <Route path="/clubes/*" element={<Club />} />
+        <Route path="/editor/*" element={<Editor />} />
         <Route path="/partidos" element={<Partidos />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

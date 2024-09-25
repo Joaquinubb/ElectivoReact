@@ -12,6 +12,9 @@
 .medium {
   font-weight: 500;
 }
+.regular {
+  font-weight: 400;
+}
 
 .overflow-auto {
   overflow: auto;
@@ -231,7 +234,8 @@
 }
 
 .custom-border-btn:hover {
-  background-color: #db1a33;
+  background-color: #b6162b;
+  color: white;
 }
 
 .imagenes {
@@ -284,4 +288,37 @@
   border-color: #db1a33; /* Cambia el color del borde */
   box-shadow: 0 0 0 0.3rem #db1a3496; /* Cambia el color de la sombra */
   color: #db1a33;
+}
+
+.nav-link:hover {
+  color: #f0c3c9;
+}
+
+.fixed-right-bottom {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+}
+
+.carousel-image {
+  object-fit: cover;
+  width: 100%;
+  height: 400px;
+}
+
+.gradient-bg {
+  background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
+
+.bg-black-trans {
+  background: linear-gradient(to top, rgba(0, 0, 0, 80%), rgba(0, 0, 0, 0));
+}
+
+.switch-item-clicked {
+  border-bottom: 2px solid #db1a33;
+}
+
+.hover-bg-gray:hover {
+  background-color: #dddddd;
+  cursor: pointer;
 }
