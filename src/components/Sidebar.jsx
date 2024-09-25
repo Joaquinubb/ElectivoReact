@@ -31,11 +31,33 @@ export function Sidebar() {
   }, []);
 
   if (loading) {
-    return <div className="p-3">Cargando...</div>;
+    return (
+      <div className="p-3 blue flex-grow-1 overflow-auto mt-5 pt-5 sidebar-content">
+        <p className="text-blanco text-12 decoration-none medium">
+          Cargando...
+        </p>
+      </div>
+    );
   }
 
   if (error) {
-    return <div className="p-3">Error: {error.message}</div>;
+    return (
+      <div className="p-3 blue flex-grow-1 overflow-auto mt-5 pt-5 sidebar-content">
+        <p className="text-blanco text-12 decoration-none medium">
+          No hay clubes
+        </p>
+      </div>
+    );
+  }
+
+  if (!data || data.length === 0) {
+    return (
+      <div className="p-3 blue flex-grow-1 overflow-auto mt-5 pt-5 sidebar-content">
+        <p className="text-blanco text-12 decoration-none medium">
+          No hay clubes
+        </p>
+      </div>
+    );
   }
 
   return (
@@ -51,6 +73,7 @@ export function Sidebar() {
                 src={club.escudo_club}
                 alt="Escudo"
                 height={30}
+                width={30}
                 className="me-2"
               />
               {club.nombre_club}

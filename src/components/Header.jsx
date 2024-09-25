@@ -49,6 +49,12 @@ export function Header() {
               Jugadores
             </Link>
           </li>
+          <Link
+            className="nav-link text-blanco decoration-none text-20 semibold"
+            to={"/partidos"}
+          >
+            Partidos
+          </Link>
         </ul>
       </header>
     </Fragment>
