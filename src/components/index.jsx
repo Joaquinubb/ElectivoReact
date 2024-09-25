@@ -4,6 +4,7 @@ export * from "../pages/Clubes";
 export * from "../pages/Entrenadores";
 export * from "../pages/Jugadores";
 export * from "../pages/Start";
+export * from "../pages/Editor";
 export * from "./Header";
 export * from "./Sidebar";
 export * from "./CardJugador";

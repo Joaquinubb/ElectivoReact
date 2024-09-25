@@ -120,7 +120,10 @@ export function Home() {
                 <CarouselNoticias />
               </div>
               <div className="d-flex justify-content-end">
-                <Link className="btn custom-border-btn bg-red text-blanco fixed-right-bottom">
+                <Link
+                  to={"/editor"}
+                  className="btn custom-border-btn bg-red text-blanco fixed-right-bottom"
+                >
                   <svg
                     className="me-3"
                     width="20"

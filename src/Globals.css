@@ -12,6 +12,9 @@
 .medium {
   font-weight: 500;
 }
+.regular {
+  font-weight: 400;
+}
 
 .overflow-auto {
   overflow: auto;
@@ -309,4 +312,13 @@
 
 .bg-black-trans {
   background: linear-gradient(to top, rgba(0, 0, 0, 80%), rgba(0, 0, 0, 0));
+}
+
+.switch-item-clicked {
+  border-bottom: 2px solid #db1a33;
+}
+
+.hover-bg-gray:hover {
+  background-color: #dddddd;
+  cursor: pointer;
 }
