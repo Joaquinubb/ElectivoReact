@@ -12,6 +12,7 @@ import {
 
 import "./Globals.css";
 import { Club } from "./pages/Club";
+import { Partidos } from "./pages/Partidos";
 
 export function App() {
   return (
@@ -25,6 +26,7 @@ export function App() {
         <Route path="/jugadores" element={<Jugadores />} />
         <Route path="/clubes/*" element={<Club />} />
         <Route path="/editor/*" element={<Editor />} />
+        <Route path="/partidos" element={<Partidos />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Fragment>
