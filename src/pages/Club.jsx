@@ -36,7 +36,7 @@ export function Club() {
       <div className="container-fluid d-flex flex-column vh-100">
         <Header></Header>
         <div className="row flex-grow-1">
-          <div className="col-2 blue d-flex flex-column sidebar-container">
+          <div className="col-sidebar blue d-flex flex-column sidebar-container">
             <Sidebar></Sidebar>
           </div>
           <div className="col mt-5 pt-4 content-container">
@@ -137,9 +137,7 @@ export function Club() {
                     alt=""
                     className="me-3"
                   />
-                    <p className="red-text medium m-0">
-                      {data.entrenador_club}
-                    </p>
+                  <p className="red-text medium m-0">{data.entrenador_club}</p>
                 </div>
                 <div className="separation-bar"></div>
                 <JugadoresByClub club={clubName} />
