@@ -22,7 +22,7 @@ export const Editor = () => {
               <div className="d-flex  gap-2">
                 <p
                   onClick={() => setDataType("clubes")}
-                  className={`m-0 text-16 red-text semibold  
+                  className={`m-0 text-16 red-text cursor-pointer  semibold  
                     ${dataType === "clubes" ? "switch-item-clicked" : ""}
                     `}
                 >

@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { CreateClub } from "./CreateClub";
+import { ClipLoader } from "react-spinners";
+import { EditClub } from "./EditClub";
+import { DeleteClub } from "./DeleteClub";
 
 export const ClubesCrud = () => {
   const [clubes, setClubes] = useState(null);
@@ -30,7 +33,7 @@ export const ClubesCrud = () => {
               key={club.id_club}
             >
               <div className="d-flex flex-column align-items-center">
-                <div>
+                <div className="">
                   <img
                     src={`${club.escudo_club}`}
                     alt="Escudo"
@@ -40,8 +43,19 @@ export const ClubesCrud = () => {
                 </div>
                 <div className="">{club.nombre_club}</div>
               </div>
+              <div className="w-100 d-flex gap-5 justify-content-between">
+                <EditClub club={club} />
+                <DeleteClub club={club} />
+              </div>
             </div>
           ))}
+        {!clubes && (
+          <>
+            <div className="w-100 d-flex justify-content-center">
+              <ClipLoader color="#db1a33" />
+            </div>
+          </>
+        )}
       </div>
       <CreateClub />
     </>
