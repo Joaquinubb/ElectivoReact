@@ -54,7 +54,7 @@ export function CardJugador({
   return (
     <>
       <button
-        className="custom-border-type-jugador m-1 red-text text-12 decoration-none medium text-center shadow-card"
+        className="custom-border-type-jugador m-1 red-text text-12 decoration-none medium text-center shadow-card hover-bg-gray"
         type="button"
         data-bs-toggle="modal"
         data-bs-target={`#jugador${id_jugador}`}

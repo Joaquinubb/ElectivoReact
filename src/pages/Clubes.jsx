@@ -40,7 +40,7 @@ export function Clubes() {
                       to={`/clubes/${club.nombre_club}`}
                       key={club.id_club}
                     >
-                      <div className="custom-border-type">
+                      <div className="custom-border-type hover-bg-gray">
                         <div className="d-flex flex-column align-items-center">
                           <div>
                             <img

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { DeletePartido } from "./DeletePartido";
 
-export function CardPartido({
+export function CardPartidoCrud({
   id_partido,
   fecha_partido,
   club_local,
@@ -10,6 +11,7 @@ export function CardPartido({
 }) {
   const [escudoLocal, setEscudoLocal] = useState("");
   const [escudoVisitante, setEscudoVisitante] = useState("");
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     // Assuming you have an API endpoint to fetch the club details
@@ -28,7 +30,7 @@ export function CardPartido({
 
     fetchClubDetails(club_local, setEscudoLocal);
     fetchClubDetails(club_visitante, setEscudoVisitante);
-  }, [club_local, club_visitante]);
+  }, [club_local, club_visitante, refresh]);
 
   return (
     <>

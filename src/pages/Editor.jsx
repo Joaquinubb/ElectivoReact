@@ -32,7 +32,7 @@ export const Editor = () => {
                 </p>
                 <p
                   onClick={() => setDataType("jugadores")}
-                  className={`m-0 text-16 red-text semibold   
+                  className={`m-0 text-16 red-text cursor-pointer semibold   
                     ${dataType === "jugadores" ? "switch-item-clicked" : ""}
                     `}
                 >
@@ -40,7 +40,7 @@ export const Editor = () => {
                 </p>
                 <p
                   onClick={() => setDataType("arbitros")}
-                  className={`m-0 text-16 red-text semibold   
+                  className={`m-0 text-16 red-text cursor-pointer semibold   
                     ${dataType === "arbitros" ? "switch-item-clicked" : ""}
                     `}
                 >
@@ -48,7 +48,7 @@ export const Editor = () => {
                 </p>
                 <p
                   onClick={() => setDataType("partidos")}
-                  className={`m-0 text-16 red-text semibold   
+                  className={`m-0 text-16 red-text cursor-pointer semibold   
                     ${dataType === "partidos" ? "switch-item-clicked" : ""}
                     `}
                 >

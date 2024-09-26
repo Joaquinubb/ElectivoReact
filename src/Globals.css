@@ -7,6 +7,11 @@
   max-width: 15%;
 }
 
+.col-2-5 {
+  flex: 0 0 17.86%;
+  max-width: 17.86%;
+}
+
 .bold {
   font-weight: 700;
 }
@@ -131,6 +136,18 @@
   box-shadow: 0 4px 8px rgba(110, 110, 110, 0.6);
   width: 15rem;
   height: 4rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-border-type-crud {
+  border-color: #db1a33;
+  border-width: 3px;
+  border-style: solid;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(110, 110, 110, 0.6);
+  width: 15rem;
+  height: 6rem;
   display: flex;
   flex-direction: column;
 }
@@ -393,5 +410,8 @@
 
 .hover-bg-gray:hover {
   background-color: #dddddd;
+}
+
+.cursor-pointer {
   cursor: pointer;
 }

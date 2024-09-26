@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { CreatePartido } from "./CreatePartido";
-import { CardPartido } from "./CardPartido";
+import { CardPartidoCrud } from "./CardPartidoCrud";
+import { DeletePartido } from "./DeletePartido";
 
 export const PartidosCrud = () => {
   const [partidos, setPartidos] = useState(null);
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     async function fetchPartidos() {
@@ -18,7 +20,7 @@ export const PartidosCrud = () => {
     }
 
     fetchPartidos();
-  }, []);
+  }, [refresh]);
 
   return (
     <>
@@ -28,15 +30,36 @@ export const PartidosCrud = () => {
             partidos.map(
               (partido) =>
                 partido.id_partido && (
-                  <CardPartido
-                    key={partido.id_partido}
-                    id_partido={partido.id_partido}
-                    fecha_partido={partido.fecha_partido}
-                    club_local={partido.club_local}
-                    club_visitante={partido.club_visitante}
-                    arbitro={partido.arbitro}
-                    estadio={partido.estadio}
-                  />
+                  <div className="col-2-5">
+                    <CardPartidoCrud
+                      key={partido.id_partido}
+                      id_partido={partido.id_partido}
+                      fecha_partido={partido.fecha_partido}
+                      club_local={partido.club_local}
+                      club_visitante={partido.club_visitante}
+                      arbitro={partido.arbitro}
+                      estadio={partido.estadio}
+                    />
+
+                    <div className="col text-center me-5">
+                      {/*           <EditArbitro
+                      club={arbitro}
+                      setRefresh={setRefresh}
+                      refresh={refresh}
+                      clubFromGrid={arbitro}
+                      className="cursor-pointer"
+                    /> */}
+                      <button className="cursor-pointer">
+                        <img src="/assets/edit.svg" alt="" />
+                      </button>
+                      <DeletePartido
+                        partido={partido}
+                        setRefresh={setRefresh}
+                        refresh={refresh}
+                        className="cursor-pointer"
+                      />
+                    </div>
+                  </div>
                 )
             )}
         </div>

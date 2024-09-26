@@ -39,7 +39,7 @@ export function Arbitros() {
                       className="red-text text-12 decoration-none medium text-center"
                       key={arbitros.id_arbitro}
                     >
-                      <div className="custom-border-type-arbitro">
+                      <div className="custom-border-type-arbitro hover-bg-gray">
                         <div className="arbitro">
                           <div className="foto-arbitro">
                             <img

@@ -49,11 +49,13 @@ export const ClubesCrud = () => {
                   setRefresh={setRefresh}
                   refresh={refresh}
                   clubFromGrid={club}
+                  className="cursor-pointer"
                 />
                 <DeleteClub
                   club={club}
                   setRefresh={setRefresh}
                   refresh={refresh}
+                  className="cursor-pointer"
                 />
               </div>
             </div>
