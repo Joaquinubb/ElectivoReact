@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-export const DeleteClub = (club) => {
-  const name = club.club.nombre_club;
-  const id = club.club.id_club;
+export const DeleteClub = ({ club, setRefresh, refresh }) => {
+  const name = club.nombre_club;
+  const id = club.id_club;
   const [error, setError] = useState(null);
 
   const deleteClub = async () => {
@@ -12,7 +12,10 @@ export const DeleteClub = (club) => {
         method: "DELETE",
       });
       if (response.ok) {
-        window.location.reload();
+        setRefresh(!refresh);
+        document
+          .querySelector(`#delete${id} .btn[data-bs-dismiss="modal"]`)
+          .click();
       } else {
         setError("Error al borrar el club");
       }

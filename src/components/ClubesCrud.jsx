@@ -6,6 +6,7 @@ import { DeleteClub } from "./DeleteClub";
 
 export const ClubesCrud = () => {
   const [clubes, setClubes] = useState(null);
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     async function fetchClubes() {
@@ -16,11 +17,10 @@ export const ClubesCrud = () => {
       }).then((response) => response.json());
 
       setClubes(clubes);
-      console.log(clubes);
     }
 
     fetchClubes();
-  }, []);
+  }, [refresh]);
 
   return (
     <>
@@ -44,8 +44,17 @@ export const ClubesCrud = () => {
                 <div className="">{club.nombre_club}</div>
               </div>
               <div className="w-100 d-flex gap-5 justify-content-between">
-                <EditClub club={club} />
-                <DeleteClub club={club} />
+                <EditClub
+                  club={club}
+                  setRefresh={setRefresh}
+                  refresh={refresh}
+                  clubFromGrid={club}
+                />
+                <DeleteClub
+                  club={club}
+                  setRefresh={setRefresh}
+                  refresh={refresh}
+                />
               </div>
             </div>
           ))}
@@ -57,7 +66,7 @@ export const ClubesCrud = () => {
           </>
         )}
       </div>
-      <CreateClub />
+      <CreateClub setRefresh={setRefresh} refresh={refresh} />
     </>
   );
 };

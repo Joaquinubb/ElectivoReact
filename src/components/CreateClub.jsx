@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ClipLoader } from "react-spinners";
 
-export const CreateClub = () => {
+export const CreateClub = ({ setRefresh, refresh }) => {
   //MANIPULACION DE LOS DATOS DEL FORMULARIO
   const [formData, setFormData] = useState({
     nombre_club: "",
@@ -87,7 +87,10 @@ export const CreateClub = () => {
 
     if (response.ok) {
       setButtonIsClicked(false);
-      window.location.reload();
+      setRefresh(!refresh);
+      document
+        .querySelector(`#crearClub .btn[data-bs-dismiss="modal"]`)
+        .click();
     } else {
       setErrorResponse(data.error);
 

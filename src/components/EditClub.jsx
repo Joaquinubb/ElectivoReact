@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 
-export const EditClub = (clubFromGrid) => {
-  const [club, setClub] = useState(clubFromGrid.club);
+export const EditClub = ({ clubFromGrid, setRefresh, refresh }) => {
+  const [club, setClub] = useState(clubFromGrid);
 
   useEffect(() => {
     async function fetchClubByName() {
@@ -33,12 +33,12 @@ export const EditClub = (clubFromGrid) => {
 
   //MANIPULACION DE LOS DATOS DEL FORMULARIO
   const [formData, setFormData] = useState({
-    nombre_club: club.nombre_club,
-    ciudad_club: club.ciudad_club,
-    estadio_club: club.estadio_club,
-    fechaFund_club: club.fechaFund_club,
-    titulosPrimera_club: club.titulosPrimera_club,
-    escudo_club: club.escudo_club,
+    nombre_club: "",
+    ciudad_club: "",
+    estadio_club: "",
+    fechaFund_club: "",
+    titulosPrimera_club: "",
+    escudo_club: "",
   });
 
   const handleChange = (event) => {
@@ -116,7 +116,10 @@ export const EditClub = (clubFromGrid) => {
 
     if (response.ok) {
       setButtonIsClicked(false);
-      window.location.reload();
+      setRefresh(!refresh);
+      document
+        .querySelector(`#editClub${club.id_club} .btn[data-bs-dismiss="modal"]`)
+        .click();
     } else {
       setErrorResponse(data.error);
 
