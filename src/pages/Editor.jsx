@@ -3,6 +3,7 @@ import { Header, Sidebar } from "../components";
 import { ClubesCrud } from "../components/ClubesCrud";
 import { PartidosCrud } from "../components/PartidosCrud";
 import { ArbitrosCrud } from "../components/ArbitrosCrud";
+import { JugadoresCrud } from "../components/JugadoresCrud";
 
 export const Editor = () => {
   const [dataType, setDataType] = React.useState("clubes");
@@ -59,6 +60,7 @@ export const Editor = () => {
               {dataType === "clubes" && <ClubesCrud />}
               {dataType === "arbitros" && <ArbitrosCrud />}
               {dataType === "partidos" && <PartidosCrud />}
+              {dataType === "jugadores" && <JugadoresCrud />}
             </div>
           </div>
         </div>

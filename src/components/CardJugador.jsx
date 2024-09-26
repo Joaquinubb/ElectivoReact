@@ -62,7 +62,7 @@ export function CardJugador({
         <div className="jugador">
           <div className="foto-jugador">
             <img
-              src="images/Group.png"
+              src="/images/Group.png"
               alt={`Foto de ${nombre_jugador} ${apellido_jugador}`}
               width={40}
               height={40}
