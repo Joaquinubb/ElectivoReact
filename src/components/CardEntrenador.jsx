@@ -37,7 +37,7 @@ export const CardEntrenador = ({
         <div className="entrenador">
           <div className="foto-entrenador">
             <img
-              src="images/Group.png"
+              src="/images/Group.png"
               alt={`Foto de ${nombre_entrenador} ${apellido_entrenador}`}
               width={40}
               height={40}

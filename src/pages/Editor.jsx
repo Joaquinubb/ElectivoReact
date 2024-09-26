@@ -44,7 +44,7 @@ export const Editor = () => {
                     ${dataType === "arbitros" ? "switch-item-clicked" : ""}
                     `}
                 >
-                  Arbitros
+                  Árbitros
                 </p>
                 <p
                   onClick={() => setDataType("partidos")}
