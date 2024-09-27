@@ -5,11 +5,11 @@ export const EditPartido = ({ partidoFromGrid, setRefresh, refresh }) => {
   const [partido, setPartido] = useState(partidoFromGrid);
   //MANIPULACION DE LOS DATOS DEL FORMULARIO
   useEffect(() => {
-    async function fetchArbitro() {
+    async function fetchPartido() {
       const apiUrl = process.env.REACT_APP_API;
 
       let fetchedPartido = await fetch(
-        `${apiUrl}/arbitros/${arbitro.id_arbitro}`,
+        `${apiUrl}/partidos/${partido.id_partido}`,
         {
           method: "GET",
         }
@@ -18,21 +18,21 @@ export const EditPartido = ({ partidoFromGrid, setRefresh, refresh }) => {
       setPartido(fetchedPartido);
     }
 
-    fetchArbitro();
+    fetchPartido();
   }, []);
 
   useEffect(() => {
     setFormData({
-      nombre_arbitro: arbitro.nombre_arbitro,
-      apellido_arbitro: arbitro.apellido_arbitro,
-      fechaNac_arbitro: arbitro.fechaNac_arbitro,
+      id_partido: partido.id_partido,
+      fecha_partido: partido.fecha_partido,
+      idArbitro_partido: partido.idArbitro_partido,
     });
-  }, [arbitro]);
+  }, [partido]);
 
   const [formData, setFormData] = useState({
-    nombre_arbitro: "",
-    apellido_arbitro: "",
-    fechaNac_arbitro: "",
+    id_partido: "",
+    fecha_partido: "",
+    idArbitro_partido: "",
   });
 
   const handleChange = (event) => {
@@ -43,23 +43,21 @@ export const EditPartido = ({ partidoFromGrid, setRefresh, refresh }) => {
 
   //VALIDACIONES
   const [errors, setErrors] = useState({
-    nombre_arbitro: "",
-    apellido_arbitro: "",
-    fechaNac_arbitro: "",
+    id_partido: "",
+    fecha_partido: "",
+    idArbitro_partido: "",
   });
 
   const validateForm = () => {
     const newErrors = {
-      nombre_arbitro: "",
-      apellido_arbitro: "",
-      fechaNac_arbitro: "",
+      id_partido: "",
+      fecha_partido: "",
+      idArbitro_partido: "",
     };
-    if (!formData.nombre_arbitro)
-      newErrors.nombre_arbitro = "Campo obligatorio";
-    if (!formData.apellido_arbitro)
-      newErrors.apellido_arbitro = "Campo obligatorio";
-    if (!formData.fechaNac_arbitro)
-      newErrors.fechaNac_arbitro = "Campo obligatorio";
+    if (!formData.id_partido) newErrors.id_partido = "Campo obligatorio";
+    if (!formData.fecha_partido) newErrors.fecha_partido = "Campo obligatorio";
+    if (!formData.idArbitro_partido)
+      newErrors.idArbitro_partido = "Campo obligatorio";
     setErrors(newErrors);
     return !Object.values(newErrors).some((error) => error !== "");
   };
@@ -72,18 +70,22 @@ export const EditPartido = ({ partidoFromGrid, setRefresh, refresh }) => {
   const [errorResponse, setErrorResponse] = useState("");
 
   const onSubmit = async (event) => {
+    console.log("submit", formData);
+
     event.preventDefault();
     setButtonIsClicked(true);
     setIsSubmitted(true);
+    console.log("formData", formData);
 
     if (!validateForm()) {
       setButtonIsClicked(false);
       return;
     }
+    console.log(formData);
 
     const response = await fetch(
       process.env.REACT_APP_API +
-        `/arbitros/${arbitro.id_arbitro}?nombre_arbitro=${formData.nombre_arbitro}&apellido_arbitro=${formData.apellido_arbitro}&fechaNac_arbitro=${formData.fechaNac_arbitro}T00:00:00Z`,
+        `/partidos?id_partido=${formData.id_partido}&fecha_partido=${formData.fecha_partido}:00Z&idArbitro_partido=${formData.idArbitro_partido}`,
       {
         method: "PUT",
         body: JSON.stringify(formData),
@@ -91,37 +93,51 @@ export const EditPartido = ({ partidoFromGrid, setRefresh, refresh }) => {
     );
 
     const data = await response.json();
+    console.log("data", data);
 
     if (response.ok) {
       setButtonIsClicked(false);
       setRefresh(!refresh);
       document
         .querySelector(
-          `#editArbitro${arbitro.id_arbitro} .btn[data-bs-dismiss="modal"]`
+          `#editarPartido${partido.id_partido} .btn[data-bs-dismiss="modal"]`
         )
         .click();
     } else {
       setErrorResponse(data.error);
 
+      console.error("Error editing user:", errorResponse);
       setButtonIsClicked(false);
     }
     setButtonIsClicked(false);
   };
+
+  const [arbitros, setArbitros] = useState([]);
+  useEffect(() => {
+    const fetchArbitros = async () => {
+      const apiUrl = process.env.REACT_APP_API;
+      const response = await fetch(`${apiUrl}/arbitros`);
+      const data = await response.json();
+      setArbitros(data);
+    };
+
+    fetchArbitros();
+  }, []);
 
   return (
     <>
       <button
         className="btn rounded-full p-0"
         data-bs-toggle="modal"
-        data-bs-target={`#editArbitro${arbitro.id_arbitro}`}
+        data-bs-target={`#editarPartido${partidoFromGrid.id_partido}`}
       >
         <img src="/assets/edit.svg" alt="" />
       </button>
 
       <div
         className="modal fade"
-        id={`editArbitro${arbitro.id_arbitro}`}
-        tabIndex={-1}
+        id={`editarPartido${partidoFromGrid.id_partido}`}
+        tabindex={-1}
         aria-hidden="true"
       >
         <div className="modal-dialog">
@@ -143,51 +159,49 @@ export const EditPartido = ({ partidoFromGrid, setRefresh, refresh }) => {
               </button>
             </div>
             <div className="d-flex flex-column w-100 px-3">
-              <h4 className="text-center bold">Editar Árbitro</h4>
-              <label className="semibold " htmlFor="nombre_arbitro">
-                Nombre*
-                {isSubmitted && errors.nombre_arbitro && (
-                  <span className="ms-2 regular">{errors.nombre_arbitro}</span>
-                )}
-              </label>
+              <h4 className="text-center bold">Editar Partido</h4>
               <input
-                name="nombre_arbitro"
-                id="nombre_arbitro"
-                value={formData.nombre_arbitro}
-                type="text"
                 onChange={handleChange}
+                value={formData.id_partido}
+                id="id_partido"
+                name="id_partido"
+                type="text"
                 className="form-control border-red-2 rounded-2 red-text shadow-card mb-2"
-              ></input>
-              <label className="semibold " htmlFor="apellido_arbitro">
-                Apellido*
-                {isSubmitted && errors.apellido_arbitro && (
+                hidden
+              />
+              <label className="semibold" htmlFor="idArbitro_partido">
+                Árbitro*
+                {isSubmitted && errors.idArbitro_partido && (
                   <span className="ms-2 regular">
-                    {errors.apellido_arbitro}
+                    {errors.idArbitro_partido}
                   </span>
                 )}
               </label>
-              <input
-                name="apellido_arbitro"
-                id="apellido_arbitro"
-                value={formData.apellido_arbitro}
-                type="text"
+              <select
+                name="idArbitro_partido"
+                value={formData.idArbitro_partido}
                 onChange={handleChange}
-                className="form-control border-red-2 rounded-2 red-text shadow-card mb-2"
-              ></input>
-              <label className="semibold" htmlFor="fechaNac_arbitro">
-                Fecha de Nacimiento*
-                {isSubmitted && errors.fechaNac_arbitro && (
-                  <span className="ms-2 regular">
-                    {errors.fechaNac_arbitro}
-                  </span>
+                className="form-select border-red-2 rounded-2 red-text shadow-card mb-2"
+              >
+                <option value="">Seleccione un árbitro</option>
+                {arbitros.map((arbitro) => (
+                  <option key={arbitro.id_arbitro} value={arbitro.id_arbitro}>
+                    {arbitro.nombre_arbitro} {arbitro.apellido_arbitro}
+                  </option>
+                ))}
+              </select>
+              <label className="semibold" htmlFor="fecha_partido">
+                Fecha y Hora*
+                {isSubmitted && errors.fecha_partido && (
+                  <span className="ms-2 regular">{errors.fecha_partido}</span>
                 )}
               </label>
               <input
                 onChange={handleChange}
-                value={formData.fechaNac_arbitro}
-                id="fechaNac_arbitro"
-                name="fechaNac_arbitro"
-                type="date"
+                value={formData.fecha_partido}
+                id="fecha_partido"
+                name="fecha_partido"
+                type="datetime-local"
                 className="form-control border-red-2 rounded-2 red-text shadow-card mb-2"
               />
               <div className="w-100 d-flex justify-content-center align-items-center">

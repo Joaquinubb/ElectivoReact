@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { DeletePartido } from "./DeletePartido";
 
 export function CardPartidoCrud({
   id_partido,
@@ -34,13 +33,13 @@ export function CardPartidoCrud({
 
   return (
     <>
-      <button
-        className="col-md-4 w-fit border-red-2 red-text text-16 d-flex align-items-center text-start rounded-3 mx-2 my-2 shadow-card hover-bg-gray"
+      <p
+        className="decoration-none text-red"
         type="button"
         data-bs-toggle="modal"
         data-bs-target={`#partido${id_partido}`}
       >
-        <div className="row mt-2 mb-2">
+        <div className="row mt-2">
           <div className="col">
             <img
               width={50}
@@ -61,7 +60,7 @@ export function CardPartidoCrud({
             />
           </div>
         </div>
-      </button>
+      </p>
 
       <div
         className="modal fade"

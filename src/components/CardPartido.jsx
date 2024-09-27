@@ -33,7 +33,7 @@ export function CardPartido({
   return (
     <>
       <button
-        className="col-md-4 w-fit border-red-2 red-text text-16 d-flex align-items-center text-start rounded-3 mx-2 my-2 shadow-card hover-bg-gray"
+        className="col-md-4 w-fit border-red-2 red-text text-16 rounded-3 mx-1 my-2 shadow-card hover-bg-gray"
         type="button"
         data-bs-toggle="modal"
         data-bs-target={`#partido${id_partido}`}

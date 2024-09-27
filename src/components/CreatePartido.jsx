@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { ClipLoader } from "react-spinners";
 
-export const CreatePartido = () => {
+export const CreatePartido = ({ setRefresh, refresh }) => {
   //MANIPULACION DE LOS DATOS DEL FORMULARIO
   const [formData, setFormData] = useState({
     fecha_partido: "",
@@ -76,7 +77,10 @@ export const CreatePartido = () => {
 
     if (response.ok) {
       setButtonIsClicked(false);
-      window.location.reload();
+      setRefresh(!refresh);
+      document
+        .querySelector(`#crearPartido .btn[data-bs-dismiss="modal"]`)
+        .click();
     } else {
       setErrorResponse(data.error);
 
@@ -236,9 +240,14 @@ export const CreatePartido = () => {
                 <button
                   onClick={onSubmit}
                   className="bg-red text-blanco border-0 my-3 py-2 px-3 rounded-2"
+                  disabled={buttonIsClicked}
                 >
-                  Confirmar
+                  {buttonIsClicked && <ClipLoader color="#ffffff" />}
+                  {!buttonIsClicked && "Confirmar"}
                 </button>
+                {errorResponse && (
+                  <p className="red-text regular">{errorResponse}</p>
+                )}
               </div>
             </div>
           </div>

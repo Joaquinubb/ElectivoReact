@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { ClipLoader } from "react-spinners";
 import { CreatePartido } from "./CreatePartido";
 import { CardPartidoCrud } from "./CardPartidoCrud";
 import { DeletePartido } from "./DeletePartido";
+import { EditPartido } from "./EditPartido";
 
 export const PartidosCrud = () => {
   const [partidos, setPartidos] = useState(null);
@@ -30,41 +32,51 @@ export const PartidosCrud = () => {
             partidos.map(
               (partido) =>
                 partido.id_partido && (
-                  <div className="col-2-5">
-                    <CardPartidoCrud
-                      key={partido.id_partido}
-                      id_partido={partido.id_partido}
-                      fecha_partido={partido.fecha_partido}
-                      club_local={partido.club_local}
-                      club_visitante={partido.club_visitante}
-                      arbitro={partido.arbitro}
-                      estadio={partido.estadio}
-                    />
-
-                    <div className="col text-center me-5">
-                      {/*           <EditArbitro
-                      club={arbitro}
-                      setRefresh={setRefresh}
-                      refresh={refresh}
-                      clubFromGrid={arbitro}
-                      className="cursor-pointer"
-                    /> */}
-                      <button className="cursor-pointer">
-                        <img src="/assets/edit.svg" alt="" />
-                      </button>
-                      <DeletePartido
-                        partido={partido}
-                        setRefresh={setRefresh}
-                        refresh={refresh}
-                        className="cursor-pointer"
-                      />
+                  <div className="w-fit border-red-2 red-text text-16 align-items-center text-start rounded-3 mx-1 my-2 shadow-card hover-bg-gray">
+                    <div className="row">
+                      <div className="col-12">
+                        <CardPartidoCrud
+                          key={partido.id_partido}
+                          id_partido={partido.id_partido}
+                          fecha_partido={partido.fecha_partido}
+                          club_local={partido.club_local}
+                          club_visitante={partido.club_visitante}
+                          arbitro={partido.arbitro}
+                          estadio={partido.estadio}
+                        />
+                        <hr />
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="text-center mb-1">
+                        <EditPartido
+                          partido={partido}
+                          setRefresh={setRefresh}
+                          refresh={refresh}
+                          partidoFromGrid={partido}
+                          className="cursor-pointer"
+                        />
+                        <DeletePartido
+                          partido={partido}
+                          setRefresh={setRefresh}
+                          refresh={refresh}
+                          className="cursor-pointer"
+                        />
+                      </div>
                     </div>
                   </div>
                 )
             )}
+          {!partidos && (
+            <>
+              <div className="w-100 d-flex justify-content-center">
+                <ClipLoader color="#db1a33" />
+              </div>
+            </>
+          )}
         </div>
       </div>
-      <CreatePartido />
+      <CreatePartido setRefresh={setRefresh} refresh={refresh} />
     </>
   );
 };
