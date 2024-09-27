@@ -3,6 +3,7 @@ import { CreateJugador } from "./CreateJugador";
 import { EditJugador } from "./EditJugador";
 import { DeleteJugador } from "./DeleteJugador";
 
+
 export const JugadoresCrud = () => {
     const [jugadores, setJugadores] = React.useState([]);
     const [searchTerm, setSearchTerm] = React.useState("");
@@ -21,6 +22,7 @@ export const JugadoresCrud = () => {
 
         fetchJugadores();
     }, [refresh]);
+
 
     const handleChange = (event) => {
         setSearchTerm(event.target.value);
@@ -44,6 +46,7 @@ export const JugadoresCrud = () => {
                 setJugadores([]); // Clear jugadores if there's an error
             }
             console.log(searchTerm);
+
         }
 
         fetchJugadores();
@@ -98,7 +101,6 @@ export const JugadoresCrud = () => {
             ))}
         </div>
       </div>
-      <CreateJugador />
     </>
   );
 };
