@@ -34,7 +34,7 @@ export const ArbitrosCrud = () => {
                 <div className="custom-border-type-crud">
                   <div className="row arbitro">
                     <div className="col-3 foto-arbitro">
-                      <img src="images/Group.png" alt="Foto del arbitro" />
+                      <img src="/images/Group.png" alt="Foto del arbitro" />
                     </div>
                     <div className="col-8 info-arbitro">
                       <div className="">
