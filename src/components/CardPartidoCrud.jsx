@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export function CardPartido({
+export function CardPartidoCrud({
   id_partido,
   fecha_partido,
   club_local,
@@ -10,6 +10,7 @@ export function CardPartido({
 }) {
   const [escudoLocal, setEscudoLocal] = useState("");
   const [escudoVisitante, setEscudoVisitante] = useState("");
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     // Assuming you have an API endpoint to fetch the club details
@@ -28,17 +29,17 @@ export function CardPartido({
 
     fetchClubDetails(club_local, setEscudoLocal);
     fetchClubDetails(club_visitante, setEscudoVisitante);
-  }, [club_local, club_visitante]);
+  }, [club_local, club_visitante, refresh]);
 
   return (
     <>
-      <button
-        className="col-md-4 w-fit border-red-2 red-text text-16 rounded-3 mx-1 my-2 shadow-card hover-bg-gray"
+      <p
+        className="decoration-none text-red"
         type="button"
         data-bs-toggle="modal"
         data-bs-target={`#partido${id_partido}`}
       >
-        <div className="row mt-2 mb-2">
+        <div className="row mt-2">
           <div className="col">
             <img
               width={50}
@@ -59,7 +60,7 @@ export function CardPartido({
             />
           </div>
         </div>
-      </button>
+      </p>
 
       <div
         className="modal fade"

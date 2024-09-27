@@ -29,7 +29,7 @@ export const CardEntrenador = ({
   return (
     <>
       <button
-        className="custom-border-type-entrenador m-1 red-text text-12 decoration-none medium text-center shadow-card"
+        className="custom-border-type-entrenador m-1 red-text text-12 decoration-none medium text-center shadow-card hover-bg-gray"
         type="button"
         data-bs-toggle="modal"
         data-bs-target={`#entrenador${id_entrenador}`}
@@ -37,7 +37,7 @@ export const CardEntrenador = ({
         <div className="entrenador">
           <div className="foto-entrenador">
             <img
-              src="images/Group.png"
+              src="/images/Group.png"
               alt={`Foto de ${nombre_entrenador} ${apellido_entrenador}`}
               width={40}
               height={40}

@@ -24,23 +24,22 @@ export function Arbitros() {
       <div className="container-fluid d-flex flex-column vh-100">
         <Header></Header>
         <div className="row flex-grow-1">
-          <div className="col-2 blue d-flex flex-column sidebar-container">
+          <div className="col-sidebar blue d-flex flex-column sidebar-container">
             <Sidebar></Sidebar>
           </div>
           <div className="col mt-5 pt-4 content-container">
             <div className="bg-white p-3">
               <h2 className="red-text bold text-20">
-                Arbitros de la Chilean Premier League
+                Árbitros de la Chilean Premier League
               </h2>
               <div className="arbitros-list mt-4">
                 {data &&
                   data.map((arbitros) => (
-                    
                     <div
                       className="red-text text-12 decoration-none medium text-center"
                       key={arbitros.id_arbitro}
                     >
-                      <div className="custom-border-type-arbitro">
+                      <div className="custom-border-type-arbitro hover-bg-gray">
                         <div className="arbitro">
                           <div className="foto-arbitro">
                             <img

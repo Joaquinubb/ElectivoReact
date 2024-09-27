@@ -1,6 +1,8 @@
 import React from "react";
 import { Header, Sidebar } from "../components";
 import { ClubesCrud } from "../components/ClubesCrud";
+import { PartidosCrud } from "../components/PartidosCrud";
+import { ArbitrosCrud } from "../components/ArbitrosCrud";
 
 export const Editor = () => {
   const [dataType, setDataType] = React.useState("clubes");
@@ -11,7 +13,7 @@ export const Editor = () => {
       <div className="container-fluid d-flex flex-column vh-100">
         <Header />
         <div className="row flex-grow-1">
-          <div className="col-2 blue d-flex flex-column sidebar-container">
+          <div className="col-sidebar blue d-flex flex-column sidebar-container">
             <Sidebar />
           </div>
           <div className="col mt-5 pt-4 content-container">
@@ -30,7 +32,7 @@ export const Editor = () => {
                 </p>
                 <p
                   onClick={() => setDataType("jugadores")}
-                  className={`m-0 text-16 red-text semibold   
+                  className={`m-0 text-16 red-text cursor-pointer semibold   
                     ${dataType === "jugadores" ? "switch-item-clicked" : ""}
                     `}
                 >
@@ -38,15 +40,25 @@ export const Editor = () => {
                 </p>
                 <p
                   onClick={() => setDataType("arbitros")}
-                  className={`m-0 text-16 red-text semibold   
+                  className={`m-0 text-16 red-text cursor-pointer semibold   
                     ${dataType === "arbitros" ? "switch-item-clicked" : ""}
                     `}
                 >
-                  Arbitros
+                  Árbitros
+                </p>
+                <p
+                  onClick={() => setDataType("partidos")}
+                  className={`m-0 text-16 red-text cursor-pointer semibold   
+                    ${dataType === "partidos" ? "switch-item-clicked" : ""}
+                    `}
+                >
+                  Partidos
                 </p>
               </div>
 
               {dataType === "clubes" && <ClubesCrud />}
+              {dataType === "arbitros" && <ArbitrosCrud />}
+              {dataType === "partidos" && <PartidosCrud />}
             </div>
           </div>
         </div>

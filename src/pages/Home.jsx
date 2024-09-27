@@ -10,7 +10,7 @@ export function Home() {
       <div className="container-fluid d-flex flex-column vh-100">
         <Header />
         <div className="row flex-grow-1">
-          <div className="col-2 blue d-flex flex-column sidebar-container">
+          <div className="col-sidebar blue d-flex flex-column sidebar-container">
             <Sidebar />
           </div>
           <div className="col mt-5 pt-4 content-container">

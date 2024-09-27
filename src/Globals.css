@@ -2,6 +2,21 @@
   text-decoration: none;
 }
 
+.col-sidebar {
+  flex: 0 0 15%;
+  max-width: 15%;
+}
+
+.col-2-5 {
+  flex: 0 0 19%;
+  max-width: 19%;
+}
+
+.col-2-4 {
+  flex: 0 0 18%;
+  max-width: 18%;
+}
+
 .bold {
   font-weight: 700;
 }
@@ -9,9 +24,11 @@
 .semibold {
   font-weight: 600;
 }
+
 .medium {
   font-weight: 500;
 }
+
 .regular {
   font-weight: 400;
 }
@@ -19,6 +36,7 @@
 .overflow-auto {
   overflow: auto;
 }
+
 .p-10 {
   padding: 5rem;
 }
@@ -46,6 +64,7 @@
 .text-blanco {
   color: #eae8e0;
 }
+
 .text-40 {
   font-size: 40px;
 }
@@ -57,6 +76,7 @@
 .text-24 {
   font-size: 24px;
 }
+
 .text-16 {
   font-size: 16px;
 }
@@ -98,6 +118,7 @@
 .bg-blue:hover {
   background-color: #4372a1;
 }
+
 .fixed-bottom {
   position: fixed;
   bottom: 0;
@@ -120,6 +141,18 @@
   box-shadow: 0 4px 8px rgba(110, 110, 110, 0.6);
   width: 15rem;
   height: 4rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-border-type-crud {
+  border-color: #db1a33;
+  border-width: 3px;
+  border-style: solid;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(110, 110, 110, 0.6);
+  width: 15rem;
+  height: 6rem;
   display: flex;
   flex-direction: column;
 }
@@ -201,6 +234,7 @@
     align-items: center;
     justify-content: center;
   }
+
   .content-container {
     margin-top: 150px !important;
     padding-top: 15px !important;
@@ -336,15 +370,20 @@
   margin-bottom: 0.9rem;
   border-top: 3px solid #999999;
 }
+
 .w-fit {
   width: fit-content;
 }
+
 .shadow-card {
   box-shadow: 0 4px 8px rgba(110, 110, 110, 0.6);
 }
+
 .form-control:focus {
-  border-color: #db1a33; /* Cambia el color del borde */
-  box-shadow: 0 0 0 0.3rem #db1a3496; /* Cambia el color de la sombra */
+  border-color: #db1a33;
+  /* Cambia el color del borde */
+  box-shadow: 0 0 0 0.3rem #db1a3496;
+  /* Cambia el color de la sombra */
   color: #db1a33;
 }
 
@@ -376,13 +415,8 @@
 
 .hover-bg-gray:hover {
   background-color: #dddddd;
-  cursor: pointer;
 }
 
 .cursor-pointer {
   cursor: pointer;
-}
-
-.rounded-full {
-  border-radius: 50px;
 }
