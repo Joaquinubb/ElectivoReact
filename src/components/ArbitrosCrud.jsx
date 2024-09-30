@@ -42,7 +42,7 @@ export const ArbitrosCrud = () => {
                       </div>
                       <div className="semibold">{arbitro.edad} años</div>
                     </div>
-                    <div className="col text-center">
+                    <div className="col text-center d-flex justify-content-center gap-3">
                       <EditArbitro
                         arbitro={arbitro}
                         setRefresh={setRefresh}

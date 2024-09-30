@@ -22,21 +22,29 @@ export function Jugadores() {
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
-    async function fetchData() {
+    async function fetchJugadores() {
       const apiUrl = process.env.REACT_APP_API;
 
-      let data = await fetch(
-        `${apiUrl}/jugadores?apellido=${event.target.value}`,
-        {
-          method: "GET",
+      try {
+        let response = await fetch(
+          `${apiUrl}/jugadores?apellido=${event.target.value}`,
+          {
+            method: "GET",
+          }
+        );
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
         }
-      ).then((response) => response.json());
-
-      setData(data);
+        let jugador = await response.json();
+        setData(jugador);
+      } catch (error) {
+        console.error("Fetch error:", error);
+        setData([]); // Clear jugadores if there's an error
+      }
+      console.log(searchTerm);
     }
 
-    fetchData();
-    console.log(data);
+    fetchJugadores();
   };
 
   return (
@@ -48,16 +56,23 @@ export function Jugadores() {
         </div>
         <div className="col mt-5 pt-4 content-container">
           <div className="bg-white p-3">
-            <div className="red-text w-100 d-flex justify-content-between ">
+            <div className="red-text w-100 d-flex justify-content-between">
               <h1 className="bold text-20">
                 Jugadores de la Chilean Premier League
               </h1>
-              <input
-                placeholder="Buscar por apellido"
-                className="form-control w-fit border-red-2 rounded-4 red-text px-3 py-1 text-15 focus"
-                type="text"
-                onChange={handleChange}
-              />
+              <div className="d-flex justify-content-between gap-2">
+                <input
+                  placeholder="Buscar por apellido"
+                  className="form-control w-fit border-red-2 rounded-4 red-text px-3 py-1 text-15 focus"
+                  type="text"
+                  onChange={handleChange}
+                />
+                <input
+                  placeholder="Buscar por club"
+                  className="form-control w-fit border-red-2 rounded-4 red-text px-3 py-1 text-15 focus"
+                  type="text"
+                />
+              </div>
             </div>
 
             <div className="row mt-4">

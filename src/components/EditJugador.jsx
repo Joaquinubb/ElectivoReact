@@ -33,7 +33,7 @@ export const EditJugador = ({ jugadorFromGrid, setRefresh, refresh }) => {
     });
   }, [jugador]);
 
-const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState({
     nombre_jugador: "",
     apellido_jugador: "",
     nacionalidad_jugador: "",
@@ -41,7 +41,7 @@ const [formData, setFormData] = useState({
     estatura_jugador: "",
     precio_jugador: "",
     club_jugador: "",
-});
+  });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -62,13 +62,13 @@ const [formData, setFormData] = useState({
 
   const validateForm = () => {
     const newErrors = {
-        nombre_jugador: "",
-        apellido_jugador: "",
-        nacionalidad_jugador: "",
-        posicion_jugador: "",
-        estatura_jugador: "",
-        precio_jugador: "",
-        club_jugador: "",
+      nombre_jugador: "",
+      apellido_jugador: "",
+      nacionalidad_jugador: "",
+      posicion_jugador: "",
+      estatura_jugador: "",
+      precio_jugador: "",
+      club_jugador: "",
     };
     if (!formData.nombre_jugador)
       newErrors.nombre_jugador = "Campo obligatorio";
@@ -82,8 +82,7 @@ const [formData, setFormData] = useState({
       newErrors.estatura_jugador = "Campo obligatorio";
     if (!formData.precio_jugador)
       newErrors.precio_jugador = "Campo obligatorio";
-    if (!formData.club_jugador)
-      newErrors.club_jugador = "Campo obligatorio";
+    if (!formData.club_jugador) newErrors.club_jugador = "Campo obligatorio";
     setErrors(newErrors);
     return !Object.values(newErrors).some((error) => error !== "");
   };
@@ -194,100 +193,108 @@ const [formData, setFormData] = useState({
                 onChange={handleChange}
                 className="form-control border-red-2 rounded-2 red-text shadow-card mb-2"
               ></input>
-                <label className="semibold " htmlFor="apellido_jugador">
-                    Apellido*
-                    {isSubmitted && errors.apellido_jugador && (
-                    <span className="ms-2 regular">{errors.apellido_jugador}</span>
-                    )}
-                </label>
-                <input
-                    name="apellido_jugador"
-                    id="apellido_jugador"
-                    value={formData.apellido_jugador}
-                    type="text"
-                    onChange={handleChange}
-                    className="form-control border-red-2 rounded-2 red-text shadow-card mb-2"
-                ></input>
-                <label className="semibold " htmlFor="nacionalidad_jugador">
-                    Nacionalidad*
-                    {isSubmitted && errors.nacionalidad_jugador && (
-                    <span className="ms-2 regular">{errors.nacionalidad_jugador}</span>
-                    )}
-                </label>
-                <input
-                    name="nacionalidad_jugador"
-                    id="nacionalidad_jugador"
-                    value={formData.nacionalidad_jugador}
-                    type="text"
-                    onChange={handleChange}
-                    className="form-control border-red-2 rounded-2 red-text shadow-card mb-2"
-                ></input>
-                <label className="semibold " htmlFor="posicion_jugador">
-                    Posición*
-                    {isSubmitted && errors.posicion_jugador && (
-                    <span className="ms-2 regular">{errors.posicion_jugador}</span>
-                    )}
-                </label>
-                <select
-                    onChange={handleChange}
-                    value={formData.posicion_jugador}
-                    id="posicion_jugador"
-                    name="posicion_jugador"
-                    className="border-red-2 rounded-2 red-text shadow-card mb-2"
-                >
-                    <option value="">Seleccione una posición</option>
-                    <option value="Portero">Portero</option>
-                    <option value="Defensa">Defensa</option>
-                    <option value="Mediocampista">Mediocampista</option>
-                    <option value="Delantero">Delantero</option>
-                </select>  
-                <label className="semibold " htmlFor="estatura_jugador">
-                    Estatura*
-                    {isSubmitted && errors.estatura_jugador && (
-                    <span className="ms-2 regular">{errors.estatura_jugador}</span>
-                    )}
-                </label>
-                <input
-                    name="estatura_jugador"
-                    id="estatura_jugador"
-                    value={formData.estatura_jugador}
-                    type="text"
-                    onChange={handleChange}
-                    className="form-control border-red-2 rounded-2 red-text shadow-card mb-2"
-                ></input>
-                <label className="semibold " htmlFor="precio_jugador">
-                    Precio*
-                    {isSubmitted && errors.precio_jugador && (
-                    <span className="ms-2 regular">{errors.precio_jugador}</span>
-                    )}
-                </label>
-                <input
-                    name="precio_jugador"
-                    id="precio_jugador"
-                    value={formData.precio_jugador}
-                    type="text"
-                    onChange={handleChange}
-                    className="form-control border-red-2 rounded-2 red-text shadow-card mb-2"
-                ></input>
-                <label className="semibold " htmlFor="club_jugador">
-                    Club*
-                    {isSubmitted && errors.club_jugador && (
-                    <span className="ms-2 regular">{errors.club_jugador}</span>
-                    )}
-                </label>
-                <select
-                    name="club_jugador"
-                    value={formData.club_jugador}
-                    onChange={handleChange}
-                    className="form-select border-red-2 rounded-2 red-text shadow-card mb-2"
-                >
-                    <option value="">Seleccione un club</option>
-                    {clubes.map((club) => (
-                    <option key={club.id_club} value={club.nombre_club}>
-                        {club.nombre_club}
-                    </option>
-                    ))}
-                </select>
+              <label className="semibold " htmlFor="apellido_jugador">
+                Apellido*
+                {isSubmitted && errors.apellido_jugador && (
+                  <span className="ms-2 regular">
+                    {errors.apellido_jugador}
+                  </span>
+                )}
+              </label>
+              <input
+                name="apellido_jugador"
+                id="apellido_jugador"
+                value={formData.apellido_jugador}
+                type="text"
+                onChange={handleChange}
+                className="form-control border-red-2 rounded-2 red-text shadow-card mb-2"
+              ></input>
+              <label className="semibold " htmlFor="nacionalidad_jugador">
+                Nacionalidad*
+                {isSubmitted && errors.nacionalidad_jugador && (
+                  <span className="ms-2 regular">
+                    {errors.nacionalidad_jugador}
+                  </span>
+                )}
+              </label>
+              <input
+                name="nacionalidad_jugador"
+                id="nacionalidad_jugador"
+                value={formData.nacionalidad_jugador}
+                type="text"
+                onChange={handleChange}
+                className="form-control border-red-2 rounded-2 red-text shadow-card mb-2"
+              ></input>
+              <label className="semibold " htmlFor="posicion_jugador">
+                Posición*
+                {isSubmitted && errors.posicion_jugador && (
+                  <span className="ms-2 regular">
+                    {errors.posicion_jugador}
+                  </span>
+                )}
+              </label>
+              <select
+                onChange={handleChange}
+                value={formData.posicion_jugador}
+                id="posicion_jugador"
+                name="posicion_jugador"
+                className="form-select border-red-2 rounded-2 red-text shadow-card mb-2"
+              >
+                <option value="">Seleccione una posición</option>
+                <option value="PORTERO">Portero</option>
+                <option value="DEFENSA">Defensa</option>
+                <option value="MEDIOCAMPISTA">Mediocampista</option>
+                <option value="DELANTERO">Delantero</option>
+              </select>
+              <label className="semibold " htmlFor="estatura_jugador">
+                Estatura*
+                {isSubmitted && errors.estatura_jugador && (
+                  <span className="ms-2 regular">
+                    {errors.estatura_jugador}
+                  </span>
+                )}
+              </label>
+              <input
+                name="estatura_jugador"
+                id="estatura_jugador"
+                value={formData.estatura_jugador}
+                type="text"
+                onChange={handleChange}
+                className="form-control border-red-2 rounded-2 red-text shadow-card mb-2"
+              ></input>
+              <label className="semibold " htmlFor="precio_jugador">
+                Precio*
+                {isSubmitted && errors.precio_jugador && (
+                  <span className="ms-2 regular">{errors.precio_jugador}</span>
+                )}
+              </label>
+              <input
+                name="precio_jugador"
+                id="precio_jugador"
+                value={formData.precio_jugador}
+                type="text"
+                onChange={handleChange}
+                className="form-control border-red-2 rounded-2 red-text shadow-card mb-2"
+              ></input>
+              <label className="semibold " htmlFor="club_jugador">
+                Club*
+                {isSubmitted && errors.club_jugador && (
+                  <span className="ms-2 regular">{errors.club_jugador}</span>
+                )}
+              </label>
+              <select
+                name="club_jugador"
+                value={formData.club_jugador}
+                onChange={handleChange}
+                className="form-select border-red-2 rounded-2 red-text shadow-card mb-2"
+              >
+                <option value="">Seleccione un club</option>
+                {clubes.map((club) => (
+                  <option key={club.id_club} value={club.nombre_club}>
+                    {club.nombre_club}
+                  </option>
+                ))}
+              </select>
               <div className="w-100 d-flex justify-content-center align-items-center">
                 <button
                   onClick={onSubmit}

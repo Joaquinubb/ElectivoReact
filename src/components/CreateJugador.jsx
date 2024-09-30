@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export const CreateJugador = () => {
   //MANIPULACION DE LOS DATOS DEL FORMULARIO
@@ -46,13 +46,20 @@ export const CreateJugador = () => {
       precio_jugador: "",
       club_jugador: "",
     };
-    if (!formData.nombre_jugador) newErrors.nombre_jugador = "Campo obligatorio";
-    if (!formData.apellido_jugador) newErrors.apellido_jugador = "Campo obligatorio";
-    if (!formData.nacionalidad_jugador) newErrors.nacionalidad_jugador = "Campo obligatorio";
-    if (!formData.fechaNac_jugador) newErrors.fechaNac_jugador = "Campo obligatorio";
-    if (!formData.posicion_jugador) newErrors.posicion_jugador = "Campo obligatorio";
-    if (!formData.estatura_jugador) newErrors.estatura_jugador = "Campo obligatorio";
-    if (!formData.precio_jugador) newErrors.precio_jugador = "Campo obligatorio";
+    if (!formData.nombre_jugador)
+      newErrors.nombre_jugador = "Campo obligatorio";
+    if (!formData.apellido_jugador)
+      newErrors.apellido_jugador = "Campo obligatorio";
+    if (!formData.nacionalidad_jugador)
+      newErrors.nacionalidad_jugador = "Campo obligatorio";
+    if (!formData.fechaNac_jugador)
+      newErrors.fechaNac_jugador = "Campo obligatorio";
+    if (!formData.posicion_jugador)
+      newErrors.posicion_jugador = "Campo obligatorio";
+    if (!formData.estatura_jugador)
+      newErrors.estatura_jugador = "Campo obligatorio";
+    if (!formData.precio_jugador)
+      newErrors.precio_jugador = "Campo obligatorio";
     if (!formData.club_jugador) newErrors.club_jugador = "Campo obligatorio";
     setErrors(newErrors);
     return !Object.values(newErrors).some((error) => error !== "");
@@ -82,7 +89,7 @@ export const CreateJugador = () => {
     const response = await fetch(
       process.env.REACT_APP_API +
         `/jugadores?nombre_jugador=${formData.nombre_jugador}&apellido_jugador=${formData.apellido_jugador}&nacionalidad_jugador=${formData.nacionalidad_jugador}&fechaNac_jugador=${formData.fechaNac_jugador}T00:00:00Z&posicion_jugador=${formData.posicion_jugador}&estatura_jugador=${formData.estatura_jugador}&precio_jugador=${formData.precio_jugador}&club_jugador=${formData.club_jugador}`,
-        {
+      {
         method: "POST",
         body: JSON.stringify(formData),
       }
@@ -102,6 +109,18 @@ export const CreateJugador = () => {
     }
     setButtonIsClicked(false);
   };
+
+  const [clubes, setClubes] = useState([]);
+  useEffect(() => {
+    const fetchClubes = async () => {
+      const apiUrl = process.env.REACT_APP_API;
+      const response = await fetch(`${apiUrl}/clubes`);
+      const data = await response.json();
+      setClubes(data);
+    };
+
+    fetchClubes();
+  }, []);
 
   return (
     <>
@@ -150,42 +169,45 @@ export const CreateJugador = () => {
               </button>
             </div>
             <div className="d-flex flex-column w-100 px-3">
-                <h4 className="text-center bold">Crear Jugador</h4>
-                <label className="semibold " htmlFor="nombre_jugador">
-                    Nombre del Jugador*
-                    {isSubmitted && errors.nombre_jugador && (
-                    <span className="ms-2 regular">{errors.nombre_jugador}</span>
-                    )}
-                </label>
-                <input
-                    onChange={handleChange}
-                    value={formData.nombre_jugador}
-                    id="nombre_jugador"
-                    name="nombre_jugador"
-                    type="text"
-                    className="border-red-2 rounded-2 red-text shadow-card mb-2"
-                />
+              <h4 className="text-center bold">Crear Jugador</h4>
+              <label className="semibold " htmlFor="nombre_jugador">
+                Nombre*
+                {isSubmitted && errors.nombre_jugador && (
+                  <span className="ms-2 regular">{errors.nombre_jugador}</span>
+                )}
+              </label>
+              <input
+                onChange={handleChange}
+                value={formData.nombre_jugador}
+                id="nombre_jugador"
+                name="nombre_jugador"
+                type="text"
+                className="form-control border-red-2 rounded-2 red-text shadow-card mb-2"
+              />
 
-                <label className="semibold " htmlFor="apellido_jugador">
-                    Apellido del Jugador*
-                    {isSubmitted && errors.apellido_jugador && (
-                    <span className="ms-2 regular">{errors.apellido_jugador}</span>
-                    )}
-                </label>
-                <input
-                    onChange={handleChange}
-                    value={formData.apellido_jugador}
-                    id="apellido_jugador"
-                    name="apellido_jugador"
-                    type="text"
-                    className="border-red-2 rounded-2 red-text shadow-card mb-2"
-                />
-
+              <label className="semibold" htmlFor="apellido_jugador">
+                Apellido*
+                {isSubmitted && errors.apellido_jugador && (
+                  <span className="ms-2 regular">
+                    {errors.apellido_jugador}
+                  </span>
+                )}
+              </label>
+              <input
+                onChange={handleChange}
+                value={formData.apellido_jugador}
+                id="apellido_jugador"
+                name="apellido_jugador"
+                type="text"
+                className="form-control border-red-2 rounded-2 red-text shadow-card mb-2"
+              />
 
               <label className="semibold" htmlFor="nacionalidad_jugador">
-                Nacionalidad Jugador*
+                Nacionalidad*
                 {isSubmitted && errors.nacionalidad_jugador && (
-                  <span className="ms-2 regular">{errors.nacionalidad_jugador}</span>
+                  <span className="ms-2 regular">
+                    {errors.nacionalidad_jugador}
+                  </span>
                 )}
               </label>
               <input
@@ -194,11 +216,11 @@ export const CreateJugador = () => {
                 id="nacionalidad_jugador"
                 name="nacionalidad_jugador"
                 type="text"
-                className="border-red-2 rounded-2 red-text shadow-card mb-2"
+                className="form-control border-red-2 rounded-2 red-text shadow-card mb-2"
               />
 
               <label className="semibold" htmlFor="posicion_jugador">
-                Posicion del Jugador*{" "}
+                Posicion*{" "}
                 {isSubmitted && errors.posicion_jugador && (
                   <span className="ms-2 regular">
                     {errors.posicion_jugador}
@@ -206,22 +228,24 @@ export const CreateJugador = () => {
                 )}
               </label>
               <select
-                    onChange={handleChange}
-                    value={formData.posicion_jugador}
-                    id="posicion_jugador"
-                    name="posicion_jugador"
-                    className="border-red-2 rounded-2 red-text shadow-card mb-2"
-                >
-                    <option value="">Seleccione una posición</option>
-                    <option value="Portero">Portero</option>
-                    <option value="Defensa">Defensa</option>
-                    <option value="Mediocampista">Mediocampista</option>
-                    <option value="Delantero">Delantero</option>
-                </select>              
-                <label className="semibold" htmlFor="estatura_jugador">
-                Estatura del Jugador*{" "}
+                onChange={handleChange}
+                value={formData.posicion_jugador}
+                id="posicion_jugador"
+                name="posicion_jugador"
+                className="form-select border-red-2 rounded-2 red-text shadow-card mb-2"
+              >
+                <option value="">Seleccione una posición</option>
+                <option value="Portero">Portero</option>
+                <option value="Defensa">Defensa</option>
+                <option value="Mediocampista">Mediocampista</option>
+                <option value="Delantero">Delantero</option>
+              </select>
+              <label className="semibold" htmlFor="estatura_jugador">
+                Estatura*{" "}
                 {isSubmitted && errors.estatura_jugador && (
-                  <span className="ms-2 regular">{errors.estatura_jugador}</span>
+                  <span className="ms-2 regular">
+                    {errors.estatura_jugador}
+                  </span>
                 )}
               </label>
               <input
@@ -230,10 +254,10 @@ export const CreateJugador = () => {
                 id="estatura_jugador"
                 name="estatura_jugador"
                 type="text"
-                className="border-red-2 rounded-2 red-text shadow-card mb-2"
+                className="form-control border-red-2 rounded-2 red-text shadow-card mb-2"
               />
-                <label className="semibold" htmlFor="precio_jugador">
-                Precio del Jugador*{" "}
+              <label className="semibold" htmlFor="precio_jugador">
+                Precio*{" "}
                 {isSubmitted && errors.precio_jugador && (
                   <span className="ms-2 regular">{errors.precio_jugador}</span>
                 )}
@@ -244,28 +268,35 @@ export const CreateJugador = () => {
                 id="precio_jugador"
                 name="precio_jugador"
                 type="text"
-                className="border-red-2 rounded-2 red-text shadow-card mb-2"
+                className="form-control border-red-2 rounded-2 red-text shadow-card mb-2"
               />
-                <label className="semibold" htmlFor="club_jugador">
-                Club del Jugador*{" "}
+              <label className="semibold" htmlFor="club_jugador">
+                Club*{" "}
                 {isSubmitted && errors.club_jugador && (
                   <span className="ms-2 regular">{errors.club_jugador}</span>
                 )}
               </label>
-              <input
-                onChange={handleChange}
-                value={formData.club_jugador}
-                id="club_jugador"
+              <select
                 name="club_jugador"
-                type="text"
-                className="border-red-2 rounded-2 red-text shadow-card mb-2"
-              />
+                value={formData.club_jugador}
+                onChange={handleChange}
+                className="form-select border-red-2 rounded-2 red-text shadow-card mb-2"
+              >
+                <option value="">Seleccione un club</option>
+                {clubes.map((club) => (
+                  <option key={club.id_club} value={club.nombre_club}>
+                    {club.nombre_club}
+                  </option>
+                ))}
+              </select>
 
-            <label className="semibold" htmlFor="fechaNac_jugador">
-                Fecha Nacimiento Jugador*
+              <label className="semibold" htmlFor="fechaNac_jugador">
+                Fecha Nacimiento*
                 {/* CAMBIAR POR TIPO FECHA */}
                 {isSubmitted && errors.fechaNac_jugador && (
-                  <span className="ms-2 regular">{errors.fechaNac_jugador}</span>
+                  <span className="ms-2 regular">
+                    {errors.fechaNac_jugador}
+                  </span>
                 )}
               </label>
               <input
@@ -274,7 +305,7 @@ export const CreateJugador = () => {
                 id="fechaNac_jugador"
                 name="fechaNac_jugador"
                 type="date"
-                className="border-red-2 rounded-2 red-text shadow-card mb-2"
+                className="form-control border-red-2 rounded-2 red-text shadow-card mb-2"
               />
               <div className="w-100 d-flex justify-content-center align-items-center">
                 <button

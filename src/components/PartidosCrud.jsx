@@ -48,7 +48,7 @@ export const PartidosCrud = () => {
                       </div>
                     </div>
                     <div className="row">
-                      <div className="text-center mb-1">
+                      <div className="text-center mb-1 d-flex justify-content-center gap-4">
                         <EditPartido
                           partido={partido}
                           setRefresh={setRefresh}

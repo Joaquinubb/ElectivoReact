@@ -3,54 +3,51 @@ import { CreateJugador } from "./CreateJugador";
 import { EditJugador } from "./EditJugador";
 import { DeleteJugador } from "./DeleteJugador";
 
+export function JugadoresCrud() {
+  const [data, setData] = React.useState([]);
+  const [searchTerm, setSearchTerm] = React.useState("");
+  const [refresh, setRefresh] = useState(false);
 
-export const JugadoresCrud = () => {
-    const [jugadores, setJugadores] = React.useState([]);
-    const [searchTerm, setSearchTerm] = React.useState("");
-    const [refresh, setRefresh] = useState(false);
+  useEffect(() => {
+    async function fetchData() {
+      const apiUrl = process.env.REACT_APP_API;
 
-    useEffect(() => {
-        async function fetchJugadores() {
-        const apiUrl = process.env.REACT_APP_API;
+      let data = await fetch(`${apiUrl}/jugadores`, {
+        method: "GET",
+      }).then((response) => response.json());
 
-        let jugador = await fetch(`${apiUrl}/jugadores`, {
+      setData(data);
+    }
+
+    fetchData();
+  }, [refresh]);
+
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
+    async function fetchJugadores() {
+      const apiUrl = process.env.REACT_APP_API;
+
+      try {
+        let response = await fetch(
+          `${apiUrl}/jugadores?apellido=${event.target.value}`,
+          {
             method: "GET",
-        }).then((response) => response.json());
-
-        setJugadores(jugador);
+          }
+        );
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
         }
+        let jugador = await response.json();
+        setData(jugador);
+      } catch (error) {
+        console.error("Fetch error:", error);
+        setData([]); // Clear jugadores if there's an error
+      }
+      console.log(searchTerm);
+    }
 
-        fetchJugadores();
-    }, [refresh]);
-
-
-    const handleChange = (event) => {
-        setSearchTerm(event.target.value);
-        async function fetchJugadores() {
-            const apiUrl = process.env.REACT_APP_API;
-
-            try {
-                let response = await fetch(
-                    `${apiUrl}/jugadores?apellido=${event.target.value}`,
-                    {
-                        method: "GET",
-                    }
-                );
-                if (!response.ok) {
-                    throw new Error("Network response was not ok");
-                }
-                let jugador = await response.json();
-                setJugadores(jugador);
-            } catch (error) {
-                console.error("Fetch error:", error);
-                setJugadores([]); // Clear jugadores if there's an error
-            }
-            console.log(searchTerm);
-
-        }
-
-        fetchJugadores();
-    };
+    fetchJugadores();
+  };
 
   return (
     <>
@@ -60,11 +57,16 @@ export const JugadoresCrud = () => {
         type="text"
         onChange={handleChange}
       />
+      <input
+        placeholder="Buscar por club"
+        className="form-control w-fit border-red-2 rounded-4 red-text px-3 py-1 text-15 focus"
+        type="text"
+        onChange={handleChange}
+      />
       <div className="row d-flex gap-2 mt-2">
-        
         <div className="jugadores-list mt-2">
-          {jugadores &&
-            jugadores.map((jugador) => (
+          {data &&
+            data.map((jugador) => (
               <div
                 className="red-text text-12 decoration-none medium text-center hover-bg-gray"
                 key={jugador.id_jugador}
@@ -78,9 +80,9 @@ export const JugadoresCrud = () => {
                       <div className="">
                         {jugador.nombre_jugador} {jugador.apellido_jugador}
                       </div>
-                      <div className="semibold">{jugador.club}</div>
+                      <div className="semibold">{jugador.club_jugador}</div>
                     </div>
-                    <div className="col text-center">
+                    <div className="col text-center d-flex justify-content-center gap-3">
                       <EditJugador
                         jugador={jugador}
                         setRefresh={setRefresh}
@@ -101,6 +103,7 @@ export const JugadoresCrud = () => {
             ))}
         </div>
       </div>
+      <CreateJugador setRefresh={setRefresh} refresh={refresh} />
     </>
   );
-};
+}

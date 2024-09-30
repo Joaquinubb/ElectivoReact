@@ -29,9 +29,16 @@ export function Clubes() {
           </div>
           <div className="col mt-5 pt-4 content-container">
             <div className="bg-white p-3">
-              <h2 className="red-text bold text-20">
-                Clubes dentro de la Chilean Premier League
-              </h2>
+              <div className="d-flex justify-content-between">
+                <h2 className="red-text bold text-20">
+                  Clubes dentro de la Chilean Premier League
+                </h2>
+                <input
+                  placeholder="Buscar por nombre"
+                  className="form-control w-fit border-red-2 rounded-4 red-text px-3 py-1 text-15 focus"
+                  type="text"
+                />
+              </div>
               <div className="club-list">
                 {data &&
                   data.map((club) => (
