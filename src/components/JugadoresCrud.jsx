@@ -51,18 +51,19 @@ export function JugadoresCrud() {
 
   return (
     <>
-      <input
-        placeholder="Buscar por apellido"
-        className="form-control w-fit border-red-2 rounded-4 red-text px-3 py-1 text-15 focus mt-4"
-        type="text"
-        onChange={handleChange}
-      />
-      <input
-        placeholder="Buscar por club"
-        className="form-control w-fit border-red-2 rounded-4 red-text px-3 py-1 text-15 focus"
-        type="text"
-        onChange={handleChange}
-      />
+      <div className="d-flex w-100 justify-content-end gap-2">
+        <input
+          placeholder="Buscar por apellido"
+          className="form-control w-fit border-red-2 rounded-4 red-text px-3 py-1 text-15 focus mt-4"
+          type="text"
+          onChange={handleChange}
+        />
+        <input
+          placeholder="Buscar por club"
+          className="form-control w-fit border-red-2 rounded-4 red-text px-3 py-1 text-15 focus mt-4"
+          type="text"
+        />
+      </div>
       <div className="row d-flex gap-2 mt-2">
         <div className="jugadores-list mt-2">
           {data &&
