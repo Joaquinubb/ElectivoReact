@@ -13,7 +13,7 @@ export function Home() {
           <div className="col-sidebar blue d-flex flex-column sidebar-container">
             <Sidebar />
           </div>
-          <div className="col mt-5 pt-4 content-container">
+          <div className="col mt-5 pt-2 content-container">
             <div className="bg-white p-3">
               <h2 className="red-text bold text-20">
                 Bienvenidos a la Chilean Premier League
