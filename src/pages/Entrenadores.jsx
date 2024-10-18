@@ -18,6 +18,24 @@ export function Entrenadores() {
 
     fetchData();
   }, []);
+
+  const handleChange = (event) => {
+    const searchTerm = event.target.value.toLowerCase();
+    if (searchTerm === "") {
+      let response = fetch(`${process.env.REACT_APP_API}/entrenadores`, {
+        method: "GET",
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setData(data);
+        });
+    } else {
+      const filteredData = data.filter((entrenador) =>
+        entrenador.apellido_entrenador.toLowerCase().includes(searchTerm)
+      );
+      setData(filteredData);
+    }
+  };
   //Retorno del componente
   return (
     <Fragment>
@@ -37,6 +55,7 @@ export function Entrenadores() {
                   placeholder="Buscar por apellido"
                   className="form-control w-fit border-red-2 rounded-4 red-text px-3 py-1 text-15 focus"
                   type="text"
+                  onChange={handleChange}
                 />
               </div>
               <div className="entrenadores-list">

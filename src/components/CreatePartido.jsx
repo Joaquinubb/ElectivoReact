@@ -49,8 +49,20 @@ export const CreatePartido = ({ setRefresh, refresh }) => {
   //REQUEST A LA API
   const [errorResponse, setErrorResponse] = useState("");
 
+  const isDateValid = (fecha) => {
+    const today = new Date();
+    const selectedDate = new Date(fecha);
+    return selectedDate >= today;
+  };
+
   const onSubmit = async (event) => {
     console.log("submit", formData);
+    if (!isDateValid(formData.fecha_partido)) {
+      setErrorResponse(
+        "La fecha y hora del partido no puede ser anterior a hoy."
+      );
+      return;
+    }
 
     event.preventDefault();
     setButtonIsClicked(true);

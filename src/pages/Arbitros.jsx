@@ -18,6 +18,24 @@ export function Arbitros() {
 
     fetchData();
   }, []);
+
+  const handleChange = (event) => {
+    const searchTerm = event.target.value.toLowerCase();
+    if (searchTerm === "") {
+      let response = fetch(`${process.env.REACT_APP_API}/arbitros`, {
+        method: "GET",
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setData(data);
+        });
+    } else {
+      const filteredData = data.filter((arbitros) =>
+        arbitros.apellido_arbitro.toLowerCase().includes(searchTerm)
+      );
+      setData(filteredData);
+    }
+  };
   //Retorno del componente
   return (
     <Fragment>
@@ -29,9 +47,17 @@ export function Arbitros() {
           </div>
           <div className="col mt-5 pt-4 content-container">
             <div className="bg-white p-3">
-              <h2 className="red-text bold text-20">
-                Árbitros de la Chilean Premier League
-              </h2>
+              <div className="d-flex justify-content-between">
+                <h2 className="red-text bold text-20">
+                  Árbitros de la Chilean Premier League
+                </h2>
+                <input
+                  placeholder="Buscar por apellido"
+                  className="form-control w-fit border-red-2 rounded-4 red-text px-3 py-1 text-15 focus"
+                  type="text"
+                  onChange={handleChange}
+                />
+              </div>
               <div className="arbitros-list mt-4">
                 {data &&
                   data.map((arbitros) => (

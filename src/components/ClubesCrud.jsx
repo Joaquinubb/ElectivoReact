@@ -37,7 +37,7 @@ export const ClubesCrud = () => {
                   <img
                     src={`${club.escudo_club}`}
                     alt="Escudo"
-                    height={30}
+                    height={50}
                     className="mb-1"
                   />
                 </div>

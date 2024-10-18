@@ -34,13 +34,13 @@ export function CardPartidoCrud({
   return (
     <>
       <p
-        className="decoration-none text-red"
+        className="decoration-none text-red card-fixed-size"
         type="button"
         data-bs-toggle="modal"
         data-bs-target={`#partido${id_partido}`}
       >
         <div className="row mt-2">
-          <div className="col">
+          <div className="col text-start">
             <img
               width={50}
               height={50}
@@ -48,10 +48,10 @@ export function CardPartidoCrud({
               alt={`${club_local} escudo`}
             />
           </div>
-          <div className="col">
+          <div className="col text-center">
             <p className="mt-3 bold">vs</p>
           </div>
-          <div className="col">
+          <div className="col text-end">
             <img
               width={50}
               height={50}
@@ -59,6 +59,9 @@ export function CardPartidoCrud({
               alt={`${club_visitante} escudo`}
             />
           </div>
+        </div>
+        <div className="row text-center">
+          <p className="text-12 m-0 medium">{`${fecha_partido}`}</p>
         </div>
       </p>
 

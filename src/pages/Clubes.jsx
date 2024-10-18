@@ -18,6 +18,24 @@ export function Clubes() {
 
     fetchData();
   }, []);
+
+  const handleChange = (event) => {
+    const searchTerm = event.target.value.toLowerCase();
+    if (searchTerm === "") {
+      let response = fetch(`${process.env.REACT_APP_API}/clubes`, {
+        method: "GET",
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setData(data);
+        });
+    } else {
+      const filteredData = data.filter((club) =>
+        club.nombre_club.toLowerCase().includes(searchTerm)
+      );
+      setData(filteredData);
+    }
+  };
   //Retorno del componente
   return (
     <Fragment>
@@ -37,6 +55,7 @@ export function Clubes() {
                   placeholder="Buscar por nombre"
                   className="form-control w-fit border-red-2 rounded-4 red-text px-3 py-1 text-15 focus"
                   type="text"
+                  onChange={handleChange}
                 />
               </div>
               <div className="club-list">
@@ -53,7 +72,7 @@ export function Clubes() {
                             <img
                               src={`${club.escudo_club}`}
                               alt="Escudo"
-                              height={30}
+                              height={80}
                               className="mb-1"
                             />
                           </div>
