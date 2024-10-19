@@ -33,7 +33,7 @@ export function CardPartido({
   return (
     <>
       <button
-        className="col-md-4 w-fit border-red-2 red-text text-16 rounded-3 mx-1 my-2 shadow-card hover-bg-gray"
+        className="col-md-4 w-fit border-red-2 red-text text-16 rounded-3 mx-1 my-2 shadow-card hover-bg-gray card-fixed-size"
         type="button"
         data-bs-toggle="modal"
         data-bs-target={`#partido${id_partido}`}
@@ -58,6 +58,9 @@ export function CardPartido({
               alt={`${club_visitante} escudo`}
             />
           </div>
+        </div>
+        <div className="row">
+          <p className="text-12 my-2 medium">{`${fecha_partido}`}</p>
         </div>
       </button>
 

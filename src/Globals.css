@@ -330,6 +330,16 @@
   color: white;
 }
 
+.card-fixed-size {
+  width: 200px !important;
+  /* Ajusta el ancho según tus necesidades */
+  height: 125px;
+  /* Ajusta la altura según tus necesidades */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .imagenes {
   max-width: 780px;
 }
