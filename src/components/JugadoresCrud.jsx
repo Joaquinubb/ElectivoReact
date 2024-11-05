@@ -86,7 +86,7 @@ export function JugadoresCrud() {
 
   return (
     <>
-      <div className="d-flex w-100 justify-content-end gap-2">
+      <div className="d-flex w-100 justify-content-start gap-2">
         <input
           placeholder="Buscar por apellido"
           className="form-control w-fit border-red-2 rounded-4 red-text px-3 py-1 text-15 focus mt-4"

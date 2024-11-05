@@ -111,7 +111,7 @@ export function Jugadores() {
               </div>
             </div>
 
-            <div className="row mt-4">
+            <div className="row mt-4 justify-content-center">
               {/* card jugador*/}
               {data.map(
                 (jugador) =>

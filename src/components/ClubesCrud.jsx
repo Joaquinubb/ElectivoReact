@@ -24,11 +24,11 @@ export const ClubesCrud = () => {
 
   return (
     <>
-      <div className="row d-flex  gap-2 mt-2">
+      <div className="row d-flex gap-2 mt-2">
         {clubes &&
           clubes.map((club) => (
             <div
-              className="border-red-2 w-fit p-2 red-text rounded-4 shadow-card hover-bg-gray"
+              className="border-red-2 custom-box-crud-clubes p-2 red-text rounded-4 shadow-card hover-bg-gray"
               to={`/clubes/${club.nombre_club}`}
               key={club.id_club}
             >

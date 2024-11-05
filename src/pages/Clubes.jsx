@@ -58,7 +58,7 @@ export function Clubes() {
                   onChange={handleChange}
                 />
               </div>
-              <div className="club-list">
+              <div className="club-list mt-3">
                 {data &&
                   data.map((club) => (
                     <Link
