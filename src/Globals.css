@@ -270,9 +270,11 @@
 
 .entrenadores-list {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   gap: 10px;
   justify-content: center;
+  align-items: center;
 }
 
 .foto-entrenador img {
@@ -443,3 +445,4 @@
   width: 15rem;
   height: 8.5rem;
 }
+

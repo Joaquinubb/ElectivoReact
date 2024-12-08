@@ -1,10 +1,38 @@
-import React, { Fragment } from "react";
-import { Header } from "../components/index";
-import { Sidebar } from "../components/Sidebar";
-import { Link } from "react-router-dom";
+import React, { Fragment, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../AuthContext";
 import { CarouselNoticias } from "../components/CarouselNoticias";
+import { Header } from "../components/index";
+import { Sidebar } from "../components/index";
 
 export function Home() {
+  const [showModal, setShowModal] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { user, login, error } = useAuth();
+  const navigate = useNavigate();
+
+  const handleEditClick = () => {
+    if (user) {
+      navigate("/editor");
+    } else {
+      setShowModal(true);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    if (user) {
+      navigate("/editor");
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await login(email, password);
+    handleCloseModal();
+  };
+
   return (
     <Fragment>
       <div className="container-fluid d-flex flex-column vh-100">
@@ -34,8 +62,8 @@ export function Home() {
                 <CarouselNoticias />
               </div>
               <div className="d-flex justify-content-end">
-                <Link
-                  to={"/editor"}
+                <button
+                  onClick={handleEditClick}
                   className="btn custom-border-btn bg-red text-blanco fixed-right-bottom"
                 >
                   <svg
@@ -52,12 +80,52 @@ export function Home() {
                     />
                   </svg>
                   Editar Información
-                </Link>
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      <div className={`modal fade ${showModal ? "show" : ""}`} tabIndex={-1} style={{ display: showModal ? "block" : "none" }} aria-hidden={!showModal}>
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">Iniciar Sesión</h5>
+              <button type="button" className="btn-close" onClick={handleCloseModal}></button>
+            </div>
+            <div className="modal-body">
+              <form onSubmit={handleSubmit}>
+                {error && <div className="alert alert-danger">{error}</div>}
+                <div className="mb-3">
+                  <label htmlFor="email" className="form-label">Email</label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="password" className="form-label">Password</label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                </div>
+                <button type="submit" className="btn btn-primary">Login</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      {showModal && <div className="modal-backdrop fade show"></div>}
     </Fragment>
   );
 }

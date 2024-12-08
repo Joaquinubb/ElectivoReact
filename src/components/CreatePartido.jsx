@@ -16,6 +16,8 @@ export const CreatePartido = ({ setRefresh, refresh }) => {
     setFormData({ ...formData, [name]: value });
   };
 
+  const today = new Date().toISOString().split("T")[0];
+
   //VALIDACIONES
   const [errors, setErrors] = useState({
     fecha_partido: "",
@@ -247,6 +249,7 @@ export const CreatePartido = ({ setRefresh, refresh }) => {
                 name="fecha_partido"
                 type="datetime-local"
                 className="form-control border-red-2 rounded-2 red-text shadow-card mb-2"
+                min={today}
               />
               <div className="w-100 d-flex justify-content-center align-items-center">
                 <button

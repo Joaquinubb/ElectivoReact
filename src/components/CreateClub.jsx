@@ -12,6 +12,8 @@ export const CreateClub = ({ setRefresh, refresh }) => {
     escudo_club: "",
   });
 
+  
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     if (name === "fechaFund_club") {
@@ -21,6 +23,8 @@ export const CreateClub = ({ setRefresh, refresh }) => {
       setFormData({ ...formData, [name]: value });
     }
   };
+
+  const today = new Date().toISOString().split("T")[0];
 
   //VALIDACIONES
   const [imgIsCharged, setImgIsCharged] = useState(false);
@@ -226,6 +230,7 @@ export const CreateClub = ({ setRefresh, refresh }) => {
                   <span className="ms-2 regular">{errors.fechaFund_club}</span>
                 )}
               </label>
+
               <input
                 onChange={handleChange}
                 value={formData.fechaFund_club}
@@ -233,6 +238,7 @@ export const CreateClub = ({ setRefresh, refresh }) => {
                 name="fechaFund_club"
                 type="date"
                 className="border-red-2 rounded-2 red-text shadow-card mb-2"
+                max={today}
               />
 
               <div className="w-100 d-flex justify-content-center flex-column align-items-center">

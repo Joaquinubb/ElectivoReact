@@ -20,7 +20,7 @@ export const CreateJugador = () => {
     const age = today.getFullYear() - selectedDate.getFullYear();
     const monthDiff = today.getMonth() - selectedDate.getMonth();
     const dayDiff = today.getDate() - selectedDate.getDate();
-    if (name === "fechaFund_club") {
+    if (name === "fechaNac_jugador") {
       const formattedDate = new Date(value).toISOString().split("T")[0];
       setFormData({ ...formData, [name]: formattedDate });
     } else {
