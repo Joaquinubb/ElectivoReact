@@ -49,9 +49,44 @@ export function JugadoresCrud() {
     fetchJugadores();
   };
 
+  const handleClubSearch = (event) => {
+    const searchTerm = event.target.value;
+    setSearchTerm(searchTerm);
+
+    async function fetchJugadores() {
+      const apiUrl = process.env.REACT_APP_API;
+
+      try {
+        if (searchTerm === "") {
+          let response = await fetch(`${apiUrl}/jugadores`, {
+            method: "GET",
+          });
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          let jugadores = await response.json();
+          setData(jugadores);
+        } else {
+          let filteredData = data.filter((jugador) =>
+            jugador.club_jugador
+              .toLowerCase()
+              .includes(searchTerm.toLowerCase())
+          );
+          setData(filteredData);
+        }
+      } catch (error) {
+        console.error("Fetch error:", error);
+        setData([]); // Clear jugadores if there's an error
+      }
+      console.log(searchTerm);
+    }
+
+    fetchJugadores();
+  };
+
   return (
     <>
-      <div className="d-flex w-100 justify-content-end gap-2">
+      <div className="d-flex w-100 justify-content-start gap-2">
         <input
           placeholder="Buscar por apellido"
           className="form-control w-fit border-red-2 rounded-4 red-text px-3 py-1 text-15 focus mt-4"
@@ -62,6 +97,7 @@ export function JugadoresCrud() {
           placeholder="Buscar por club"
           className="form-control w-fit border-red-2 rounded-4 red-text px-3 py-1 text-15 focus mt-4"
           type="text"
+          onChange={handleClubSearch}
         />
       </div>
       <div className="row d-flex gap-2 mt-2">

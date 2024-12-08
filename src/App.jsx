@@ -9,14 +9,17 @@ import {
   Start,
   Editor,
 } from "./components";
+import { AuthProvider } from "./AuthContext";
 
 import "./Globals.css";
 import { Club } from "./pages/Club";
 import { Partidos } from "./pages/Partidos";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 
 export function App() {
   return (
     <Fragment>
+      <AuthProvider>
       <Routes>
         <Route path="/" element={<Start />} />
         <Route path="/home" element={<Home />} />
@@ -25,10 +28,11 @@ export function App() {
         <Route path="/entrenadores" element={<Entrenadores />} />
         <Route path="/jugadores" element={<Jugadores />} />
         <Route path="/clubes/*" element={<Club />} />
-        <Route path="/editor/*" element={<Editor />} />
+        <Route path="/editor/*" element={<ProtectedRoute><Editor /></ProtectedRoute>} />
         <Route path="/partidos" element={<Partidos />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
+      </AuthProvider>
     </Fragment>
   );
 }

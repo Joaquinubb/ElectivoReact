@@ -41,6 +41,8 @@ export const EditArbitro = ({ arbitroFromGrid, setRefresh, refresh }) => {
     setFormData({ ...formData, [name]: value });
   };
 
+  const today = new Date().toISOString().split("T")[0];
+
   //VALIDACIONES
   const [errors, setErrors] = useState({
     nombre_arbitro: "",
@@ -189,6 +191,7 @@ export const EditArbitro = ({ arbitroFromGrid, setRefresh, refresh }) => {
                 name="fechaNac_arbitro"
                 type="date"
                 className="form-control border-red-2 rounded-2 red-text shadow-card mb-2"
+                max={today}
               />
               <div className="w-100 d-flex justify-content-center align-items-center">
                 <button

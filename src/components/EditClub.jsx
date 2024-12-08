@@ -4,6 +4,8 @@ import { ClipLoader } from "react-spinners";
 export const EditClub = ({ clubFromGrid, setRefresh, refresh }) => {
   const [club, setClub] = useState(clubFromGrid);
 
+  
+
   useEffect(() => {
     async function fetchClubByName() {
       const apiUrl = process.env.REACT_APP_API;
@@ -50,6 +52,8 @@ export const EditClub = ({ clubFromGrid, setRefresh, refresh }) => {
       setFormData({ ...formData, [name]: value });
     }
   };
+
+  const today = new Date().toISOString().split("T")[0];
 
   //VALIDACIONES
   const [imgIsCharged, setImgIsCharged] = useState(false);
@@ -250,6 +254,7 @@ export const EditClub = ({ clubFromGrid, setRefresh, refresh }) => {
                 name="fechaFund_club"
                 type="date"
                 className="border-red-2 rounded-2 red-text shadow-card mb-2"
+                max={today}
               />
 
               <div className="w-100 d-flex justify-content-center flex-column align-items-center">

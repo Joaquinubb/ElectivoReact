@@ -15,11 +15,22 @@ export const CreateJugador = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    if (name === "fechaFund_club") {
+    const today = new Date();
+    const selectedDate = new Date(value);
+    const age = today.getFullYear() - selectedDate.getFullYear();
+    const monthDiff = today.getMonth() - selectedDate.getMonth();
+    const dayDiff = today.getDate() - selectedDate.getDate();
+    if (name === "fechaNac_jugador") {
       const formattedDate = new Date(value).toISOString().split("T")[0];
       setFormData({ ...formData, [name]: formattedDate });
     } else {
       setFormData({ ...formData, [name]: value });
+    }
+    if (age > 17 || (age === 17 && (monthDiff > 0 || (monthDiff === 0 && dayDiff >= 0)))) {
+      setFormData({
+        ...formData,
+        [name]: value
+      });
     }
   };
 
@@ -68,6 +79,10 @@ export const CreateJugador = () => {
   //ESTADO DEL FORMULARIO
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [buttonIsClicked, setButtonIsClicked] = useState(false);
+
+  const minDate = new Date();
+  minDate.setFullYear(minDate.getFullYear() - 17);
+  const minDateString = minDate.toISOString().split('T')[0]
 
   //REQUEST A LA API
   const [errorResponse, setErrorResponse] = useState("");
@@ -306,6 +321,7 @@ export const CreateJugador = () => {
                 name="fechaNac_jugador"
                 type="date"
                 className="form-control border-red-2 rounded-2 red-text shadow-card mb-2"
+                max={minDateString}
               />
               <div className="w-100 d-flex justify-content-center align-items-center">
                 <button

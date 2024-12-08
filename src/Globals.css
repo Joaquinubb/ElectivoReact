@@ -170,8 +170,10 @@
 
 .arbitros-list {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   gap: 10px;
+  justify-content: center;
 }
 
 .foto-arbitro img {
@@ -204,6 +206,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
+  justify-content: center;
 }
 
 /* Media queries for larger screens */
@@ -267,8 +270,11 @@
 
 .entrenadores-list {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   gap: 10px;
+  justify-content: center;
+  align-items: center;
 }
 
 .foto-entrenador img {
@@ -299,10 +305,15 @@
   padding-top: 0.2rem;
 }
 
+.margin-left-rem-3 {
+  margin-left: 3rem;
+}
+
 .jugadores-list {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  
 }
 
 .info-jugador {
@@ -429,3 +440,9 @@
 .cursor-pointer {
   cursor: pointer;
 }
+
+.custom-box-crud-clubes {
+  width: 15rem;
+  height: 8.5rem;
+}
+
