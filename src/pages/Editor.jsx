@@ -8,7 +8,6 @@ import { useAuth } from "../AuthContext";
 
 export const Editor = () => {
   const [dataType, setDataType] = React.useState("clubes");
-  console.log(dataType);
   const { logout } = useAuth();
 
   return (

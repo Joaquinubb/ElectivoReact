@@ -76,7 +76,6 @@ export const EditPartido = ({ partidoFromGrid, setRefresh, refresh }) => {
   };
 
   const onSubmit = async (event) => {
-    console.log("submit", formData);
 
     if (!isDateValid(formData.fecha_partido)) {
       setErrorResponse(
@@ -88,13 +87,11 @@ export const EditPartido = ({ partidoFromGrid, setRefresh, refresh }) => {
     event.preventDefault();
     setButtonIsClicked(true);
     setIsSubmitted(true);
-    console.log("formData", formData);
 
     if (!validateForm()) {
       setButtonIsClicked(false);
       return;
     }
-    console.log(formData);
 
     const response = await fetch(
       process.env.REACT_APP_API +
@@ -106,7 +103,6 @@ export const EditPartido = ({ partidoFromGrid, setRefresh, refresh }) => {
     );
 
     const data = await response.json();
-    console.log("data", data);
 
     if (response.ok) {
       setButtonIsClicked(false);
