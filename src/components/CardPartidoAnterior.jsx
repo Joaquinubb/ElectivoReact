@@ -29,11 +29,6 @@ export function CardPartidoAnterior({
     fetchClubDetails(club_visitante, setEscudoVisitante);
   }, [club_local, club_visitante, estadio]);
 
-  const mapContainerStyle = {
-    width: "90%",
-    height: "400px",
-  };
-
   return (
     <>
       <div className="col-md-4 w-fit border-red-2 red-text text-16 rounded-3 mx-1 my-2 shadow-card hover-bg-gray card-fixed-size">

@@ -27,8 +27,7 @@ export const JugadoresByClub = ({ club }) => {
     }
 
     fetchJugadores();
-  }, []);
-  console.log(data.jugadores);
+  }, [club]);
 
   if (typeof data.jugadores === "string") {
     return <p className="text-16 m-0 bold red-text">{data.jugadores}</p>;

@@ -29,7 +29,7 @@ export function Club() {
     }
 
     fetchData();
-  }, []);
+  }, [clubName]);
 
   return (
     <Fragment>
@@ -43,7 +43,7 @@ export function Club() {
             <div className="bg-white p-3">
               <div className="border-red-2  pb-4 shadow-card px-5 rounded-4">
                 <h1 className="text-40 red-text bold text-center d-flex align-items-center flex-column">
-                <img
+                  <img
                     src={data.escudo_club}
                     height={75}
                     width={75}
@@ -72,7 +72,6 @@ export function Club() {
                         <p className="m-0 bold">{data.fechaFund_club}</p>
                       </div>
                     </div>
-
                   </div>
                   <div className="col-md-4 d-flex justify-content-center">
                     <div className="w-fit mb-4 bg-red text-blanco rounded-3 shadow-card px-4 py-3 d-flex">
@@ -116,7 +115,6 @@ export function Club() {
                         <p className="m-0 bold">{data.estadio_club}</p>
                       </div>
                     </div>
-
                   </div>
                 </div>
                 <div className="row justify-content-center m-0 px-2">
