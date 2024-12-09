@@ -1,6 +1,42 @@
 import React, { useEffect, useState } from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 
+// Función para parsear la fecha en español
+function parseSpanishDate(dateString) {
+  // Mapear los meses en español a números
+  const meses = {
+    enero: 0,
+    febrero: 1,
+    marzo: 2,
+    abril: 3,
+    mayo: 4,
+    junio: 5,
+    julio: 6,
+    agosto: 7,
+    septiembre: 8,
+    octubre: 9,
+    noviembre: 10,
+    diciembre: 11,
+  };
+
+  // Expresión regular para extraer los componentes de la fecha
+  const regex = /(\d{1,2}) de (\w+) de (\d{4}) a las (\d{2}):(\d{2}):(\d{2})/;
+  const matches = dateString.match(regex);
+
+  if (matches) {
+    const day = parseInt(matches[1], 10);
+    const month = meses[matches[2].toLowerCase()];
+    const year = parseInt(matches[3], 10);
+    const hour = parseInt(matches[4], 10);
+    const minute = parseInt(matches[5], 10);
+    const second = parseInt(matches[6], 10);
+
+    return new Date(year, month, day, hour, minute, second);
+  }
+
+  return null;
+}
+
 export function CardPartido({
   id_partido,
   fecha_partido,
@@ -11,9 +47,12 @@ export function CardPartido({
 }) {
   const [escudoLocal, setEscudoLocal] = useState("");
   const [escudoVisitante, setEscudoVisitante] = useState("");
+  const [center, setCenter] = useState(null);
+  const [weather, setWeather] = useState(null);
+  const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+  const weatherApiKey = process.env.REACT_APP_OPEN_WEATHER_API_KEY;
 
   useEffect(() => {
-    // Assuming you have an API endpoint to fetch the club details
     const fetchClubDetails = async (clubName, setEscudo) => {
       const apiUrl = process.env.REACT_APP_API;
       try {
@@ -27,34 +66,77 @@ export function CardPartido({
       }
     };
 
+    const fetchCoordinates = async () => {
+      try {
+        const response = await fetch(
+          `https://maps.googleapis.com/maps/api/geocode/json?address=Estadio ${encodeURIComponent(
+            estadio
+          )}&key=${googleMapsApiKey}`
+        );
+        const data = await response.json();
+        if (data.results.length > 0) {
+          const location = data.results[0].geometry.location;
+          setCenter({ lat: location.lat, lng: location.lng });
+          fetchWeather(location.lat, location.lng);
+        }
+      } catch (error) {
+        console.error("Error fetching coordinates:", error);
+      }
+    };
+
+    const fetchWeather = async (lat, lng) => {
+      try {
+        const response = await fetch(
+          `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=${weatherApiKey}&units=metric`
+        );
+        const data = await response.json();
+
+        // Parsear la fecha del partido
+        const partidoFecha = parseSpanishDate(fecha_partido);
+
+        if (partidoFecha) {
+          // Ajustar la fecha del partido al huso horario UTC
+          const partidoFechaUTC = new Date(
+            partidoFecha.getTime() + partidoFecha.getTimezoneOffset() * 60000
+          );
+
+          // Filtrar los pronósticos que coinciden con la fecha del partido
+          const forecastsDelDia = data.list.filter((forecast) => {
+            const forecastDate = new Date(forecast.dt_txt);
+
+            return (
+              forecastDate.getUTCFullYear() ===
+                partidoFechaUTC.getUTCFullYear() &&
+              forecastDate.getUTCMonth() === partidoFechaUTC.getUTCMonth() &&
+              forecastDate.getUTCDate() === partidoFechaUTC.getUTCDate()
+            );
+          });
+
+          if (forecastsDelDia.length > 0) {
+            // Puedes elegir mostrar el primer pronóstico del día
+            setWeather(forecastsDelDia[0]);
+          } else {
+            console.error(
+              "No hay pronóstico disponible para la fecha del partido."
+            );
+          }
+        } else {
+          console.error("No se pudo parsear la fecha del partido.");
+        }
+      } catch (error) {
+        console.error("Error al obtener el clima:", error);
+      }
+    };
+
     fetchClubDetails(club_local, setEscudoLocal);
     fetchClubDetails(club_visitante, setEscudoVisitante);
-  }, [club_local, club_visitante]);
+    fetchCoordinates();
+  }, [club_local, club_visitante, estadio]);
 
   const mapContainerStyle = {
     width: "90%",
     height: "400px",
   };
-
-  const [center, setCenter] = useState(null);
-  const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
-
-  useEffect(() => {
-    const fetchCoordinates = async () => {
-      const response = await fetch(
-        `https://maps.googleapis.com/maps/api/geocode/json?address=Estadio ${encodeURIComponent(
-          estadio
-        )}&key=${googleMapsApiKey}`
-      );
-      const data = await response.json();
-      if (data.results.length > 0) {
-        const location = data.results[0].geometry.location;
-        setCenter({ lat: location.lat, lng: location.lng });
-      }
-    };
-
-    fetchCoordinates();
-  }, [estadio]);
 
   return (
     <>
@@ -138,6 +220,19 @@ export function CardPartido({
             </div>
             <div className="row mt-3">
               <p className=" text-16 m-0 medium">{`${fecha_partido}`}</p>
+              <p className="text-16 m-0 medium">
+                {weather ? (
+                  <>
+                    {`Clima: ${weather.main.temp}°C`}
+                    <img
+                      src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}.png`}
+                      alt="Weather icon"
+                    />
+                  </>
+                ) : (
+                  "Clima no disponible"
+                )}
+              </p>
               <p className=" text-16 m-0 medium">Árbitro: {`${arbitro}`}</p>
               <p className=" text-16 m-0 medium">Estadio {`${estadio}`}</p>
             </div>
