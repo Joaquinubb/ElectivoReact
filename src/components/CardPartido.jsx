@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 
 export function CardPartido({
   id_partido,
@@ -29,6 +30,31 @@ export function CardPartido({
     fetchClubDetails(club_local, setEscudoLocal);
     fetchClubDetails(club_visitante, setEscudoVisitante);
   }, [club_local, club_visitante]);
+
+  const mapContainerStyle = {
+    width: "90%",
+    height: "400px",
+  };
+
+  const [center, setCenter] = useState(null);
+  const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+
+  useEffect(() => {
+    const fetchCoordinates = async () => {
+      const response = await fetch(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=Estadio ${encodeURIComponent(
+          estadio
+        )}&key=${googleMapsApiKey}`
+      );
+      const data = await response.json();
+      if (data.results.length > 0) {
+        const location = data.results[0].geometry.location;
+        setCenter({ lat: location.lat, lng: location.lng });
+      }
+    };
+
+    fetchCoordinates();
+  }, [estadio]);
 
   return (
     <>
@@ -67,7 +93,7 @@ export function CardPartido({
       <div
         className="modal fade"
         id={`partido${id_partido}`}
-        tabindex="-1"
+        tabIndex="-1"
         aria-hidden="true"
       >
         <div className="modal-dialog">
@@ -111,9 +137,20 @@ export function CardPartido({
               </div>
             </div>
             <div className="row mt-3">
-              <p className=" text-16 m-0 medium">Estadio {`${estadio}`}</p>
+              <p className=" text-16 m-0 medium">{`${fecha_partido}`}</p>
               <p className=" text-16 m-0 medium">Árbitro: {`${arbitro}`}</p>
-              <p className=" text-16 m-0 medium mb-4">{`${fecha_partido}`}</p>
+              <p className=" text-16 m-0 medium">Estadio {`${estadio}`}</p>
+            </div>
+            <div className="row mb-3 mt-1">
+              <LoadScript googleMapsApiKey={googleMapsApiKey}>
+                <GoogleMap
+                  mapContainerStyle={mapContainerStyle}
+                  center={center}
+                  zoom={15}
+                >
+                  <Marker position={center} />
+                </GoogleMap>
+              </LoadScript>
             </div>
           </div>
         </div>
