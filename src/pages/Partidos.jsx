@@ -1,40 +1,63 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Header, Sidebar } from "../components/index";
 import { CardPartido } from "../components/CardPartido";
+import { CardPartidoAnterior } from "../components/CardPartidoAnterior";
+
 export function Partidos() {
   const [allData, setAllData] = useState([]);
-  const [data, setData] = useState([]);
+  const [upcomingMatches, setUpcomingMatches] = useState([]);
+  const [pastMatches, setPastMatches] = useState([]);
   const [showPastMatches, setShowPastMatches] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
       const apiUrl = process.env.REACT_APP_API;
-
       let data = await fetch(`${apiUrl}/partidos`, {
         method: "GET",
       }).then((response) => response.json());
-
       setAllData(data);
       filterMatches(data, showPastMatches);
     }
-
     fetchData();
   }, []);
 
+  const parseDate = (fecha) => {
+    const [dayOfWeek, day, month, year, time] = fecha
+      .replace(/,/g, "")
+      .replace(/ de /g, " ")
+      .replace(" a las", "")
+      .split(" ");
+    const months = {
+      enero: "January",
+      febrero: "February",
+      marzo: "March",
+      abril: "April",
+      mayo: "May",
+      junio: "June",
+      julio: "July",
+      agosto: "August",
+      septiembre: "September",
+      octubre: "October",
+      noviembre: "November",
+      diciembre: "December",
+    };
+    return new Date(`${months[month]} ${day}, ${year} ${time}`);
+  };
+
   const filterMatches = (data, showPastMatches) => {
     const today = new Date();
-    const filteredData = data.filter((partido) => {
-      const formattedDate = partido.fecha_partido
-        .replace(
-          /domingo, |lunes, |martes, |miércoles, |jueves, |viernes, |sábado, /,
-          ""
-        )
-        .replace(/ de /g, " ")
-        .replace(" a las", "");
-      const partidoDate = new Date(formattedDate);
-      return showPastMatches ? partidoDate < today : partidoDate >= today;
+    const upcoming = data.filter((partido) => {
+      const partidoDate = parseDate(partido.fecha_partido);
+      return partidoDate >= today;
     });
-    setData(filteredData);
+
+    const past = data.filter((partido) => {
+      const partidoDate = parseDate(partido.fecha_partido);
+      return partidoDate < today;
+    });
+
+    setUpcomingMatches(upcoming);
+    setPastMatches(showPastMatches ? past : []);
   };
 
   const handleShowPastMatches = () => {
@@ -42,7 +65,6 @@ export function Partidos() {
     filterMatches(allData, !showPastMatches);
   };
 
-  //Retorno del componente
   return (
     <Fragment>
       <div className="container-fluid d-flex flex-column vh-100">
@@ -67,64 +89,37 @@ export function Partidos() {
                 </button>
               </div>
               <div className="row mt-4">
-                {data &&
-                  data
-                    .filter(
-                      (partido) =>
-                        new Date(
-                          partido.fecha_partido
-                            .replace(
-                              /domingo, |lunes, |martes, |miércoles, |jueves, |viernes, |sábado, /,
-                              ""
-                            )
-                            .replace(/ de /g, " ")
-                            .replace(" a las", "")
-                        ) >= new Date()
-                    )
-                    .map(
-                      (partido) =>
-                        partido.id_partido && (
-                          <CardPartido
-                            key={partido.id_partido}
-                            id_partido={partido.id_partido}
-                            fecha_partido={partido.fecha_partido}
-                            club_local={partido.club_local}
-                            club_visitante={partido.club_visitante}
-                            arbitro={partido.arbitro}
-                            estadio={partido.estadio}
-                          />
-                        )
-                    )}
-                {showPastMatches &&
-                  data &&
-                  data
-                    .filter(
-                      (partido) =>
-                        new Date(
-                          partido.fecha_partido
-                            .replace(
-                              /domingo, |lunes, |martes, |miércoles, |jueves, |viernes, |sábado, /,
-                              ""
-                            )
-                            .replace(/ de /g, " ")
-                            .replace(" a las", "")
-                        ) < new Date()
-                    )
-                    .map(
-                      (partido) =>
-                        partido.id_partido && (
-                          <CardPartido
-                            key={partido.id_partido}
-                            id_partido={partido.id_partido}
-                            fecha_partido={partido.fecha_partido}
-                            club_local={partido.club_local}
-                            club_visitante={partido.club_visitante}
-                            arbitro={partido.arbitro}
-                            estadio={partido.estadio}
-                          />
-                        )
-                    )}
+                {upcomingMatches &&
+                  upcomingMatches.map((partido) => (
+                    <CardPartido
+                      key={partido.id_partido}
+                      id_partido={partido.id_partido}
+                      fecha_partido={partido.fecha_partido}
+                      club_local={partido.club_local}
+                      club_visitante={partido.club_visitante}
+                      arbitro={partido.arbitro}
+                      estadio={partido.estadio}
+                    />
+                  ))}
               </div>
+              {showPastMatches && pastMatches.length > 0 && (
+                <div className="mt-5">
+                  <h2 className="red-text bold text-16">Partidos Anteriores</h2>
+                  <div className="row mt-4">
+                    {pastMatches.map((partido) => (
+                      <CardPartidoAnterior
+                        key={partido.id_partido}
+                        id_partido={partido.id_partido}
+                        fecha_partido={partido.fecha_partido}
+                        club_local={partido.club_local}
+                        club_visitante={partido.club_visitante}
+                        arbitro={partido.arbitro}
+                        estadio={partido.estadio}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
