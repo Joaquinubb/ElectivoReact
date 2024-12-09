@@ -131,7 +131,14 @@ export function CardPartido({
     fetchClubDetails(club_local, setEscudoLocal);
     fetchClubDetails(club_visitante, setEscudoVisitante);
     fetchCoordinates();
-  }, [club_local, club_visitante, estadio]);
+  }, [
+    club_local,
+    club_visitante,
+    estadio,
+    fecha_partido,
+    googleMapsApiKey,
+    weatherApiKey,
+  ]);
 
   const mapContainerStyle = {
     width: "90%",

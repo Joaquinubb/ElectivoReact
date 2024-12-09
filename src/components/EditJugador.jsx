@@ -19,7 +19,7 @@ export const EditJugador = ({ jugadorFromGrid, setRefresh, refresh }) => {
     }
 
     fetchJugador();
-  }, []);
+  }, [jugador.id_jugador]);
 
   useEffect(() => {
     setFormData({

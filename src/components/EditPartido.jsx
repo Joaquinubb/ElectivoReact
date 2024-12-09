@@ -19,7 +19,7 @@ export const EditPartido = ({ partidoFromGrid, setRefresh, refresh }) => {
     }
 
     fetchPartido();
-  }, []);
+  }, [partido.id_partido]);
 
   useEffect(() => {
     setFormData({

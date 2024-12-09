@@ -58,7 +58,6 @@ export const CreatePartido = ({ setRefresh, refresh }) => {
   };
 
   const onSubmit = async (event) => {
-    console.log("submit", formData);
     if (!isDateValid(formData.fecha_partido)) {
       setErrorResponse(
         "La fecha y hora del partido no puede ser anterior a hoy."
@@ -69,13 +68,11 @@ export const CreatePartido = ({ setRefresh, refresh }) => {
     event.preventDefault();
     setButtonIsClicked(true);
     setIsSubmitted(true);
-    console.log("formData", formData);
 
     if (!validateForm()) {
       setButtonIsClicked(false);
       return;
     }
-    console.log(formData);
 
     const response = await fetch(
       process.env.REACT_APP_API +
@@ -87,7 +84,6 @@ export const CreatePartido = ({ setRefresh, refresh }) => {
     );
 
     const data = await response.json();
-    console.log("data", data);
 
     if (response.ok) {
       setButtonIsClicked(false);

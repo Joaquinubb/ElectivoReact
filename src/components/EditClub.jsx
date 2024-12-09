@@ -4,8 +4,6 @@ import { ClipLoader } from "react-spinners";
 export const EditClub = ({ clubFromGrid, setRefresh, refresh }) => {
   const [club, setClub] = useState(clubFromGrid);
 
-  
-
   useEffect(() => {
     async function fetchClubByName() {
       const apiUrl = process.env.REACT_APP_API;
@@ -21,7 +19,7 @@ export const EditClub = ({ clubFromGrid, setRefresh, refresh }) => {
     }
 
     fetchClubByName();
-  }, []);
+  }, [club.nombre_club]);
   useEffect(() => {
     setFormData({
       nombre_club: club.nombre_club,
@@ -56,7 +54,7 @@ export const EditClub = ({ clubFromGrid, setRefresh, refresh }) => {
   const today = new Date().toISOString().split("T")[0];
 
   //VALIDACIONES
-  const [imgIsCharged, setImgIsCharged] = useState(false);
+  const [, setImgIsCharged] = useState(false);
   const [errors, setErrors] = useState({
     nombre_club: "",
     ciudad_club: "",

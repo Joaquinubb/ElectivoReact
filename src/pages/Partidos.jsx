@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect, useCallback } from "react";
 import { Header, Sidebar } from "../components/index";
 import { CardPartido } from "../components/CardPartido";
 import { CardPartidoAnterior } from "../components/CardPartidoAnterior";
@@ -8,6 +8,25 @@ export function Partidos() {
   const [upcomingMatches, setUpcomingMatches] = useState([]);
   const [pastMatches, setPastMatches] = useState([]);
   const [showPastMatches, setShowPastMatches] = useState(false);
+
+  const filterMatches = useCallback(
+    (data, showPastMatches) => {
+      const today = new Date();
+      const upcoming = data.filter((partido) => {
+        const partidoDate = parseDate(partido.fecha_partido);
+        return partidoDate >= today;
+      });
+
+      const past = data.filter((partido) => {
+        const partidoDate = parseDate(partido.fecha_partido);
+        return partidoDate < today;
+      });
+
+      setUpcomingMatches(upcoming);
+      setPastMatches(showPastMatches ? past : []);
+    },
+    [] // No es necesario incluir dependencias
+  );
 
   useEffect(() => {
     async function fetchData() {
@@ -19,10 +38,10 @@ export function Partidos() {
       filterMatches(data, showPastMatches);
     }
     fetchData();
-  }, []);
+  }, [filterMatches, showPastMatches]);
 
   const parseDate = (fecha) => {
-    const [dayOfWeek, day, month, year, time] = fecha
+    const [, day, month, year, time] = fecha
       .replace(/,/g, "")
       .replace(/ de /g, " ")
       .replace(" a las", "")
@@ -42,22 +61,6 @@ export function Partidos() {
       diciembre: "December",
     };
     return new Date(`${months[month]} ${day}, ${year} ${time}`);
-  };
-
-  const filterMatches = (data, showPastMatches) => {
-    const today = new Date();
-    const upcoming = data.filter((partido) => {
-      const partidoDate = parseDate(partido.fecha_partido);
-      return partidoDate >= today;
-    });
-
-    const past = data.filter((partido) => {
-      const partidoDate = parseDate(partido.fecha_partido);
-      return partidoDate < today;
-    });
-
-    setUpcomingMatches(upcoming);
-    setPastMatches(showPastMatches ? past : []);
   };
 
   const handleShowPastMatches = () => {
