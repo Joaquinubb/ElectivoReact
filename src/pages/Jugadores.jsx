@@ -3,7 +3,7 @@ import { CardJugador, Header, Sidebar } from "../components/index";
 
 export function Jugadores() {
   const [data, setData] = React.useState([]);
-  const [searchTerm, setSearchTerm] = React.useState("");
+  const [, setSearchTerm] = React.useState("");
 
   useEffect(() => {
     async function fetchData() {

@@ -25,7 +25,7 @@ export const CreateClub = ({ setRefresh, refresh }) => {
   const today = new Date().toISOString().split("T")[0];
 
   //VALIDACIONES
-  const [imgIsCharged, setImgIsCharged] = useState(false);
+  const [, setImgIsCharged] = useState(false);
   const [errors, setErrors] = useState({
     nombre_club: "",
     ciudad_club: "",
