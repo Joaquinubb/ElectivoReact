@@ -19,7 +19,7 @@ export const EditArbitro = ({ arbitroFromGrid, setRefresh, refresh }) => {
     }
 
     fetchArbitro();
-  }, []);
+  }, [arbitro.id_arbitro]);
 
   useEffect(() => {
     setFormData({

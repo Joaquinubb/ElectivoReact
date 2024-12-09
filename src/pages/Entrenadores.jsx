@@ -22,7 +22,7 @@ export function Entrenadores() {
   const handleChange = (event) => {
     const searchTerm = event.target.value.toLowerCase();
     if (searchTerm === "") {
-      let response = fetch(`${process.env.REACT_APP_API}/entrenadores`, {
+      fetch(`${process.env.REACT_APP_API}/entrenadores`, {
         method: "GET",
       })
         .then((response) => response.json())

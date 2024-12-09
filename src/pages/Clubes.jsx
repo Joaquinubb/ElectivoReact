@@ -22,7 +22,7 @@ export function Clubes() {
   const handleChange = (event) => {
     const searchTerm = event.target.value.toLowerCase();
     if (searchTerm === "") {
-      let response = fetch(`${process.env.REACT_APP_API}/clubes`, {
+      fetch(`${process.env.REACT_APP_API}/clubes`, {
         method: "GET",
       })
         .then((response) => response.json())

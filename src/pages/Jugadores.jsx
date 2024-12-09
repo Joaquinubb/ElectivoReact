@@ -17,8 +17,7 @@ export function Jugadores() {
     }
 
     fetchData();
-    console.log(data);
-  }, []);
+  }, [data]);
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
@@ -41,7 +40,6 @@ export function Jugadores() {
         console.error("Fetch error:", error);
         setData([]); // Clear jugadores if there's an error
       }
-      console.log(searchTerm);
     }
 
     fetchJugadores();
@@ -76,7 +74,6 @@ export function Jugadores() {
         console.error("Fetch error:", error);
         setData([]); // Clear jugadores if there's an error
       }
-      console.log(searchTerm);
     }
 
     fetchJugadores();

@@ -12,8 +12,6 @@ export const CreateClub = ({ setRefresh, refresh }) => {
     escudo_club: "",
   });
 
-  
-
   const handleChange = (event) => {
     const { name, value } = event.target;
     if (name === "fechaFund_club") {
@@ -261,11 +259,9 @@ export const CreateClub = ({ setRefresh, refresh }) => {
                     onError={(e) => {
                       setImgIsCharged(false);
                       e.target.src = "/assets/imagenotfound.png";
-                      console.log("on error: ", imgIsCharged);
                     }}
                     onLoad={(e) => {
                       setImgIsCharged(true);
-                      console.log("on lodead: ", imgIsCharged);
                     }}
                   />
                 )}

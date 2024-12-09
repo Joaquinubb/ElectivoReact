@@ -48,8 +48,6 @@ export const CreateArbitro = ({ setRefresh, refresh }) => {
   const [errorResponse, setErrorResponse] = useState("");
 
   const onSubmit = async (event) => {
-    console.log("submit", formData);
-
     event.preventDefault();
     setButtonIsClicked(true);
     setIsSubmitted(true);

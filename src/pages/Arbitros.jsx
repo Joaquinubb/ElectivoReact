@@ -1,6 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Header, Sidebar } from "../components/index";
-import { Link } from "react-router-dom";
 export function Arbitros() {
   //Obtenemos los datos
   const [data, setData] = useState(null);
@@ -22,7 +21,7 @@ export function Arbitros() {
   const handleChange = (event) => {
     const searchTerm = event.target.value.toLowerCase();
     if (searchTerm === "") {
-      let response = fetch(`${process.env.REACT_APP_API}/arbitros`, {
+      fetch(`${process.env.REACT_APP_API}/arbitros`, {
         method: "GET",
       })
         .then((response) => response.json())

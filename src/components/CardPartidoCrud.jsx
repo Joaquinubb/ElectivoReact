@@ -10,7 +10,7 @@ export function CardPartidoCrud({
 }) {
   const [escudoLocal, setEscudoLocal] = useState("");
   const [escudoVisitante, setEscudoVisitante] = useState("");
-  const [refresh, setRefresh] = useState(false);
+  const [refresh] = useState(false);
 
   useEffect(() => {
     // Assuming you have an API endpoint to fetch the club details

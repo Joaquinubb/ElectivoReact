@@ -26,10 +26,13 @@ export const CreateJugador = () => {
     } else {
       setFormData({ ...formData, [name]: value });
     }
-    if (age > 17 || (age === 17 && (monthDiff > 0 || (monthDiff === 0 && dayDiff >= 0)))) {
+    if (
+      age > 17 ||
+      (age === 17 && (monthDiff > 0 || (monthDiff === 0 && dayDiff >= 0)))
+    ) {
       setFormData({
         ...formData,
-        [name]: value
+        [name]: value,
       });
     }
   };
@@ -78,28 +81,24 @@ export const CreateJugador = () => {
 
   //ESTADO DEL FORMULARIO
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [buttonIsClicked, setButtonIsClicked] = useState(false);
+  const [, setButtonIsClicked] = useState(false);
 
   const minDate = new Date();
   minDate.setFullYear(minDate.getFullYear() - 17);
-  const minDateString = minDate.toISOString().split('T')[0]
+  const minDateString = minDate.toISOString().split("T")[0];
 
   //REQUEST A LA API
   const [errorResponse, setErrorResponse] = useState("");
 
   const onSubmit = async (event) => {
-    console.log("submit", formData);
-
     event.preventDefault();
     setButtonIsClicked(true);
     setIsSubmitted(true);
-    console.log("formData", formData);
 
     if (!validateForm()) {
       setButtonIsClicked(false);
       return;
     }
-    console.log(formData);
 
     const response = await fetch(
       process.env.REACT_APP_API +
@@ -111,7 +110,6 @@ export const CreateJugador = () => {
     );
 
     const data = await response.json();
-    console.log("data", data);
 
     if (response.ok) {
       setButtonIsClicked(false);
