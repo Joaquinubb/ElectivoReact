@@ -81,6 +81,25 @@ export function Partidos() {
     }
   };
 
+  const filterMatches = useCallback(
+    (data, showPastMatches) => {
+      const today = new Date();
+      const upcoming = data.filter((partido) => {
+        const partidoDate = parseDate(partido.fecha_partido);
+        return partidoDate >= today;
+      });
+
+      const past = data.filter((partido) => {
+        const partidoDate = parseDate(partido.fecha_partido);
+        return partidoDate < today;
+      });
+
+      setUpcomingMatches(upcoming);
+      setPastMatches(showPastMatches ? past : []);
+    },
+    [] // No es necesario incluir dependencias
+  );
+
   useEffect(() => {
     async function fetchData() {
       const apiUrl = process.env.REACT_APP_API;
@@ -144,7 +163,9 @@ export function Partidos() {
                     : "Mostrar Partidos Anteriores"}
                 </button>
               </div>
+
               <div className="row mt-4" ref={upcomingMatchesRef}>
+
                 {upcomingMatches &&
                   upcomingMatches.map((partido) => (
                     <CardPartido

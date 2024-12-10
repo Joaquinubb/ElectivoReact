@@ -19,8 +19,6 @@ export function Jugadores() {
     fetchData();
   }, [data]);
 
-
-
   //CLUBES
   const [clubes, setClubes] = useState([]);
   useEffect(() => {
@@ -37,8 +35,6 @@ export function Jugadores() {
     fetchData();
     
   }, [ ]);
-
-  
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
