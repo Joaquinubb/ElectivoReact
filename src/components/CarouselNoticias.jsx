@@ -11,7 +11,11 @@ export const CarouselNoticias = () => {
         method: "GET",
       }).then((response) => response.json());
 
-      setArticles(data.filter((article) => article.title && article.imgSrc));
+      setArticles(
+        data.filter(
+          (article) => article.title && article.imgSrc && article.link
+        )
+      );
     }
 
     fetchData();
@@ -53,7 +57,13 @@ export const CarouselNoticias = () => {
                     />
                   )}
                   <div className="bg-black-trans carousel-caption d-none d-md-block rounded-3">
-                    <h5 className="m-0">{article.title}</h5>
+                    <a
+                      href={article.link}
+                      className="decoration-none text-white"
+                      target="_blank"
+                    >
+                      <h5 className="m-0">{article.title}</h5>
+                    </a>
                   </div>
                 </div>
               ))}
