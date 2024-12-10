@@ -61,6 +61,7 @@ export const CarouselNoticias = () => {
                       href={article.link}
                       className="decoration-none text-white"
                       target="_blank"
+                      rel="noreferrer"
                     >
                       <h5 className="m-0">{article.title}</h5>
                     </a>
