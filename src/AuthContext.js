@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }) => {
     try {
       await signOut(auth);
       setUser(null);
-      navigate("/login");
+      navigate("/home");
     } catch (error) {
       setError('Error al cerrar sesión: ' + error.message);
     }

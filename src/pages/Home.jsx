@@ -9,6 +9,7 @@ export function Home() {
   const [showModal, setShowModal] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [localError, setLocalError] = useState(null);
   const { user, login, error } = useAuth();
   const navigate = useNavigate();
 
@@ -22,6 +23,7 @@ export function Home() {
 
   const handleCloseModal = () => {
     setShowModal(false);
+    setLocalError(null);
     if (user) {
       navigate("/editor");
     }
@@ -29,8 +31,12 @@ export function Home() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await login(email, password);
-    handleCloseModal();
+    try {
+      await login(email, password);
+      setShowModal(true);
+    } catch(error){
+      setLocalError("Error al iniciar sesión");
+    }
   };
 
   return (
