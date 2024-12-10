@@ -145,6 +145,13 @@ export function CardPartido({
     height: "400px",
   };
 
+  let imgTeam;
+
+  if (club_local === "Universidad Católica") {
+    imgTeam =
+      "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg9cS3ff7bC_15dqFMSNnMKtdTDsFNAyOwhIhrJjdqtLVO57q91fGK82LozSBOHW422mlknsnpoZ3jJRJgYHFT0sE4V4CWX-X3XP1Ernvzkk7B9xf05VoBf2Krka4AkexyqhCYW66QXAB0/w1200-h630-p-k-no-nu/Universidad+Catolica.png";
+  }
+
   return (
     <>
       <button
@@ -156,9 +163,9 @@ export function CardPartido({
         <div className="row mt-2 mb-2">
           <div className="col">
             <img
-              width={50}
-              height={50}
-              src={escudoLocal}
+              width={40}
+              height={40}
+              src={"images/teams/" + club_local + ".png"}
               alt={`${club_local} escudo`}
             />
           </div>
@@ -167,9 +174,9 @@ export function CardPartido({
           </div>
           <div className="col">
             <img
-              width={50}
-              height={50}
-              src={escudoVisitante}
+              width={40}
+              height={40}
+              src={"images/teams/" + club_visitante + ".png"}
               alt={`${club_visitante} escudo`}
             />
           </div>

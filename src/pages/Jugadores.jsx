@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { CardJugador, Header, Sidebar } from "../components/index";
 
 export function Jugadores() {
@@ -18,6 +18,23 @@ export function Jugadores() {
 
     fetchData();
   }, [data]);
+
+  //CLUBES
+  const [clubes, setClubes] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      const apiUrl = process.env.REACT_APP_API;
+
+      let data = await fetch(`${apiUrl}/clubes`, {
+        method: "GET",
+      }).then((response) => response.json());
+
+      setClubes(data);
+    }
+
+    fetchData();
+    
+  }, [ ]);
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
@@ -124,6 +141,7 @@ export function Jugadores() {
                       id_jugador={jugador.id_jugador}
                       nacionalidad_jugador={jugador.nacionalidad_jugador}
                       posicion_jugador={jugador.posicion_jugador}
+                      escudo_club={ clubes.find((club) => club.nombre_club === jugador.club_jugador)?.escudo_club || "" }
                     />
                   )
               )}

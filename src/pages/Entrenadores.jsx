@@ -18,6 +18,24 @@ export function Entrenadores() {
 
     fetchData();
   }, []);
+  
+
+   //CLUBES
+   const [clubes, setClubes] = useState([]);
+   useEffect(() => {
+     async function fetchData() {
+       const apiUrl = process.env.REACT_APP_API;
+ 
+       let data = await fetch(`${apiUrl}/clubes`, {
+         method: "GET",
+       }).then((response) => response.json());
+ 
+       setClubes(data);
+     }
+ 
+     fetchData();
+     
+   }, [ ]);
 
   const handleChange = (event) => {
     const searchTerm = event.target.value.toLowerCase();
@@ -76,6 +94,7 @@ export function Entrenadores() {
                             nacionalidad_entrenador={
                               entrenador.nacionalidad_entrenador
                             }
+                            escudo_club={ clubes.find((club) => club.nombre_club === entrenador.club_entrenador)?.escudo_club }
                           />
                         )
                     )}

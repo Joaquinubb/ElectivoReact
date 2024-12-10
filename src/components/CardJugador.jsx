@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export function CardJugador({
   nombre_jugador,
@@ -10,6 +10,7 @@ export function CardJugador({
   id_jugador,
   nacionalidad_jugador,
   posicion_jugador,
+  escudo_club,
 }) {
   let imgJugador;
   switch (nacionalidad_jugador) {
@@ -50,6 +51,9 @@ export function CardJugador({
     default:
       break;
   }
+
+  
+
 
   return (
     <>
@@ -115,6 +119,10 @@ export function CardJugador({
             <p className=" text-16 m-0 medium">{`${estatura_jugador} CM`}</p>
             <p className=" text-16 m-0 medium">{`${posicion_jugador}`}</p>
             <p className=" text-16 m-0 medium">{`${edad} Años`}</p>
+            <img src={escudo_club} alt="" width={40} />
+            <div>
+              <img src="" alt="" />
+            </div>
             <div className="d-flex align-items-center flex-column">
               <img
                 className="my-4"

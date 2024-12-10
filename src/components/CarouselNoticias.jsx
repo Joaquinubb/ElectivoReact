@@ -1,66 +1,108 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export const CarouselNoticias = () => {
+  const [articles, setArticles] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const apiUrl = "https://news-clp-scrapper.vercel.app/api/noticias";
+
+      let data = await fetch(apiUrl, {
+        method: "GET",
+      }).then((response) => response.json());
+
+      setArticles(data.filter((article) => article.title && article.imgSrc));
+    }
+
+    fetchData();
+  }, []);
+
   return (
-    <div id="carouselExampleCaptions" className="carousel slide">
-      <div className="carousel-indicators">
-        <button
-          type="button"
-          data-bs-target="#carouselExampleCaptions"
-          data-bs-slide-to="0"
-          className="active"
-          aria-current="true"
-          aria-label="Slide 1"
-        ></button>
-        <button
-          type="button"
-          data-bs-target="#carouselExampleCaptions"
-          data-bs-slide-to="1"
-          aria-label="Slide 2"
-        ></button>
+    <>
+      <div id="carouselExampleCaptions" className="carousel slide">
+        {articles.length !== 0 && (
+          <>
+            <div className="carousel-indicators">
+              {articles.map((_, index) => (
+                <button
+                  key={index}
+                  type="button"
+                  data-bs-target="#carouselExampleCaptions"
+                  data-bs-slide-to={index}
+                  className={index === 0 ? "active" : ""}
+                  aria-current={index === 0 ? "true" : undefined}
+                  aria-label={`Slide ${index + 1}`}
+                ></button>
+              ))}
+            </div>
+            <div className="carousel-inner">
+              {articles.map((article, index) => (
+                <div
+                  key={index}
+                  className={` carousel-item ${index === 0 ? "active" : ""}`}
+                >
+                  {article.imgSrc === "" ? (
+                    <div className="bg-black carousel-caption d-none d-md-block rounded-3">
+                      <h5 className="m-0">{article.title}</h5>
+                    </div>
+                  ) : (
+                    <img
+                      src={article.imgSrc}
+                      className="rounded-5 carousel-image d-block w-100"
+                      alt={article.title}
+                    />
+                  )}
+                  <div className="bg-black-trans carousel-caption d-none d-md-block rounded-3">
+                    <h5 className="m-0">{article.title}</h5>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <button
+              className="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselExampleCaptions"
+              data-bs-slide="prev"
+            >
+              <span
+                className="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span className="visually-hidden">Previous</span>
+            </button>
+            <button
+              className="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExampleCaptions"
+              data-bs-slide="next"
+            >
+              <span
+                className="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span className="visually-hidden">Next</span>
+            </button>
+          </>
+        )}
       </div>
-      <div className="carousel-inner">
-        <div className="carousel-item active">
-          <img
-            src="https://sifup.cl/wp-content/uploads/2019/08/n%CC%83ublense-2022-baja-06-1.jpg"
-            className="rounded-5 carousel-image d-block w-100"
-            alt="..."
-            height={500}
-          />
-          <div className="bg-black-trans carousel-caption d-none d-md-block rounded-3">
-            <h5 className="m-0">Noticia numero 1</h5>
-          </div>
+
+      {articles.length !== 0 && (
+        <div className="red-text">
+          Fuente:{" "}
+          <a
+            target="_blank"
+            href="https://chile.as.com/noticias/futbol/"
+            className="decoration-none red-text"
+          >
+            Diario As
+          </a>
         </div>
-        <div className="carousel-item">
-          <img
-            src="https://assets.adnradio.cl/2022/01/A_UNO_1330036-e1641934197502.jpg"
-            className="rounded-5 carousel-image d-block w-100"
-            alt="..."
-            height={500}
-          />
-          <div className="bg-black-trans carousel-caption d-none d-md-block rounded-3">
-            <h5 className="m-0">Noticia numero 2</h5>
-          </div>
+      )}
+      {articles.length === 0 && (
+        <div className="text-center">
+          <span className="red-text medium">Cargando ...</span>
         </div>
-      </div>
-      <button
-        className="carousel-control-prev"
-        type="button"
-        data-bs-target="#carouselExampleCaptions"
-        data-bs-slide="prev"
-      >
-        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span className="visually-hidden">Previous</span>
-      </button>
-      <button
-        className="carousel-control-next"
-        type="button"
-        data-bs-target="#carouselExampleCaptions"
-        data-bs-slide="next"
-      >
-        <span className="carousel-control-next-icon" aria-hidden="true"></span>
-        <span className="visually-hidden">Next</span>
-      </button>
-    </div>
+      )}
+    </>
   );
 };

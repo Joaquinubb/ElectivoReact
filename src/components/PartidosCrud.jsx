@@ -18,7 +18,6 @@ export const PartidosCrud = () => {
       }).then((response) => response.json());
 
       setPartidos(partidos);
-      console.log(partidos);
     }
 
     fetchPartidos();

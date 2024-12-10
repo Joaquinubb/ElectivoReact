@@ -5,6 +5,7 @@ export const CardEntrenador = ({
   nombre_entrenador,
   apellido_entrenador,
   club_entrenador,
+  escudo_club,
 }) => {
   const [infoAdicional, setInfoAdicional] = useState(null);
 
@@ -87,6 +88,7 @@ export const CardEntrenador = ({
                 <p className=" text-16 m-0 medium">{`${club_entrenador}`}</p>
                 <p className=" text-16 m-0 medium">{`${infoAdicional[0].edad} Años`}</p>
                 <p className=" text-16 m-0 medium">{`${infoAdicional[0].fechaNac_entrenador}`}</p>
+                <img src={escudo_club} alt={`Escudo ${escudo_club}`  } width={40} />
                 <div className="d-flex align-items-center flex-column">
                   <img
                     className="my-4"
