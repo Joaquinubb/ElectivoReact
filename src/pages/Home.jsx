@@ -9,7 +9,7 @@ export function Home() {
   const [showModal, setShowModal] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [localError, setLocalError] = useState(null);
+  const [, setLocalError] = useState(null);
   const { user, login, error } = useAuth();
   const navigate = useNavigate();
 
@@ -34,7 +34,7 @@ export function Home() {
     try {
       await login(email, password);
       setShowModal(true);
-    } catch(error){
+    } catch (error) {
       setLocalError("Error al iniciar sesión");
     }
   };
@@ -93,18 +93,29 @@ export function Home() {
         </div>
       </div>
 
-      <div className={`modal fade ${showModal ? "show" : ""}`} tabIndex={-1} style={{ display: showModal ? "block" : "none" }} aria-hidden={!showModal}>
+      <div
+        className={`modal fade ${showModal ? "show" : ""}`}
+        tabIndex={-1}
+        style={{ display: showModal ? "block" : "none" }}
+        aria-hidden={!showModal}
+      >
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title">Iniciar Sesión</h5>
-              <button type="button" className="btn-close" onClick={handleCloseModal}></button>
+              <button
+                type="button"
+                className="btn-close"
+                onClick={handleCloseModal}
+              ></button>
             </div>
             <div className="modal-body">
               <form onSubmit={handleSubmit}>
                 {error && <div className="alert alert-danger">{error}</div>}
                 <div className="mb-3">
-                  <label htmlFor="email" className="form-label">Email</label>
+                  <label htmlFor="email" className="form-label">
+                    Email
+                  </label>
                   <input
                     type="email"
                     className="form-control"
@@ -115,7 +126,9 @@ export function Home() {
                   />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="password" className="form-label">Password</label>
+                  <label htmlFor="password" className="form-label">
+                    Password
+                  </label>
                   <input
                     type="password"
                     className="form-control"
@@ -125,7 +138,9 @@ export function Home() {
                     required
                   />
                 </div>
-                <button type="submit" className="btn btn-primary">Login</button>
+                <button type="submit" className="btn btn-primary">
+                  Login
+                </button>
               </form>
             </div>
           </div>
