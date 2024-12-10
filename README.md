@@ -14,3 +14,8 @@ In the project directory, you can run:
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+### `docker-compose up -d`
+
+Ejecuta la aplicación optimizada para producción en un contenedor Docker.\
+Open [http://localhost:129](http://localhost:129) to view it in your browser.

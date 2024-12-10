@@ -91,6 +91,7 @@ export const CarouselNoticias = () => {
           Fuente:{" "}
           <a
             target="_blank"
+            rel="noreferrer"
             href="https://chile.as.com/noticias/futbol/"
             className="decoration-none red-text"
           >
@@ -100,7 +101,7 @@ export const CarouselNoticias = () => {
       )}
       {articles.length === 0 && (
         <div className="text-center">
-          <span className="red-text medium">Cargando ...</span>
+          <span className="red-text medium">Cargando noticias...</span>
         </div>
       )}
     </>

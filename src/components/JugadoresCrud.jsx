@@ -5,7 +5,7 @@ import { DeleteJugador } from "./DeleteJugador";
 
 export function JugadoresCrud() {
   const [data, setData] = React.useState([]);
-  const [searchTerm, setSearchTerm] = React.useState("");
+  const [, setSearchTerm] = React.useState("");
   const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {

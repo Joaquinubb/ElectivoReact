@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 export function CardJugador({
   nombre_jugador,
@@ -51,9 +51,6 @@ export function CardJugador({
     default:
       break;
   }
-
-  
-
 
   return (
     <>

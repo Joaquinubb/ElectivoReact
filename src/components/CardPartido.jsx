@@ -145,13 +145,6 @@ export function CardPartido({
     height: "400px",
   };
 
-  let imgTeam;
-
-  if (club_local === "Universidad Católica") {
-    imgTeam =
-      "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg9cS3ff7bC_15dqFMSNnMKtdTDsFNAyOwhIhrJjdqtLVO57q91fGK82LozSBOHW422mlknsnpoZ3jJRJgYHFT0sE4V4CWX-X3XP1Ernvzkk7B9xf05VoBf2Krka4AkexyqhCYW66QXAB0/w1200-h630-p-k-no-nu/Universidad+Catolica.png";
-  }
-
   return (
     <>
       <button

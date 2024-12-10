@@ -1,49 +1,63 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Header, Sidebar } from "../components/index";
 import { Link } from "react-router-dom";
-export function Clubes() {
-  //Obtenemos los datos
-  const [data, setData] = useState(null);
 
+export function Clubes() {
+  // Estados para los datos
+  const [data, setData] = useState([]);
+  const [allData, setAllData] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  // Fetch clubes
   useEffect(() => {
     async function fetchData() {
       const apiUrl = process.env.REACT_APP_API;
 
-      let data = await fetch(`${apiUrl}/clubes`, {
-        method: "GET",
-      }).then((response) => response.json());
-
-      setData(data);
+      try {
+        let response = await fetch(`${apiUrl}/clubes`, {
+          method: "GET",
+        });
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        let clubes = await response.json();
+        setData(clubes);
+        setAllData(clubes);
+      } catch (error) {
+        console.error("Fetch error:", error);
+        setData([]);
+        setAllData([]);
+      }
     }
 
     fetchData();
   }, []);
 
   const handleChange = (event) => {
-    const searchTerm = event.target.value.toLowerCase();
+    const value = event.target.value.toLowerCase();
+    setSearchTerm(value);
+    filtrarDatos(value);
+  };
+
+  const filtrarDatos = (searchTerm) => {
     if (searchTerm === "") {
-      fetch(`${process.env.REACT_APP_API}/clubes`, {
-        method: "GET",
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          setData(data);
-        });
+      setData(allData);
     } else {
-      const filteredData = data.filter((club) =>
+      const filteredData = allData.filter((club) =>
         club.nombre_club.toLowerCase().includes(searchTerm)
       );
       setData(filteredData);
     }
   };
-  //Retorno del componente
+
+  // Retorno del componente
   return (
     <Fragment>
       <div className="container-fluid d-flex flex-column vh-100">
-        <Header></Header>
+        <Header />
         <div className="row flex-grow-1">
           <div className="col-sidebar blue d-flex flex-column sidebar-container">
-            <Sidebar></Sidebar>
+            <Sidebar />
           </div>
           <div className="col mt-5 pt-4 content-container">
             <div className="bg-white p-3">
@@ -55,6 +69,7 @@ export function Clubes() {
                   placeholder="Buscar por nombre"
                   className="form-control w-fit border-red-2 rounded-4 red-text px-3 py-1 text-15 focus"
                   type="text"
+                  value={searchTerm}
                   onChange={handleChange}
                 />
               </div>

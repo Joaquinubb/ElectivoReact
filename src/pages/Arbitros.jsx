@@ -1,48 +1,65 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Header, Sidebar } from "../components/index";
-export function Arbitros() {
-  //Obtenemos los datos
-  const [data, setData] = useState(null);
 
+export function Arbitros() {
+  // Estados para los datos
+  const [data, setData] = useState([]);
+  const [allData, setAllData] = useState([]);
+  const [searchTermApellido, setSearchTermApellido] = useState("");
+
+  // Fetch árbitros
   useEffect(() => {
     async function fetchData() {
       const apiUrl = process.env.REACT_APP_API;
 
-      let data = await fetch(`${apiUrl}/arbitros`, {
-        method: "GET",
-      }).then((response) => response.json());
-
-      setData(data);
+      try {
+        let response = await fetch(`${apiUrl}/arbitros`, {
+          method: "GET",
+        });
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        let arbitros = await response.json();
+        setData(arbitros);
+        setAllData(arbitros);
+      } catch (error) {
+        console.error("Fetch error:", error);
+        setData([]);
+        setAllData([]);
+      }
     }
 
     fetchData();
   }, []);
 
-  const handleChange = (event) => {
-    const searchTerm = event.target.value.toLowerCase();
-    if (searchTerm === "") {
-      fetch(`${process.env.REACT_APP_API}/arbitros`, {
-        method: "GET",
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          setData(data);
-        });
-    } else {
-      const filteredData = data.filter((arbitros) =>
-        arbitros.apellido_arbitro.toLowerCase().includes(searchTerm)
-      );
-      setData(filteredData);
-    }
+  // Manejar cambio de apellido
+  const handleChangeApellido = (event) => {
+    const value = event.target.value;
+    setSearchTermApellido(value);
+    filtrarDatos(value);
   };
-  //Retorno del componente
+
+  // Filtrar datos
+  const filtrarDatos = (apellido) => {
+    let filtrado = allData;
+
+    if (apellido) {
+      filtrado = filtrado.filter((arbitro) =>
+        arbitro.apellido_arbitro.toLowerCase().includes(apellido.toLowerCase())
+      );
+    }
+
+    setData(filtrado);
+  };
+
+  // Retorno del componente
   return (
     <Fragment>
       <div className="container-fluid d-flex flex-column vh-100">
-        <Header></Header>
+        <Header />
         <div className="row flex-grow-1">
           <div className="col-sidebar blue d-flex flex-column sidebar-container">
-            <Sidebar></Sidebar>
+            <Sidebar />
           </div>
           <div className="col mt-5 pt-4 content-container">
             <div className="bg-white p-3">
@@ -54,15 +71,16 @@ export function Arbitros() {
                   placeholder="Buscar por apellido"
                   className="form-control w-fit border-red-2 rounded-4 red-text px-3 py-1 text-15 focus"
                   type="text"
-                  onChange={handleChange}
+                  value={searchTermApellido}
+                  onChange={handleChangeApellido}
                 />
               </div>
               <div className="arbitros-list mt-4">
                 {data &&
-                  data.map((arbitros) => (
+                  data.map((arbitro) => (
                     <div
                       className="red-text text-12 decoration-none medium text-center"
-                      key={arbitros.id_arbitro}
+                      key={arbitro.id_arbitro}
                     >
                       <div className="custom-border-type-arbitro hover-bg-gray">
                         <div className="arbitro">
@@ -74,10 +92,10 @@ export function Arbitros() {
                           </div>
                           <div className="info-arbitro">
                             <div className="">
-                              {arbitros.nombre_arbitro}{" "}
-                              {arbitros.apellido_arbitro}
+                              {arbitro.nombre_arbitro}{" "}
+                              {arbitro.apellido_arbitro}
                             </div>
-                            <div className="semibold">{arbitros.edad} años</div>
+                            <div className="semibold">{arbitro.edad} años</div>
                           </div>
                         </div>
                       </div>

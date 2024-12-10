@@ -2,106 +2,94 @@ import React, { useEffect, useState } from "react";
 import { CardJugador, Header, Sidebar } from "../components/index";
 
 export function Jugadores() {
-  const [data, setData] = React.useState([]);
-  const [, setSearchTerm] = React.useState("");
-
-  useEffect(() => {
-    async function fetchData() {
-      const apiUrl = process.env.REACT_APP_API;
-
-      let data = await fetch(`${apiUrl}/jugadores`, {
-        method: "GET",
-      }).then((response) => response.json());
-
-      setData(data);
-    }
-
-    fetchData();
-  }, [data]);
-
-  //CLUBES
+  const [data, setData] = useState([]);
+  const [allData, setAllData] = useState([]);
+  const [searchTermApellido, setSearchTermApellido] = useState("");
+  const [searchTermClub, setSearchTermClub] = useState("");
   const [clubes, setClubes] = useState([]);
+
   useEffect(() => {
     async function fetchData() {
-      const apiUrl = process.env.REACT_APP_API;
-
-      let data = await fetch(`${apiUrl}/clubes`, {
-        method: "GET",
-      }).then((response) => response.json());
-
-      setClubes(data);
-    }
-
-    fetchData();
-    
-  }, [ ]);
-
-  const handleChange = (event) => {
-    setSearchTerm(event.target.value);
-    async function fetchJugadores() {
       const apiUrl = process.env.REACT_APP_API;
 
       try {
-        let response = await fetch(
-          `${apiUrl}/jugadores?apellido=${event.target.value}`,
-          {
-            method: "GET",
-          }
-        );
+        let response = await fetch(`${apiUrl}/jugadores`, {
+          method: "GET",
+        });
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
-        let jugador = await response.json();
-        setData(jugador);
+        let jugadores = await response.json();
+        setData(jugadores);
+        setAllData(jugadores);
       } catch (error) {
         console.error("Fetch error:", error);
-        setData([]); // Clear jugadores if there's an error
+        setData([]);
+        setAllData([]);
       }
     }
 
-    fetchJugadores();
-  };
+    fetchData();
+  }, []);
 
-  const handleClubSearch = (event) => {
-    const searchTerm = event.target.value;
-    setSearchTerm(searchTerm);
-
-    async function fetchJugadores() {
+  useEffect(() => {
+    async function fetchClubes() {
       const apiUrl = process.env.REACT_APP_API;
 
       try {
-        if (searchTerm === "") {
-          let response = await fetch(`${apiUrl}/jugadores`, {
-            method: "GET",
-          });
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          let jugadores = await response.json();
-          setData(jugadores);
-        } else {
-          let filteredData = data.filter((jugador) =>
-            jugador.club_jugador
-              .toLowerCase()
-              .includes(searchTerm.toLowerCase())
-          );
-          setData(filteredData);
+        let response = await fetch(`${apiUrl}/clubes`, {
+          method: "GET",
+        });
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
         }
+        let clubesData = await response.json();
+        setClubes(clubesData);
       } catch (error) {
         console.error("Fetch error:", error);
-        setData([]); // Clear jugadores if there's an error
+        setClubes([]);
       }
     }
 
-    fetchJugadores();
+    fetchClubes();
+  }, []);
+
+  const handleChangeApellido = (event) => {
+    const value = event.target.value;
+    setSearchTermApellido(value);
+    filtrarDatos(value, searchTermClub);
+  };
+
+  const handleChangeClub = (event) => {
+    const value = event.target.value;
+    setSearchTermClub(value);
+    filtrarDatos(searchTermApellido, value);
+  };
+
+  const filtrarDatos = (apellido, club) => {
+    let filtrado = allData;
+
+    if (apellido) {
+      filtrado = filtrado.filter((jugador) =>
+        jugador.apellido_jugador.toLowerCase().includes(apellido.toLowerCase())
+      );
+    }
+
+    if (club) {
+      filtrado = filtrado.filter((jugador) =>
+        jugador.club_jugador.toLowerCase().includes(club.toLowerCase())
+      );
+    }
+
+    setData(filtrado);
   };
 
   return (
     <div className="container-fluid d-flex flex-column vh-100">
-      <Header></Header>
+      <Header />
       <div className="row flex-grow-1">
         <div className="col-sidebar blue d-flex flex-column sidebar-container">
-          <Sidebar></Sidebar>
+          <Sidebar />
         </div>
         <div className="col mt-5 pt-4 content-container">
           <div className="bg-white p-3">
@@ -114,19 +102,21 @@ export function Jugadores() {
                   placeholder="Buscar por apellido"
                   className="form-control w-fit border-red-2 rounded-4 red-text px-3 py-1 text-15 focus"
                   type="text"
-                  onChange={handleChange}
+                  value={searchTermApellido}
+                  onChange={handleChangeApellido}
                 />
                 <input
                   placeholder="Buscar por club"
                   className="form-control w-fit border-red-2 rounded-4 red-text px-3 py-1 text-15 focus"
                   type="text"
-                  onChange={handleClubSearch}
+                  value={searchTermClub}
+                  onChange={handleChangeClub}
                 />
               </div>
             </div>
 
             <div className="row mt-4 justify-content-center">
-              {/* card jugador*/}
+              {/* card jugador */}
               {data.map(
                 (jugador) =>
                   jugador.nombre_jugador && (
@@ -141,7 +131,11 @@ export function Jugadores() {
                       id_jugador={jugador.id_jugador}
                       nacionalidad_jugador={jugador.nacionalidad_jugador}
                       posicion_jugador={jugador.posicion_jugador}
-                      escudo_club={ clubes.find((club) => club.nombre_club === jugador.club_jugador)?.escudo_club || "" }
+                      escudo_club={
+                        clubes.find(
+                          (club) => club.nombre_club === jugador.club_jugador
+                        )?.escudo_club || ""
+                      }
                     />
                   )
               )}
