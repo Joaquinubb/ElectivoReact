@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
+import { ClubesContext } from "../contexts/ClubesContext";
 
 export const CreateJugador = () => {
   //MANIPULACION DE LOS DATOS DEL FORMULARIO
@@ -123,17 +124,7 @@ export const CreateJugador = () => {
     setButtonIsClicked(false);
   };
 
-  const [clubes, setClubes] = useState([]);
-  useEffect(() => {
-    const fetchClubes = async () => {
-      const apiUrl = process.env.REACT_APP_API;
-      const response = await fetch(`${apiUrl}/clubes`);
-      const data = await response.json();
-      setClubes(data);
-    };
-
-    fetchClubes();
-  }, []);
+  const { clubes } = useContext(ClubesContext);
 
   return (
     <>

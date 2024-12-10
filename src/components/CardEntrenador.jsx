@@ -88,11 +88,15 @@ export const CardEntrenador = ({
                 <p className=" text-16 m-0 medium">{`${club_entrenador}`}</p>
                 <p className=" text-16 m-0 medium">{`${infoAdicional[0].edad} Años`}</p>
                 <p className=" text-16 m-0 medium">{`${infoAdicional[0].fechaNac_entrenador}`}</p>
-                <img src={escudo_club} alt={`Escudo ${escudo_club}`  } width={40} />
+                <img
+                  src={escudo_club}
+                  alt={`Escudo ${escudo_club}`}
+                  width={40}
+                />
                 <div className="d-flex align-items-center flex-column">
                   <img
                     className="my-4"
-                    src={`images/${infoAdicional[0].nacionalidad_entrenador}.png`}
+                    src={`images/${infoAdicional[0].nacionalidad_entrenador}.png`.toLowerCase()}
                     width={100}
                     height={100}
                     alt={`${infoAdicional[0].nacionalidad_entrenador}`}

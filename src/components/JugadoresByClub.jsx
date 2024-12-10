@@ -56,7 +56,7 @@ export const JugadoresByClub = ({ club }) => {
             <img
               width={40}
               height={40}
-              src={`/images/${jugador.nacionalidad}.png`}
+              src={`/images/${jugador.nacionalidad}.png`.toLowerCase()}
               alt=""
             />{" "}
             <div className="ms-2">
@@ -77,7 +77,7 @@ export const JugadoresByClub = ({ club }) => {
             <img
               width={40}
               height={40}
-              src={`/images/${jugador.nacionalidad}.png`}
+              src={`/images/${jugador.nacionalidad}.png`.toLowerCase()}
               alt=""
             />{" "}
             <div className="ms-2">
@@ -98,7 +98,7 @@ export const JugadoresByClub = ({ club }) => {
             <img
               width={40}
               height={40}
-              src={`/images/${jugador.nacionalidad}.png`}
+              src={`/images/${jugador.nacionalidad}.png`.toLowerCase()}
               alt=""
             />{" "}
             <div className="ms-2">
@@ -119,7 +119,7 @@ export const JugadoresByClub = ({ club }) => {
             <img
               width={40}
               height={40}
-              src={`/images/${jugador.nacionalidad}.png`}
+              src={`/images/${jugador.nacionalidad}.png`.toLowerCase()}
               alt=""
             />{" "}
             <div className="ms-2">

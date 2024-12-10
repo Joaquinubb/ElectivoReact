@@ -15,23 +15,34 @@ import "./Globals.css";
 import { Club } from "./pages/Club";
 import { Partidos } from "./pages/Partidos";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import { ClubesProvider } from "./contexts/ClubesContext";
 
 export function App() {
   return (
     <Fragment>
       <AuthProvider>
-      <Routes>
-        <Route path="/" element={<Start />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/arbitros" element={<Arbitros />} />
-        <Route path="/clubes" element={<Clubes />} />
-        <Route path="/entrenadores" element={<Entrenadores />} />
-        <Route path="/jugadores" element={<Jugadores />} />
-        <Route path="/clubes/*" element={<Club />} />
-        <Route path="/editor/*" element={<ProtectedRoute><Editor /></ProtectedRoute>} />
-        <Route path="/partidos" element={<Partidos />} />
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<Start />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/arbitros" element={<Arbitros />} />
+          <Route path="/clubes" element={<Clubes />} />
+          <Route path="/entrenadores" element={<Entrenadores />} />
+          <Route path="/jugadores" element={<Jugadores />} />
+          <Route path="/clubes/*" element={<Club />} />
+
+          <Route
+            path="/editor/*"
+            element={
+              <ProtectedRoute>
+                <ClubesProvider>
+                  <Editor />
+                </ClubesProvider>
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/partidos" element={<Partidos />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
       </AuthProvider>
     </Fragment>
   );
